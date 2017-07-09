@@ -14,6 +14,28 @@
       border-right: 1px solid red;
       margin-right: 10px;
    }
+   label {
+     margin-left: 5px;
+   }
+   label.have_label, input.have_amt {
+     color: black;
+     font-style: italic;
+     padding: 1px 5px;
+     margin: 3px 5px;
+     border: 1px cornflowerblue solid;
+   }
+   label.have_label {
+     background-color: rgb( 200, 200, 200 );
+     border-right: none;
+     margin-right: 0;
+   }
+   input.have_amt {
+     border-left: none;
+     margin-left: 0;
+     padding: 2px;
+   }
+
+
    </style>
 
  </head>
@@ -190,39 +212,121 @@
     dd.appendChild(opt);
   }
 
-  var gen_reso_line = function( resource, amt, depth ) {
-    if ( typeof depth == "undefined" ) {
-      depth = 1;
-    }
+
+  var mkCostModel = function( resource, amt, depth ) {
     if ( typeof amt == "undefined" ) {
       amt = 1;
     }
-    var xdiv = document.createElement("div");
-    xdiv.className = "resource_group resource_" + depth;
-    var divname = document.createElement("span");
-    divname.className = "resoname";
-    divname.textContent = resource;
-    xdiv.appendChild(divname);
-    var divcnt = document.createElement("span");
-    divcnt.className = "resocount";
-    divcnt.textContent = amt;
-    xdiv.appendChild(divcnt);
-    var has_children = false;
-    var child_node;
-    for ( var needed_resource in data[resource] ) {
-      if ( !data[resource].hasOwnProperty(needed_resource) ) {
+    if ( typeof depth == "undefined" ) {
+      depth = 1;
+    }
+
+    var model_data = {
+      initial_amt: amt,
+      resource: resource,
+      have: 0,
+      display_needed: amt,
+      currently_needed: amt,
+      composition: data[resource],
+      update_fns: [],
+    };
+
+    for ( let needed_resource in model_data.composition ) {
+      if ( !model_data.composition.hasOwnProperty(needed_resource) ) {
          continue;
       }
-      if ( !has_children ) {
-        has_children = true;
-        child_node = document.createElement("div");
-        child_node.className = "components";
+      if ( typeof model_data['children'] == "undefined" ) {
+        model_data.children = [];
       }
-      child_node.appendChild(gen_reso_line( needed_resource, amt * data[resource][needed_resource], depth + 1 ));
+      let chld = mkCostModel( needed_resource, amt * model_data.composition[needed_resource], depth + 1 );
+
+      model_data.children.push( chld );
+      model_data.update_fns.push( function() {
+        let needed =  model_data.display_needed * model_data.composition[needed_resource];
+        chld.setNeeded( needed );
+      });
     }
-    if ( has_children ) {
+    model_data.setNeeded = function( amt ) {
+      model_data.currently_needed = Number.parseInt( amt );
+      model_data.update();
+    };
+    model_data.setHave = function( amt ) {
+      model_data.have = Number.parseInt( amt );
+      model_data.update();
+    };
+    model_data.update = function() {
+      model_data.display_needed = model_data.currently_needed - model_data.have;
+      if ( model_data.display_needed < 1 ) {
+        model_data.display_needed = 0;
+      }
+      for ( let child of model_data.update_fns ) {
+        child();
+      }
+    };
+    if ( depth == 1 ) {
+      console.log(model_data);
+    }
+    return model_data;
+  };
+
+  var gen_reso_line = function( model, depth ) {
+    if ( typeof depth == "undefined" ) {
+      depth = 1;
+    }
+
+    var xdiv = document.createElement("div");
+    xdiv.className = "resource_group resource_" + depth;
+
+    var divname = document.createElement("span");
+    divname.className = "resoname";
+    divname.textContent = model.resource;
+    xdiv.appendChild(divname);
+
+    var divcnt = document.createElement("span");
+    divcnt.className = "resocount";
+    divcnt.textContent = model.initial_amt;
+    xdiv.appendChild(divcnt);
+
+    var have_amt_label = document.createElement("label");
+    have_amt_label.textContent = "Have"
+    have_amt_label.className = "have_label";
+    xdiv.appendChild(have_amt_label);
+
+    var have_amt = document.createElement("input");
+    have_amt.type = "text"
+    have_amt.value = 0;
+    have_amt.className = "have_amt";
+    xdiv.appendChild( have_amt );
+
+
+    var timeout_debounce = false;
+    have_amt.addEventListener("keyup", function() {
+      if ( timeout_debounce ) { window.clearTimeout( timeout_debounce ); }
+      timeout_debounce = window.setTimeout(function() {
+        if ( have_amt.value == "" ) {
+          return model.setHave( Number.parseInt( 0 ) );
+        }
+        let amtv = Number.parseInt( have_amt.value );
+        if ( ( "" + amtv ) == "NaN" ) {
+          return model.setHave( Number.parseInt( 0 ) );
+        }
+        model.setHave( amtv );
+      }, 750);
+    });
+
+    if ( typeof model['children'] != "undefined" ) {
+      var  child_node = document.createElement("div");
+      child_node.className = "components";
+      for( let child of model['children'] ) {
+        child_node.appendChild( gen_reso_line( child, depth + 1 ));
+      }
       xdiv.appendChild( child_node );
     }
+    model.update_fns.push(function() {
+      divcnt.textContent = model.display_needed;
+    });
+
+
     return xdiv;
   };
 
@@ -245,7 +349,8 @@
     if ( typeof data[resource] == "undefined" ) {
       throw "Can't get costs for: " + resource;
     }
-    out.appendChild(gen_reso_line( resource, camt, 1 ));
+
+    out.appendChild(gen_reso_line( mkCostModel( resource, camt ), 1 ));
   };
   var marker = false;
   var auto_change_input = function() {
