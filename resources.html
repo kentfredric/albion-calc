@@ -5,11 +5,13 @@
  <script>
 
    var data = {};
+   var item_names = [];
 
    var add_item = function( name, resources ) {
       if( typeof data[name] != "undefined" ) {
         throw "Field: " + name + " already defined";
       }
+      item_names.push(name);
       data[name] = {};
       if ( typeof resources == "undefined" ) {
         resources = {};
