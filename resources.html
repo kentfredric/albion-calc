@@ -44,45 +44,113 @@
    };
 
 /* Core Materials */
+  add_item("Silver");
+
   /* T1 Materials */
-   add_item( "Rough Logs"  );
-   add_item( "Rough Stone" );
-   add_item( "Birch Logs"  );
+  add_item( "Rough Logs"  );
+  add_item( "Rough Stone" );
+
 
   /* T2 Materials */
-   add_item( "Copper Ore"  );
-   add_item( "Cotton"      );
-   add_item( "Rugged Hide" );
+  add_item( "Copper Ore"  );
+  add_item( "Cotton"      );
+  add_item( "Rugged Hide" );
+  add_item( "Limestone"   );
+  add_item( "Birch Logs"  );
+
+  /* T3 Materials */
+  add_item( "Sandstone"      , { "Limestone":   3 });
+  add_item( "Chestnut Logs"  , { "Birch Logs":  3 });
+  add_item( "Thin Hide"      , { "Rugged Hide": 3 });
+  add_item( "Tin Ore"        , { "Copper Ore":  3 });
+
+  /* T4 Materials */
+  add_item( "Travertine"    , { "Sandstone" : 6 });
+  add_item( "Medium Hide"   , { "Thin Hide" : 6 });
+  add_item( "Uncommon Medium Hide",     { "Medium Hide" :           1, "Silver": 6000   });
+  add_item( "Rare Medium Hide",         { "Uncommon Medium Hide" :  1, "Silver": 12000  });
+  add_item( "Exceptional Medium Hide",  { "Rare Medium Hide" :      1, "Silver": 24000  });
+
+/* Crops */
+  /* T2 Crops */
+  add_item("Arcane Agaric" );
+  add_item("Carrots");
+  add_item("Beans");
 
 /* Crafted Materials */
   /* T2 Materials */
-   add_item( "Birch Planks" , { "Birch Logs": 1   });
-   add_item( "Copper Bar",    { "Copper Ore": 1   });
-   add_item( "Simple Cloth",  { "Cotton" : 1      });
-   add_item( "Stiff Leather", { "Rugged Hide" : 1 });
+  add_item( "Birch Planks" ,   { "Birch Logs":   1 });
+  add_item( "Copper Bar",      { "Copper Ore":   1 });
+  add_item( "Simple Cloth",    { "Cotton" :      1 });
+  add_item( "Stiff Leather",   { "Rugged Hide" : 1 });
+  add_item( "Limestone Block", { "Limestone"   : 1 });
 
+  /* T3 Materials */
+  add_item( "Chestnut Planks", { "Chestnut Logs": 2, "Birch Planks":    1 });
+  add_item( "Sandstone Block", { "Sandstone" :    2, "Limestone Block": 1 });
+  add_item( "Thick Leather",   { "Thin Hide" :    2, "Stiff Leather":   1 });
+  add_item( "Bronze Bar",      { "Tin Ore"   :    2, "Copper Bar":      1 });
+
+  /* T4 Materials */
+  add_item( "Travertine Block", { "Travertine" : 2, "Sandstone Block" : 1 });
+  add_item( "Worked Leather",  { "Medium Hide" :  2, "Thick Leather":   1 });
+  add_item( "Uncommon Worked Leather", { "Uncommon Medium Hide" : 2, "Thick Leather" : 1 });
+  add_item( "Rare Worked Leather", { "Rare Medium Hide" : 2, "Thick Leather" : 1 });
+  add_item( "Exceptional Worked Leather", { "Exceptional Medium Hide" : 2, "Thick Leather" : 1 });
 
 /* Toolmaker */
   /* Novices Toolmaker -> Tools */
-   add_item( "Beginners Pickaxe",         { "Rough Stone":   3, "Rough Logs": 3 });
-   add_item( "Beginners Axe",             { "Rough Stone":   3, "Rough Logs": 3 });
-   add_item( "Beginners Skinning Kinfe",  { "Rough Stone":   3, "Rough Logs": 3 });
-   add_item( "Beginners Sickle",          { "Rough Stone":   3, "Rough Logs": 3 });
-   add_item( "Novices Sickle",            { "Birch Planks":  6, "Copper Bar": 2 });
-   add_item( "Novices Pickaxe",           { "Birch Planks":  6, "Copper Bar": 2 });
-   add_item( "Novices Skinning Kinfe",    { "Birch Planks":  6, "Copper Bar": 2 });
-   add_item( "Novices Stone Hammer",      { "Birch Planks":  6, "Copper Bar": 2 });
-   add_item( "Novices Demolition Hammer", { "Birch Planks": 12, "Copper Bar": 12});
+  add_item( "Beginners Pickaxe",         { "Rough Stone":   3, "Rough Logs": 3 });
+  add_item( "Beginners Axe",             { "Rough Stone":   3, "Rough Logs": 3 });
+  add_item( "Beginners Skinning Kinfe",  { "Rough Stone":   3, "Rough Logs": 3 });
+  add_item( "Beginners Sickle",          { "Rough Stone":   3, "Rough Logs": 3 });
+  add_item( "Novices Sickle",            { "Birch Planks":  6, "Copper Bar": 2 });
+  add_item( "Novices Pickaxe",           { "Birch Planks":  6, "Copper Bar": 2 });
+  add_item( "Novices Skinning Kinfe",    { "Birch Planks":  6, "Copper Bar": 2 });
+  add_item( "Novices Stone Hammer",      { "Birch Planks":  6, "Copper Bar": 2 });
+  add_item( "Novices Demolition Hammer", { "Birch Planks": 12, "Copper Bar": 12});
 
- /* Novices Toolmaker -> Accessories */
-   add_item( "Novices Bag",  { "Simple Cloth" : 12, "Stiff Leather" : 12 });
-   add_item( "Novices Cape", { "Simple Cloth" :  4, "Stiff Leather" :  4 });
+  /* Novices Toolmaker -> Accessories */
+  add_item( "Novices Bag",  { "Simple Cloth" : 12, "Stiff Leather" : 12 });
+  add_item( "Novices Cape", { "Simple Cloth" :  4, "Stiff Leather" :  4 });
 
- /* Novices Toolmaker -> Furniture */
-   add_item( "Novices Chest", { "Birch Planks" : 20, "Copper Bar": 10 });
-   add_item( "Novices Bed",   { "Birch Planks" : 10, "Copper Bar": 20 });
-   add_item( "Novices Table", { "Birch Planks" : 30, "Copper Bar": 30 });
+  /* Novices Toolmaker -> Furniture */
+  add_item( "Novices Chest", { "Birch Planks" : 20, "Copper Bar": 10 });
+  add_item( "Novices Bed",   { "Birch Planks" : 10, "Copper Bar": 20 });
+  add_item( "Novices Table", { "Birch Planks" : 30, "Copper Bar": 30 });
 
+/* Warriors Forge */
+  /* Novices Warriors Forge -> Weapons */
+  add_item("Beginners Broadsword", { "Rough Stone"  :  6, "Rough Logs":    6 });
+  add_item("Beginners Shield",     { "Rough Logs"   :  4                     });
+  add_item("Novices Broadsword",   { "Copper Bar"   : 16, "Stiff Leather": 8 });
+  add_item("Novices Sheild",       { "Birch Planks" :  4, "Copper Bar"   : 4 });
+
+  /* Novices Warriors Forge -> Armor */
+  add_item("Novices Soldier Helmet", { "Copper Bar" : 8  });
+  add_item("Novices Soldier Armor",  { "Copper Bar" : 16 });
+  add_item("Novices Soldier Boots",  { "Copper Bar" : 8  });
+
+/* Alchemists Lab */
+  /* Novices Alchemists Lab -> Potions */
+  add_item("Minor Healing Potion", { "Arcane Agaric" : 8 });
+  add_item("Minor Energy  Potion", { "Arcane Agaric" : 8 });
+
+/* Cook */
+  /* Novices Cook -> Food */
+  add_item("Carrot Soup", { "Carrots" : 16 });
+  add_item("Bean Salad",  { "Beans"   :  8, "Carrots" : 8 });
+
+/* Mage Tower */
+  /* Novices Mage Tower -> Weapons */
+  add_item("Novices Fire Staff",      { "Birch Planks" : 16, "Copper Bar":    8 });
+  add_item("Novices Tome of Spells",  { "Simple Cloth" :  4, "Stiff Leather": 4 });
+
+  /* Novics Mage Tower -> Armor */
+  add_item("Novices Scholar Cowl",    { "Simple Cloth" :  8 });
+  add_item("Novices Scholar Robe",    { "Simple Cloth" : 16 });
+  add_item("Novices Scholar Sandals", { "Simple Cloth" :  8 });
+  
  </script>
  <body>
 
