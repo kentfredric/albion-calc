@@ -1,6 +1,21 @@
 <html>
  <head>
    <title>Resource Computation</title>
+   <style>
+   div.resource_group {
+      border: 1px solid black;
+      background-color: rgba( 0, 0, 0, 0.1 );
+      padding-left: 10px;
+      padding-bottom: 5px;
+   }
+   span.resoname {
+      font-weight: bold;
+      padding-right: 10px;
+      border-right: 1px solid red;
+      margin-right: 10px;
+   }
+   </style>
+
  </head>
  <script>
 
@@ -155,6 +170,91 @@
   
  </script>
  <body>
+  <div id="in">
+     <label>Item:</label><select id="dd"></select>
+     <label>Amount:</label><input id="amt" type="text" value="" />
+  </div>
+  <div id="out">
 
+  </div>
+
+
+  <script>
+  var dd  = document.getElementById("dd");
+  var amt = document.getElementById("amt");
+  var out = document.getElementById("out");
+  item_names.sort();
+  for ( let reso_name of item_names ) {
+    var opt = document.createElement("option");
+    opt.innerHTML = reso_name;
+    dd.appendChild(opt);
+  }
+
+  var gen_reso_line = function( resource, amt, depth ) {
+    if ( typeof depth == "undefined" ) {
+      depth = 1;
+    }
+    if ( typeof amt == "undefined" ) {
+      amt = 1;
+    }
+    var xdiv = document.createElement("div");
+    xdiv.className = "resource_group resource_" + depth;
+    var divname = document.createElement("span");
+    divname.className = "resoname";
+    divname.textContent = resource;
+    xdiv.appendChild(divname);
+    var divcnt = document.createElement("span");
+    divcnt.className = "resocount";
+    divcnt.textContent = amt;
+    xdiv.appendChild(divcnt);
+    var has_children = false;
+    var child_node;
+    for ( var needed_resource in data[resource] ) {
+      if ( !data[resource].hasOwnProperty(needed_resource) ) {
+         continue;
+      }
+      if ( !has_children ) {
+        has_children = true;
+        child_node = document.createElement("div");
+        child_node.className = "components";
+      }
+      child_node.appendChild(gen_reso_line( needed_resource, amt * data[resource][needed_resource], depth + 1 ));
+    }
+    if ( has_children ) {
+      xdiv.appendChild( child_node );
+    }
+    return xdiv;
+  };
+
+  var calc_bom = function() {
+    var camt = Number.parseInt(amt.value);
+    if ( "" + camt  == "NaN" ) {
+      camt = 0;
+      amt.value = "";
+      return;
+    }
+    if ( ( "" + camt  ) != amt.value ) {
+      amt.value = camt;
+    }
+    out.innerHTML = "";
+    if ( camt < 1 ) {
+      return;
+    }
+
+    var resource = dd.value;
+    if ( typeof data[resource] == "undefined" ) {
+      throw "Can't get costs for: " + resource;
+    }
+    out.appendChild(gen_reso_line( resource, camt, 1 ));
+    console.log("Calc bom: %s @ %s", dd.value, amt.value );
+  };
+  var marker = false;
+  var auto_change_input = function() {
+    if( marker ) { window.clearTimeout(marker); }
+    marker = window.setTimeout(function(){ marker = false;  calc_bom() }, 750);
+  };
+  dd.addEventListener("change", auto_change_input);
+  amt.addEventListener("keyup", auto_change_input);
+  </script>
  </body>
 </html>
