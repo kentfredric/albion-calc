@@ -107,12 +107,32 @@
   add_item( "Travertine"    , { "Sandstone" : 6 });
   add_item( "Medium Hide"   , { "Thin Hide" : 6 });
   add_item( "Iron Ore"      , { "Tin Ore" : 6   });
+  add_item( "Pine Logs"     , { "Chestnut Logs": 6 });
+
   add_item( "Uncommon Medium Hide",     { "Medium Hide" :           1, "Silver": 6000   });
   add_item( "Rare Medium Hide",         { "Uncommon Medium Hide" :  1, "Silver": 12000  });
   add_item( "Exceptional Medium Hide",  { "Rare Medium Hide" :      1, "Silver": 24000  });
   add_item( "Uncommon Iron Ore",        { "Iron Ore" :              1, "Silver": 6000   });
   add_item( "Rare Iron Ore",            { "Uncommon Iron Ore" :     1, "Silver": 12000  });
   add_item( "Exceptional Iron Ore",     { "Rare Iron Ore" :         1, "Silver": 24000  });
+
+  /* T5 Materials */
+  add_item( "Cedar Logs",   { "Pine Logs"  : 9 });
+  add_item( "Granite",      { "Travertine" : 9 });
+  add_item( "Titanium Ore", { "Iron Ore"   : 9 });
+
+  /* T6 Materials */
+  add_item( "Bloodoak Logs" , { "Cedar Logs"   : 15 });
+  add_item( "Slate",          { "Granite"      : 15 });
+  add_item( "Runite Ore"    , { "Titanium Ore" : 15 });
+
+  /* T7 Materials */
+  add_item( "Ashenbark Logs", { "Bloodoak Logs" : 25 });
+  add_item( "Basalt"        , { "Slate"         : 25 });
+  add_item( "Meteorite Ore" , { "Runite Ore"    : 25 });
+
+  /* T8 Materials */
+  add_item( "Marble"        , { "Basalt"        : 42 });
 
 /* Crops */
   /* T2 Crops */
@@ -137,14 +157,33 @@
   /* T4 Materials */
   add_item( "Travertine Block", { "Travertine" : 2, "Sandstone Block" : 1 });
   add_item( "Worked Leather",  { "Medium Hide" :  2, "Thick Leather":   1 });
+  add_item( "Steel Bar", { "Iron Ore": 2, "Bronze Bar" : 1 });
+  add_item( "Pine Planks", { "Pine Logs": 2, "Chestnut Planks": 1 });
+
   add_item( "Uncommon Worked Leather", { "Uncommon Medium Hide" : 2, "Thick Leather" : 1 });
   add_item( "Rare Worked Leather", { "Rare Medium Hide" : 2, "Thick Leather" : 1 });
   add_item( "Exceptional Worked Leather", { "Exceptional Medium Hide" : 2, "Thick Leather" : 1 });
-  add_item( "Steel Bar", { "Iron Ore": 2, "Bronze Bar" : 1 });
   add_item( "Uncommon Steel Bar", { "Uncommon Iron Ore": 2, "Bronze Bar" : 1 });
   add_item( "Rare Steel Bar", { "Rare Iron Ore": 2, "Bronze Bar" : 1 });
   add_item( "Exceptional Steel Bar", { "Exceptional Iron Ore": 2, "Bronze Bar" : 1 });
 
+  /* T5 Materials */
+  add_item( "Cedar Planks",  { "Cedar Logs": 3, "Pine Planks" : 1   });
+  add_item( "Granite Block", { "Granite" : 3, "Travertine Block": 1 });
+  add_item( "Titanium Steel Bar", { "Titanium Ore": 3, "Steel Bar": 1 });
+
+  /* T6 Materials */
+  add_item( "Bloodoak Planks", { "Bloodoak Logs": 4, "Cedar Planks": 1  });
+  add_item( "Slate Block",     { "Slate" : 4,        "Granite Block": 1 });
+  add_item( "Runite Steel Bar", { "Runite Ore": 4,        "Titanium Steel Bar": 1 });
+
+  /* T7 Materials */
+  add_item( "Ashenbark Planks", { "Ashenbark Logs": 5, "Bloodoak Planks" : 1 });
+  add_item( "Basalt Block",     { "Basalt":         5, "Slate Block"     : 1 });
+  add_item( "Meteorite Steel Bar", { "Meteorite Ore": 5, "Runite Steel Bar": 1 });
+
+  /* T8 Materials */
+  add_item( "Marble Block",     { "Marble":         5, "Basalt Block"    : 1 });
 
 /* Toolmaker */
   /* Novices Toolmaker -> Tools */
@@ -199,6 +238,40 @@
   add_item("Novices Scholar Robe",    { "Simple Cloth" : 16 });
   add_item("Novices Scholar Sandals", { "Simple Cloth" :  8 });
   
+
+/* Building Costs */
+  add_item("Novices Lumbermill",  { "Rough Logs" : 25 , "Rough Stone" : 3 , "Limestone Block" : 150 });
+  add_item("Novices Smelter",     { "Rough Logs" : 25 , "Rough Stone" : 3 , "Limestone Block" : 150 });
+  add_item("Novices Tanner",      { "Rough Logs" : 25 , "Rough Stone" : 3 , "Limestone Block" : 150 });
+  add_item("Novices Weaver",      { "Rough Logs" : 25 , "Rough Stone" : 3 , "Limestone Block" : 150 });
+  add_item("Novices Toolmaker",   { "Rough Logs" : 50 , "Rough Stone" : 5 , "Limestone Block" : 300 });
+  add_item("Novices Stonemason",  { "Rough Logs" : 25 , "Rough Stone" : 25, "Limestone"       : 150 });
+  add_item("Novices Repair Station",  { "Rough Logs"   : 90 , "Rough Stone"     : 90,
+                                        "Birch Planks" : 90 , "Limestone Block" : 90  });
+  add_item("Novices Alchemists Lab",  { "Rough Logs" : 50, "Rough Stone" : 5, "Limestone Block" : 300 });
+  add_item("Novices Cook",            { "Rough Logs" : 50, "Rough Stone" : 5, "Limestone Block" : 300 });
+  add_item("Journeymans Mill",        { "Rough Logs" : 50, "Rough Stone" : 5, "Sandstone Block" : 150 });
+  add_item("Journeymans Butcher",     { "Rough Logs" : 50, "Rough Stone" : 5, "Sandstone Block" : 150 });
+  add_item("Journeymans Saddler",     { "Rough Logs" : 100, "Rough Stone" : 10, "Sandstone Block" : 300 });
+
+  add_item("Farm",          { "Rough Logs" : 15, "Rough Stone" : 15 });
+  add_item("Herb Garden",   { "Rough Logs" : 25, "Rough Stone" : 25, "Birch Planks": 25, "Limestone Block": 25 });
+  add_item("Pasture",  { "Rough Logs" : 30, "Rough Stone" : 30, "Chestnut Planks": 30, "Sandstone Block": 30 });
+
+  add_item("Kennel",   { "Bloodoak Logs" : 50, "Slate" : 50, "Runite Steel Bar" : 10 });
+
+  add_item("Workbench", { "Rough Logs" : 25, "Rough Stone" : 100 });
+  add_item("Novice Warriors Forge", { "Rough Logs": 50, "Rough Stone": 5, "Limestone Block" : 300 });
+  add_item("Novice Mages Tower",    { "Rough Logs": 50, "Rough Stone": 5, "Limestone Block" : 300 });
+  add_item("Novice Hunters Lodge",  { "Rough Logs": 50, "Rough Stone": 5, "Limestone Block" : 300 });
+
+  add_item("Novices Guild Hall",  { "Rough Logs": 150, "Rough Stone": 15, "Limestone Block" : 900 });
+  add_item("Novices House",       { "Rough Logs":  30, "Rough Stone":  3, "Limestone Block" : 180 });
+
+  add_item("Legendary Explorers Shelter", { "Explorers Anchor" : 1,
+                                   "Rough Logs":  30, "Rough Stone":  3, "Limestone Block" : 180 });
+
+
  </script>
  <body>
   <div id="in">
