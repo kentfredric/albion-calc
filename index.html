@@ -332,9 +332,48 @@
   add_item("Novices Scholar Cowl",    { "Simple Cloth" :  8 }, {tier: 2 });
   add_item("Novices Scholar Robe",    { "Simple Cloth" : 16 }, {tier: 2 });
   add_item("Novices Scholar Sandals", { "Simple Cloth" :  8 }, {tier: 2 });
-  
 
 /* Building Costs */
+  /* Player Buildings */
+  add_item("Novices Guild Hall",  { "Rough Logs": 150, "Rough Stone": 15, "Limestone Block" : 900 }, {tier: 2});
+  add_item("Novices House",       { "Rough Logs":  30, "Rough Stone":  3, "Limestone Block" : 180 }, {tier: 2});
+
+  add_item("Legendary Explorers Shelter", { "Explorers Anchor" : 1,
+                                            "Rough Logs":  30, "Rough Stone":  3, "Limestone Block" : 180 }, {tier: 2});
+
+
+  add_item("Journeymans Guild Hall", { "Novices Guild Hall": 1, "Rough Logs": 300, "Rough Stone": 30, "Sandstone Block": 900}, { tier: 3 });
+  add_item("Journeymans House", { "Novices House": 1, "Rough Logs": 60, "Rough Stone": 6, "Sandstone Block": 180}, { tier: 3 });
+  add_item("Legendary Explorers Hut", { "Legendary Explorers Shelter": 1, "Rough Logs": 60, "Rough Stone": 6, "Sandstone Block": 180 }, { tier: 3 });
+
+  add_item("Adepts Guild Hall", { "Journeymans Guild Hall": 1, "Rough Logs": 600, "Rough Stone": 60, "Travertine Block": 900 }, { tier: 4 });
+  add_item("Adepts House" ,  { "Journeymans House": 1, "Rough Logs": 120, "Rough Stone": 12, "Travertine Block": 180 } , { tier: 4 });
+  add_item("Legendary Explorers House", { "Legendary Explorers Hut" : 1, "Rough Logs": 120, "Rough Stone": 12, "Travertine Block": 180 }, { tier: 4 });
+
+  add_item("Experts Guild Hall", { "Adepts Guild Hall": 1, "Rough Logs": 1200, "Rough Stone": 120, "Granite Block": 900 }, { tier: 5 });
+  add_item("Experts House" ,  { "Adepts House": 1, "Rough Logs": 240, "Rough Stone": 24, "Granite Block": 180 } , { tier: 5 });
+  add_item("Legendary Explorers Residence", { "Legendary Explorers House" : 1, "Rough Logs": 240, "Rough Stone": 24, "Granite Block": 180 }, { tier: 5 });
+
+  add_item("Masters Guild Hall", { "Experts Guild Hall": 1, "Rough Logs": 2400, "Rough Stone": 240, "Slate Block": 900 }, { tier: 6 });
+  add_item("Masters House" ,  { "Experts House": 1, "Rough Logs": 480, "Rough Stone": 48, "Slate Block": 180 } , { tier: 6 });
+  add_item("Legendary Explorers Villa", { "Legendary Explorers Residence" : 1, "Rough Logs": 480, "Rough Stone": 48, "Slate Block": 180 }, { tier: 6 });
+
+  add_item("Grandmasters Guild Hall", { "Masters Guild Hall": 1, "Rough Logs": 4800, "Rough Stone": 480, "Basalt Block": 900 }, { tier: 7 });
+  add_item("Grandmasters House" ,  { "Masters House": 1, "Rough Logs": 960, "Rough Stone": 96, "Basalt Block": 180 } , { tier: 7 });
+  add_item("Legendary Explorers Manor", { "Legendary Explorers Villa" : 1, "Rough Logs": 960, "Rough Stone": 96, "Basalt Block": 180 }, { tier: 7 });
+
+  add_item("Elders Guild Hall", { "Grandmasters Guild Hall": 1, "Rough Logs": 9600, "Rough Stone": 960, "Marble Block": 900 }, { tier: 8 });
+  add_item("Elders House" ,  { "Grandmasters House": 1, "Rough Logs": 1920, "Rough Stone": 192, "Marble Block": 180 } , { tier: 8 });
+  add_item("Legendary Explorers Palace", { "Legendary Explorers Manor" : 1, "Rough Logs": 1920, "Rough Stone": 192, "Marble Block": 180 }, { tier: 8 });
+
+/* */
+
+
+
+  add_item("Farm",          { "Rough Logs" : 15, "Rough Stone" : 15 }, {tier: 1});
+  add_item("Workbench", { "Rough Logs" : 25, "Rough Stone" : 100 }, {tier: 1});
+
+
   add_item("Novices Lumbermill",  { "Rough Logs" : 25 , "Rough Stone" : 3 , "Limestone Block" : 150 }, {tier: 2});
   add_item("Novices Smelter",     { "Rough Logs" : 25 , "Rough Stone" : 3 , "Limestone Block" : 150 }, {tier: 2});
   add_item("Novices Tanner",      { "Rough Logs" : 25 , "Rough Stone" : 3 , "Limestone Block" : 150 }, {tier: 2});
@@ -345,28 +384,22 @@
                                         "Birch Planks" : 90 , "Limestone Block" : 90  }, {tier: 2});
   add_item("Novices Alchemists Lab",  { "Rough Logs" : 50, "Rough Stone" : 5, "Limestone Block" : 300 }, {tier: 2});
   add_item("Novices Cook",            { "Rough Logs" : 50, "Rough Stone" : 5, "Limestone Block" : 300 }, {tier: 2});
-  add_item("Journeymans Mill",        { "Rough Logs" : 50, "Rough Stone" : 5, "Sandstone Block" : 150 }, {tier: 3});
-  add_item("Journeymans Butcher",     { "Rough Logs" : 50, "Rough Stone" : 5, "Sandstone Block" : 150 }, {tier: 3});
-  add_item("Journeymans Saddler",     { "Rough Logs" : 100, "Rough Stone" : 10, "Sandstone Block" : 300 }, {tier: 3});
 
-  add_item("Farm",          { "Rough Logs" : 15, "Rough Stone" : 15 }, {tier: 1});
-  add_item("Herb Garden",   { "Rough Logs" : 25, "Rough Stone" : 25, "Birch Planks": 25, "Limestone Block": 25 }, {tier: 2});
-  add_item("Pasture",  { "Rough Logs" : 30, "Rough Stone" : 30, "Chestnut Planks": 30, "Sandstone Block": 30 }, {tier: 3});
-
-  add_item("Kennel",   { "Bloodoak Logs" : 50, "Slate" : 50, "Runite Steel Bar" : 10 }, {tier: 6});
-
-  add_item("Workbench", { "Rough Logs" : 25, "Rough Stone" : 100 }, {tier: 1});
   add_item("Novice Warriors Forge", { "Rough Logs": 50, "Rough Stone": 5, "Limestone Block" : 300 }, {tier: 2});
   add_item("Novice Mages Tower",    { "Rough Logs": 50, "Rough Stone": 5, "Limestone Block" : 300 }, {tier: 2});
   add_item("Novice Hunters Lodge",  { "Rough Logs": 50, "Rough Stone": 5, "Limestone Block" : 300 }, {tier: 2});
 
-  add_item("Novices Guild Hall",  { "Rough Logs": 150, "Rough Stone": 15, "Limestone Block" : 900 }, {tier: 2});
-  add_item("Novices House",       { "Rough Logs":  30, "Rough Stone":  3, "Limestone Block" : 180 }, {tier: 2});
+  add_item("Herb Garden",   { "Rough Logs" : 25, "Rough Stone" : 25, "Birch Planks": 25, "Limestone Block": 25 }, {tier: 2});
 
-  add_item("Legendary Explorers Shelter", { "Explorers Anchor" : 1,
-                                            "Rough Logs":  30, "Rough Stone":  3, "Limestone Block" : 180 }, {tier: 2});
+  add_item("Journeymans Mill",        { "Rough Logs" : 50, "Rough Stone" : 5, "Sandstone Block" : 150 }, {tier: 3});
+  add_item("Journeymans Butcher",     { "Rough Logs" : 50, "Rough Stone" : 5, "Sandstone Block" : 150 }, {tier: 3});
+  add_item("Journeymans Saddler",     { "Rough Logs" : 100, "Rough Stone" : 10, "Sandstone Block" : 300 }, {tier: 3});
 
-})();
+  add_item("Pasture",  { "Rough Logs" : 30, "Rough Stone" : 30, "Chestnut Planks": 30, "Sandstone Block": 30 }, {tier: 3});
+
+  add_item("Kennel",   { "Bloodoak Logs" : 50, "Slate" : 50, "Runite Steel Bar" : 10 }, {tier: 6});
+
+ })();
  </script>
  <body>
   <div id="in">
