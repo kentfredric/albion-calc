@@ -39,6 +39,9 @@
      padding: 2px;
    }
 
+   input.invalid {
+     border: 1px solid #f00;
+   }
   option.rlevel1, option.rlevel2, option.rlevel3, option.rlevel4,
   option.rlevel5, option.rlevel6, option.rlevel7, option.rlevel8 {
     background-color: #fff;
@@ -378,6 +381,7 @@
     <p>You can reduce the number of items to hunt through in the drop down if you know what you're looking for.</p>
     <p>However, the search only currently supports searching by a single term</p>
     <ul>
+      <li>A search term that can be found in your items name will show all items containing that term (eg: <em>stone</em>)</li>
       <li>Setting your search term to <code>T3</code> ( or any other Tier, <code>T1</code> to <code>T8</code> ) will
         filter the drop down list to show only items of that Tier</li>
     </ul>
@@ -423,17 +427,36 @@
       if ( search.length < 1 ) {
         return renderddopts(AlbionData.item_names);
       }
-      let res = search.match(/^T(?:ier|eir|)(?:\s*)([0-9]+)$/i);
+      let res = search.match(/^T(?:ier|eir|)(?:\s*)([0-8]+)$/i);
+      let out = [];
+
       if ( res != null ){
         console.log("Teir Search", res[1]);
-        let out = [];
         for ( let reso_name of AlbionData.item_names ) {
           if ( typeof AlbionData.attributes[reso_name]["tier"] != "undefined" && AlbionData.attributes[reso_name]["tier"] == res[1] ) {
             out.push(reso_name);
           }
         }
-        return renderddopts(out);
+      } else {
+        /* Fallback search by term */
+        console.log("Generic Search");
+        let sterm = search.toLowerCase();
+
+        for ( let reso_name of AlbionData.item_names ) {
+          if ( reso_name.toLowerCase().indexOf(sterm) > -1 ) {
+            out.push(reso_name);
+          }
+        }
       }
+      console.log(out);
+      if ( out.length < 1  ) {
+        itemfilter.classList.add("invalid");
+        return;
+      } else {
+        itemfilter.classList.remove("invalid");
+      }
+      return renderddopts(out);
+
     }, 500);
   });
 
