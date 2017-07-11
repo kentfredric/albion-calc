@@ -2,6 +2,9 @@
  <head>
    <title>Resource Computation</title>
    <style>
+   html {
+     font-family: sans-serif;
+   }
    div.resource_group {
       border: 1px solid black;
       background-color: rgba( 0, 0, 0, 0.1 );
@@ -10,6 +13,7 @@
    }
    span.resoname {
       font-weight: bold;
+      padding-left: 10px;
       padding-right: 10px;
       border-right: 1px solid red;
       margin-right: 10px;
@@ -35,43 +39,92 @@
      padding: 2px;
    }
 
+  option.rlevel1, option.rlevel2, option.rlevel3, option.rlevel4,
+  option.rlevel5, option.rlevel6, option.rlevel7, option.rlevel8 {
+    background-color: #fff;
+    font-weight: bold;
+  }
+  div > span.resoname {  color: #fff }
 
-   </style>
+  option.rlevel1 {   color: #444a50;   }
+  div.rlevel1 > span.resoname {   background-color: #444a50 }
+
+  option.rlevel2 { color: #7c6758 }
+  div.rlevel2 > span.resoname {   background-color: #7c6758;  }
+
+  option.rlevel3 { color: #4c623c }
+  div.rlevel3 > span.resoname {  background-color: #4c623c;  }
+
+  option.rlevel4 { color: #4c6f84;  }
+  div.rlevel4 > span.resoname { background-color: #4c6f84;  }
+
+  option.rlevel5 { color: #833a34;  }
+  div.rlevel5 > span.resoname { background-color: #833a34;  }
+
+  option.rlevel6 { color: #d47e3b;  }
+  div.rlevel6 > span.resoname { background-color: #d47e3b;  }
+
+  option.rlevel7 { color: #d3b654; }
+  div.rlevel7 > span.resoname { background-color: #d3b654;  }
+
+  option.rlevel8 {
+    background-color: #000;
+    color: #e9e9e9;
+  }
+
+  div.rlevel8 > span.resoname, option.rlevel8 {
+    color: #000;
+    background-color: #e9e9e9;
+  }
+  </style>
 
  </head>
  <script>
+(function() {
+  var AlbionData = {
+    items:      {},
+    item_names: [],
+    attributes: {}
+  };
 
-   var data = {};
-   var item_names = [];
+  document.AlbionData = AlbionData;
 
-   var add_item = function( name, resources ) {
-      if( typeof data[name] != "undefined" ) {
-        throw "Field: " + name + " already defined";
+  let data = AlbionData.items;
+
+  let item_names = AlbionData.item_names;
+
+  AlbionData.add_item = function( name, resources, attributes ) {
+    if( typeof data[name] != "undefined" ) {
+      throw "Field: " + name + " already defined";
+    }
+    item_names.push(name);
+    data[name] = {};
+    if ( typeof resources == "undefined" ) {
+      resources = {};
+    }
+    if ( typeof attributes == "undefined" ) {
+      attributes = {};
+    }
+    for ( let key in resources ) {
+      if ( !resources.hasOwnProperty(key) ) {
+        continue;
       }
-      item_names.push(name);
-      data[name] = {};
-      if ( typeof resources == "undefined" ) {
-        resources = {};
+      if( typeof data[key] == "undefined" ) {
+        throw "Field: " + key + " of " + name + " not already defined";
       }
-      for ( var key in resources ) {
-        if ( !resources.hasOwnProperty(key) ) {
-          continue;
-        }
-        if( typeof data[key] == "undefined" ) {
-          throw "Field: " + key + " of " + name + " not already defined";
-        }
-        data[name][key] = resources[key];
-      }
-   };
-   var get_costs = function( resource , how_many ) {
+      data[name][key] = resources[key];
+    }
+    AlbionData.attributes[name] = attributes;
+  };
+  var get_costs = function( resource , how_many ) {
      if ( typeof how_many == "undefined" ) {
        how_many = 1;
      }
      if ( typeof data[resource] == "undefined" ) {
        throw "Can't get costs for: " + resource;
      }
-     var out = {};
-     for ( var needed_resource in data[resource] ) {
+     let out = {};
+     for ( let needed_resource in data[resource] ) {
        if ( !data[resource].hasOwnProperty(needed_resource) ) {
          continue;
        }
@@ -80,198 +133,203 @@
        out[needed_resource].components    = get_costs( needed_resource, out[needed_resource].amount_needed );
      }
      return out;
-   };
-
+  };
+})();
+(function() {
+  let add_item = document.AlbionData.add_item;
 /* Core Materials */
   add_item("Silver");
 
   /* T1 Materials */
-  add_item( "Rough Logs"  );
-  add_item( "Rough Stone" );
-
+  add_item( "Rough Logs"  , {}, { tier: 1 });
+  add_item( "Rough Stone" , {}, { tier: 1 });
 
   /* T2 Materials */
-  add_item( "Copper Ore"  );
-  add_item( "Cotton"      );
-  add_item( "Rugged Hide" );
-  add_item( "Limestone"   );
-  add_item( "Birch Logs"  );
+  add_item( "Copper Ore"  , {}, { tier: 2 } );
+  add_item( "Cotton"      , {}, { tier: 2 } );
+  add_item( "Rugged Hide" , {}, { tier: 2 } );
+  add_item( "Limestone"   , {}, { tier: 2 } );
+  add_item( "Birch Logs"  , {}, { tier: 2 } );
 
   /* T3 Materials */
-  add_item( "Sandstone"      , { "Limestone":   3 });
-  add_item( "Chestnut Logs"  , { "Birch Logs":  3 });
-  add_item( "Thin Hide"      , { "Rugged Hide": 3 });
-  add_item( "Tin Ore"        , { "Copper Ore":  3 });
+  add_item( "Sandstone"      , { "Limestone":   3 }, { tier: 3 });
+  add_item( "Chestnut Logs"  , { "Birch Logs":  3 }, { tier: 3 });
+  add_item( "Thin Hide"      , { "Rugged Hide": 3 }, { tier: 3 });
+  add_item( "Tin Ore"        , { "Copper Ore":  3 }, { tier: 3 });
 
   /* T4 Materials */
-  add_item( "Travertine"    , { "Sandstone" : 6 });
-  add_item( "Medium Hide"   , { "Thin Hide" : 6 });
-  add_item( "Iron Ore"      , { "Tin Ore" : 6   });
-  add_item( "Pine Logs"     , { "Chestnut Logs": 6 });
+  add_item( "Travertine"    , { "Sandstone" : 6 }, { tier: 4 });
+  add_item( "Medium Hide"   , { "Thin Hide" : 6 }, { tier: 4 });
+  add_item( "Iron Ore"      , { "Tin Ore" : 6   }, { tier: 4 });
+  add_item( "Pine Logs"     , { "Chestnut Logs": 6 }, { tier: 4 });
 
-  add_item( "Uncommon Medium Hide",     { "Medium Hide" :           1, "Silver": 6000   });
-  add_item( "Rare Medium Hide",         { "Uncommon Medium Hide" :  1, "Silver": 12000  });
-  add_item( "Exceptional Medium Hide",  { "Rare Medium Hide" :      1, "Silver": 24000  });
-  add_item( "Uncommon Iron Ore",        { "Iron Ore" :              1, "Silver": 6000   });
-  add_item( "Rare Iron Ore",            { "Uncommon Iron Ore" :     1, "Silver": 12000  });
-  add_item( "Exceptional Iron Ore",     { "Rare Iron Ore" :         1, "Silver": 24000  });
+  add_item( "Uncommon Medium Hide",     { "Medium Hide" :           1, "Silver": 6000   }, { tier: 4 });
+  add_item( "Rare Medium Hide",         { "Uncommon Medium Hide" :  1, "Silver": 12000  }, { tier: 4 });
+  add_item( "Exceptional Medium Hide",  { "Rare Medium Hide" :      1, "Silver": 24000  }, { tier: 4 });
+  add_item( "Uncommon Iron Ore",        { "Iron Ore" :              1, "Silver": 6000   }, { tier: 4 });
+  add_item( "Rare Iron Ore",            { "Uncommon Iron Ore" :     1, "Silver": 12000  }, { tier: 4 });
+  add_item( "Exceptional Iron Ore",     { "Rare Iron Ore" :         1, "Silver": 24000  }, { tier: 4 });
 
   /* T5 Materials */
-  add_item( "Cedar Logs",   { "Pine Logs"  : 9 });
-  add_item( "Granite",      { "Travertine" : 9 });
-  add_item( "Titanium Ore", { "Iron Ore"   : 9 });
+  add_item( "Cedar Logs",   { "Pine Logs"  : 9 }, {tier: 5 });
+  add_item( "Granite",      { "Travertine" : 9 }, {tier: 5 });
+  add_item( "Titanium Ore", { "Iron Ore"   : 9 }, {tier: 5 });
 
   /* T6 Materials */
-  add_item( "Bloodoak Logs" , { "Cedar Logs"   : 15 });
-  add_item( "Slate",          { "Granite"      : 15 });
-  add_item( "Runite Ore"    , { "Titanium Ore" : 15 });
+  add_item( "Bloodoak Logs" , { "Cedar Logs"   : 15 }, {tier: 6});
+  add_item( "Slate",          { "Granite"      : 15 }, {tier: 6});
+  add_item( "Runite Ore"    , { "Titanium Ore" : 15 }, {tier: 6});
 
   /* T7 Materials */
-  add_item( "Ashenbark Logs", { "Bloodoak Logs" : 25 });
-  add_item( "Basalt"        , { "Slate"         : 25 });
-  add_item( "Meteorite Ore" , { "Runite Ore"    : 25 });
+  add_item( "Ashenbark Logs", { "Bloodoak Logs" : 25 }, {tier: 7});
+  add_item( "Basalt"        , { "Slate"         : 25 }, {tier: 7});
+  add_item( "Meteorite Ore" , { "Runite Ore"    : 25 }, {tier: 7});
 
   /* T8 Materials */
-  add_item( "Marble"        , { "Basalt"        : 42 });
+  add_item( "Marble"        , { "Basalt"        : 42 }, {tier: 8});
 
 /* Crops */
   /* T2 Crops */
-  add_item("Arcane Agaric" );
-  add_item("Carrots");
-  add_item("Beans");
+  add_item("Arcane Agaric" , {}, {tier: 2});
+  add_item("Carrots", {}, { tier: 2});
+  add_item("Beans", {}, {tier: 2});
+
+/* Drops / Uniques */
+  add_item( "Explorers Anchor" , {}, { tier: 3 });
 
 /* Crafted Materials */
   /* T2 Materials */
-  add_item( "Birch Planks" ,   { "Birch Logs":   1 });
-  add_item( "Copper Bar",      { "Copper Ore":   1 });
-  add_item( "Simple Cloth",    { "Cotton" :      1 });
-  add_item( "Stiff Leather",   { "Rugged Hide" : 1 });
-  add_item( "Limestone Block", { "Limestone"   : 1 });
+  add_item( "Birch Planks" ,   { "Birch Logs":   1 }, { tier: 2 });
+  add_item( "Copper Bar",      { "Copper Ore":   1 }, { tier: 2 });
+  add_item( "Simple Cloth",    { "Cotton" :      1 }, { tier: 2 });
+  add_item( "Stiff Leather",   { "Rugged Hide" : 1 }, { tier: 2 });
+  add_item( "Limestone Block", { "Limestone"   : 1 }, { tier: 2 });
 
   /* T3 Materials */
-  add_item( "Chestnut Planks", { "Chestnut Logs": 2, "Birch Planks":    1 });
-  add_item( "Sandstone Block", { "Sandstone" :    2, "Limestone Block": 1 });
-  add_item( "Thick Leather",   { "Thin Hide" :    2, "Stiff Leather":   1 });
-  add_item( "Bronze Bar",      { "Tin Ore"   :    2, "Copper Bar":      1 });
+  add_item( "Chestnut Planks", { "Chestnut Logs": 2, "Birch Planks":    1 }, { tier: 3 });
+  add_item( "Sandstone Block", { "Sandstone" :    2, "Limestone Block": 1 }, { tier: 3 });
+  add_item( "Thick Leather",   { "Thin Hide" :    2, "Stiff Leather":   1 }, { tier: 3 });
+  add_item( "Bronze Bar",      { "Tin Ore"   :    2, "Copper Bar":      1 }, { tier: 3 });
 
   /* T4 Materials */
-  add_item( "Travertine Block", { "Travertine" : 2, "Sandstone Block" : 1 });
-  add_item( "Worked Leather",  { "Medium Hide" :  2, "Thick Leather":   1 });
-  add_item( "Steel Bar", { "Iron Ore": 2, "Bronze Bar" : 1 });
-  add_item( "Pine Planks", { "Pine Logs": 2, "Chestnut Planks": 1 });
+  add_item( "Travertine Block", { "Travertine" : 2, "Sandstone Block" : 1 }, { tier: 4 });
+  add_item( "Worked Leather",  { "Medium Hide" :  2, "Thick Leather":   1 }, { tier: 4 });
+  add_item( "Steel Bar", { "Iron Ore": 2, "Bronze Bar" : 1 }, { tier: 4 });
+  add_item( "Pine Planks", { "Pine Logs": 2, "Chestnut Planks": 1 }, { tier: 4 });
 
-  add_item( "Uncommon Worked Leather", { "Uncommon Medium Hide" : 2, "Thick Leather" : 1 });
-  add_item( "Rare Worked Leather", { "Rare Medium Hide" : 2, "Thick Leather" : 1 });
-  add_item( "Exceptional Worked Leather", { "Exceptional Medium Hide" : 2, "Thick Leather" : 1 });
-  add_item( "Uncommon Steel Bar", { "Uncommon Iron Ore": 2, "Bronze Bar" : 1 });
-  add_item( "Rare Steel Bar", { "Rare Iron Ore": 2, "Bronze Bar" : 1 });
-  add_item( "Exceptional Steel Bar", { "Exceptional Iron Ore": 2, "Bronze Bar" : 1 });
+  add_item( "Uncommon Worked Leather", { "Uncommon Medium Hide" : 2, "Thick Leather" : 1 }, { tier: 4 });
+  add_item( "Rare Worked Leather", { "Rare Medium Hide" : 2, "Thick Leather" : 1 }, { tier: 4 });
+  add_item( "Exceptional Worked Leather", { "Exceptional Medium Hide" : 2, "Thick Leather" : 1 }, { tier: 4 });
+  add_item( "Uncommon Steel Bar", { "Uncommon Iron Ore": 2, "Bronze Bar" : 1 }, { tier: 4});
+  add_item( "Rare Steel Bar", { "Rare Iron Ore": 2, "Bronze Bar" : 1 }, {tier: 4 });
+  add_item( "Exceptional Steel Bar", { "Exceptional Iron Ore": 2, "Bronze Bar" : 1 }, {tier: 4});
 
   /* T5 Materials */
-  add_item( "Cedar Planks",  { "Cedar Logs": 3, "Pine Planks" : 1   });
-  add_item( "Granite Block", { "Granite" : 3, "Travertine Block": 1 });
-  add_item( "Titanium Steel Bar", { "Titanium Ore": 3, "Steel Bar": 1 });
+  add_item( "Cedar Planks",  { "Cedar Logs": 3, "Pine Planks" : 1   }, {tier: 5});
+  add_item( "Granite Block", { "Granite" : 3, "Travertine Block": 1 }, {tier: 5});
+  add_item( "Titanium Steel Bar", { "Titanium Ore": 3, "Steel Bar": 1 }, {tier: 5});
 
   /* T6 Materials */
-  add_item( "Bloodoak Planks", { "Bloodoak Logs": 4, "Cedar Planks": 1  });
-  add_item( "Slate Block",     { "Slate" : 4,        "Granite Block": 1 });
-  add_item( "Runite Steel Bar", { "Runite Ore": 4,        "Titanium Steel Bar": 1 });
+  add_item( "Bloodoak Planks", { "Bloodoak Logs": 4, "Cedar Planks": 1  }, {tier: 6});
+  add_item( "Slate Block",     { "Slate" : 4,        "Granite Block": 1 }, {tier: 6});
+  add_item( "Runite Steel Bar", { "Runite Ore": 4,        "Titanium Steel Bar": 1 }, {tier: 6});
 
   /* T7 Materials */
-  add_item( "Ashenbark Planks", { "Ashenbark Logs": 5, "Bloodoak Planks" : 1 });
-  add_item( "Basalt Block",     { "Basalt":         5, "Slate Block"     : 1 });
-  add_item( "Meteorite Steel Bar", { "Meteorite Ore": 5, "Runite Steel Bar": 1 });
+  add_item( "Ashenbark Planks", { "Ashenbark Logs": 5, "Bloodoak Planks" : 1 }, {tier: 7});
+  add_item( "Basalt Block",     { "Basalt":         5, "Slate Block"     : 1 }, {tier: 7});
+  add_item( "Meteorite Steel Bar", { "Meteorite Ore": 5, "Runite Steel Bar": 1 }, {tier: 7});
 
   /* T8 Materials */
-  add_item( "Marble Block",     { "Marble":         5, "Basalt Block"    : 1 });
+  add_item( "Marble Block",     { "Marble":         5, "Basalt Block"    : 1 }, {tier: 8});
 
 /* Toolmaker */
   /* Novices Toolmaker -> Tools */
-  add_item( "Beginners Pickaxe",         { "Rough Stone":   3, "Rough Logs": 3 });
-  add_item( "Beginners Axe",             { "Rough Stone":   3, "Rough Logs": 3 });
-  add_item( "Beginners Skinning Kinfe",  { "Rough Stone":   3, "Rough Logs": 3 });
-  add_item( "Beginners Sickle",          { "Rough Stone":   3, "Rough Logs": 3 });
-  add_item( "Novices Sickle",            { "Birch Planks":  6, "Copper Bar": 2 });
-  add_item( "Novices Pickaxe",           { "Birch Planks":  6, "Copper Bar": 2 });
-  add_item( "Novices Skinning Kinfe",    { "Birch Planks":  6, "Copper Bar": 2 });
-  add_item( "Novices Stone Hammer",      { "Birch Planks":  6, "Copper Bar": 2 });
-  add_item( "Novices Demolition Hammer", { "Birch Planks": 12, "Copper Bar": 12});
+  add_item( "Beginners Pickaxe",         { "Rough Stone":   3, "Rough Logs": 3 }, {tier: 1});
+  add_item( "Beginners Axe",             { "Rough Stone":   3, "Rough Logs": 3 }, {tier: 1});
+  add_item( "Beginners Skinning Kinfe",  { "Rough Stone":   3, "Rough Logs": 3 }, {tier: 1});
+  add_item( "Beginners Sickle",          { "Rough Stone":   3, "Rough Logs": 3 }, {tier: 1});
+  add_item( "Beginners Stone Hammer",    { "Rough Stone":   3, "Rough Logs": 3 }, {tier: 1});
+  add_item( "Novices Sickle",            { "Birch Planks":  6, "Copper Bar": 2 }, {tier: 2});
+  add_item( "Novices Pickaxe",           { "Birch Planks":  6, "Copper Bar": 2 }, {tier: 2});
+  add_item( "Novices Skinning Kinfe",    { "Birch Planks":  6, "Copper Bar": 2 }, {tier: 2});
+  add_item( "Novices Stone Hammer",      { "Birch Planks":  6, "Copper Bar": 2 }, {tier: 2});
+  add_item( "Novices Demolition Hammer", { "Birch Planks": 12, "Copper Bar": 12}, {tier: 2});
 
   /* Novices Toolmaker -> Accessories */
-  add_item( "Novices Bag",  { "Simple Cloth" : 12, "Stiff Leather" : 12 });
-  add_item( "Novices Cape", { "Simple Cloth" :  4, "Stiff Leather" :  4 });
+  add_item( "Novices Bag",  { "Simple Cloth" : 12, "Stiff Leather" : 12 }, {tier: 2});
+  add_item( "Novices Cape", { "Simple Cloth" :  4, "Stiff Leather" :  4 }, {tier: 2});
 
   /* Novices Toolmaker -> Furniture */
-  add_item( "Novices Chest", { "Birch Planks" : 20, "Copper Bar": 10 });
-  add_item( "Novices Bed",   { "Birch Planks" : 10, "Copper Bar": 20 });
-  add_item( "Novices Table", { "Birch Planks" : 30, "Copper Bar": 30 });
+  add_item( "Novices Chest", { "Birch Planks" : 20, "Copper Bar": 10 }, {tier: 2});
+  add_item( "Novices Bed",   { "Birch Planks" : 10, "Copper Bar": 20 }, {tier: 2});
+  add_item( "Novices Table", { "Birch Planks" : 30, "Copper Bar": 30 }, {tier: 2});
 
 /* Warriors Forge */
   /* Novices Warriors Forge -> Weapons */
-  add_item("Beginners Broadsword", { "Rough Stone"  :  6, "Rough Logs":    6 });
-  add_item("Beginners Shield",     { "Rough Logs"   :  4                     });
-  add_item("Novices Broadsword",   { "Copper Bar"   : 16, "Stiff Leather": 8 });
-  add_item("Novices Sheild",       { "Birch Planks" :  4, "Copper Bar"   : 4 });
+  add_item("Beginners Broadsword", { "Rough Stone"  :  6, "Rough Logs":    6 }, {tier: 1});
+  add_item("Beginners Shield",     { "Rough Logs"   :  4                     }, {tier: 1});
+  add_item("Novices Broadsword",   { "Copper Bar"   : 16, "Stiff Leather": 8 }, {tier: 2});
+  add_item("Novices Sheild",       { "Birch Planks" :  4, "Copper Bar"   : 4 }, {tier: 2});
 
   /* Novices Warriors Forge -> Armor */
-  add_item("Novices Soldier Helmet", { "Copper Bar" : 8  });
-  add_item("Novices Soldier Armor",  { "Copper Bar" : 16 });
-  add_item("Novices Soldier Boots",  { "Copper Bar" : 8  });
+  add_item("Novices Soldier Helmet", { "Copper Bar" : 8  }, { tier: 2});
+  add_item("Novices Soldier Armor",  { "Copper Bar" : 16 }, { tier: 2});
+  add_item("Novices Soldier Boots",  { "Copper Bar" : 8  }, { tier: 2});
 
 /* Alchemists Lab */
   /* Novices Alchemists Lab -> Potions */
-  add_item("Minor Healing Potion", { "Arcane Agaric" : 8 });
-  add_item("Minor Energy  Potion", { "Arcane Agaric" : 8 });
+  add_item("Minor Healing Potion", { "Arcane Agaric" : 8 }, {tier: 2});
+  add_item("Minor Energy Potion", { "Arcane Agaric" : 8 }, {tier: 2});
 
 /* Cook */
   /* Novices Cook -> Food */
-  add_item("Carrot Soup", { "Carrots" : 16 });
-  add_item("Bean Salad",  { "Beans"   :  8, "Carrots" : 8 });
+  add_item("Carrot Soup", { "Carrots" : 16 }, { tier: 1 });
+  add_item("Bean Salad",  { "Beans"   :  8, "Carrots" : 8 }, { tier: 2 });
 
 /* Mage Tower */
   /* Novices Mage Tower -> Weapons */
-  add_item("Novices Fire Staff",      { "Birch Planks" : 16, "Copper Bar":    8 });
-  add_item("Novices Tome of Spells",  { "Simple Cloth" :  4, "Stiff Leather": 4 });
+  add_item("Novices Fire Staff",      { "Birch Planks" : 16, "Copper Bar":    8 }, { tier: 2 });
+  add_item("Novices Tome of Spells",  { "Simple Cloth" :  4, "Stiff Leather": 4 }, { tier: 2 });
 
   /* Novics Mage Tower -> Armor */
-  add_item("Novices Scholar Cowl",    { "Simple Cloth" :  8 });
-  add_item("Novices Scholar Robe",    { "Simple Cloth" : 16 });
-  add_item("Novices Scholar Sandals", { "Simple Cloth" :  8 });
+  add_item("Novices Scholar Cowl",    { "Simple Cloth" :  8 }, {tier: 2 });
+  add_item("Novices Scholar Robe",    { "Simple Cloth" : 16 }, {tier: 2 });
+  add_item("Novices Scholar Sandals", { "Simple Cloth" :  8 }, {tier: 2 });
   
 
 /* Building Costs */
-  add_item("Novices Lumbermill",  { "Rough Logs" : 25 , "Rough Stone" : 3 , "Limestone Block" : 150 });
-  add_item("Novices Smelter",     { "Rough Logs" : 25 , "Rough Stone" : 3 , "Limestone Block" : 150 });
-  add_item("Novices Tanner",      { "Rough Logs" : 25 , "Rough Stone" : 3 , "Limestone Block" : 150 });
-  add_item("Novices Weaver",      { "Rough Logs" : 25 , "Rough Stone" : 3 , "Limestone Block" : 150 });
-  add_item("Novices Toolmaker",   { "Rough Logs" : 50 , "Rough Stone" : 5 , "Limestone Block" : 300 });
-  add_item("Novices Stonemason",  { "Rough Logs" : 25 , "Rough Stone" : 25, "Limestone"       : 150 });
+  add_item("Novices Lumbermill",  { "Rough Logs" : 25 , "Rough Stone" : 3 , "Limestone Block" : 150 }, {tier: 2});
+  add_item("Novices Smelter",     { "Rough Logs" : 25 , "Rough Stone" : 3 , "Limestone Block" : 150 }, {tier: 2});
+  add_item("Novices Tanner",      { "Rough Logs" : 25 , "Rough Stone" : 3 , "Limestone Block" : 150 }, {tier: 2});
+  add_item("Novices Weaver",      { "Rough Logs" : 25 , "Rough Stone" : 3 , "Limestone Block" : 150 }, {tier: 2});
+  add_item("Novices Toolmaker",   { "Rough Logs" : 50 , "Rough Stone" : 5 , "Limestone Block" : 300 }, {tier: 2});
+  add_item("Novices Stonemason",  { "Rough Logs" : 25 , "Rough Stone" : 25, "Limestone"       : 150 }, {tier: 2});
   add_item("Novices Repair Station",  { "Rough Logs"   : 90 , "Rough Stone"     : 90,
-                                        "Birch Planks" : 90 , "Limestone Block" : 90  });
-  add_item("Novices Alchemists Lab",  { "Rough Logs" : 50, "Rough Stone" : 5, "Limestone Block" : 300 });
-  add_item("Novices Cook",            { "Rough Logs" : 50, "Rough Stone" : 5, "Limestone Block" : 300 });
-  add_item("Journeymans Mill",        { "Rough Logs" : 50, "Rough Stone" : 5, "Sandstone Block" : 150 });
-  add_item("Journeymans Butcher",     { "Rough Logs" : 50, "Rough Stone" : 5, "Sandstone Block" : 150 });
-  add_item("Journeymans Saddler",     { "Rough Logs" : 100, "Rough Stone" : 10, "Sandstone Block" : 300 });
+                                        "Birch Planks" : 90 , "Limestone Block" : 90  }, {tier: 2});
+  add_item("Novices Alchemists Lab",  { "Rough Logs" : 50, "Rough Stone" : 5, "Limestone Block" : 300 }, {tier: 2});
+  add_item("Novices Cook",            { "Rough Logs" : 50, "Rough Stone" : 5, "Limestone Block" : 300 }, {tier: 2});
+  add_item("Journeymans Mill",        { "Rough Logs" : 50, "Rough Stone" : 5, "Sandstone Block" : 150 }, {tier: 3});
+  add_item("Journeymans Butcher",     { "Rough Logs" : 50, "Rough Stone" : 5, "Sandstone Block" : 150 }, {tier: 3});
+  add_item("Journeymans Saddler",     { "Rough Logs" : 100, "Rough Stone" : 10, "Sandstone Block" : 300 }, {tier: 3});
 
-  add_item("Farm",          { "Rough Logs" : 15, "Rough Stone" : 15 });
-  add_item("Herb Garden",   { "Rough Logs" : 25, "Rough Stone" : 25, "Birch Planks": 25, "Limestone Block": 25 });
-  add_item("Pasture",  { "Rough Logs" : 30, "Rough Stone" : 30, "Chestnut Planks": 30, "Sandstone Block": 30 });
+  add_item("Farm",          { "Rough Logs" : 15, "Rough Stone" : 15 }, {tier: 1});
+  add_item("Herb Garden",   { "Rough Logs" : 25, "Rough Stone" : 25, "Birch Planks": 25, "Limestone Block": 25 }, {tier: 2});
+  add_item("Pasture",  { "Rough Logs" : 30, "Rough Stone" : 30, "Chestnut Planks": 30, "Sandstone Block": 30 }, {tier: 3});
 
-  add_item("Kennel",   { "Bloodoak Logs" : 50, "Slate" : 50, "Runite Steel Bar" : 10 });
+  add_item("Kennel",   { "Bloodoak Logs" : 50, "Slate" : 50, "Runite Steel Bar" : 10 }, {tier: 6});
 
-  add_item("Workbench", { "Rough Logs" : 25, "Rough Stone" : 100 });
-  add_item("Novice Warriors Forge", { "Rough Logs": 50, "Rough Stone": 5, "Limestone Block" : 300 });
-  add_item("Novice Mages Tower",    { "Rough Logs": 50, "Rough Stone": 5, "Limestone Block" : 300 });
-  add_item("Novice Hunters Lodge",  { "Rough Logs": 50, "Rough Stone": 5, "Limestone Block" : 300 });
+  add_item("Workbench", { "Rough Logs" : 25, "Rough Stone" : 100 }, {tier: 1});
+  add_item("Novice Warriors Forge", { "Rough Logs": 50, "Rough Stone": 5, "Limestone Block" : 300 }, {tier: 2});
+  add_item("Novice Mages Tower",    { "Rough Logs": 50, "Rough Stone": 5, "Limestone Block" : 300 }, {tier: 2});
+  add_item("Novice Hunters Lodge",  { "Rough Logs": 50, "Rough Stone": 5, "Limestone Block" : 300 }, {tier: 2});
 
-  add_item("Novices Guild Hall",  { "Rough Logs": 150, "Rough Stone": 15, "Limestone Block" : 900 });
-  add_item("Novices House",       { "Rough Logs":  30, "Rough Stone":  3, "Limestone Block" : 180 });
+  add_item("Novices Guild Hall",  { "Rough Logs": 150, "Rough Stone": 15, "Limestone Block" : 900 }, {tier: 2});
+  add_item("Novices House",       { "Rough Logs":  30, "Rough Stone":  3, "Limestone Block" : 180 }, {tier: 2});
 
   add_item("Legendary Explorers Shelter", { "Explorers Anchor" : 1,
-                                   "Rough Logs":  30, "Rough Stone":  3, "Limestone Block" : 180 });
+                                            "Rough Logs":  30, "Rough Stone":  3, "Limestone Block" : 180 }, {tier: 2});
 
-
+})();
  </script>
  <body>
   <div id="in">
@@ -284,18 +342,28 @@
 
 
   <script>
-  var dd  = document.getElementById("dd");
-  var amt = document.getElementById("amt");
+
+(function() {
+  let dd  = document.getElementById("dd");
+  let amt = document.getElementById("amt");
   var out = document.getElementById("out");
+
+  let AlbionData = document.AlbionData;
+  let item_names = document.AlbionData.item_names;
+  let data       = document.AlbionData.items;
+
   item_names.sort();
   for ( let reso_name of item_names ) {
-    var opt = document.createElement("option");
+    let opt = document.createElement("option");
     opt.innerHTML = reso_name;
+    if ( typeof AlbionData.attributes[reso_name]["tier"] != "undefined" ) {
+      opt.className = "rlevel" +  AlbionData.attributes[reso_name]["tier"];
+    }
     dd.appendChild(opt);
   }
 
 
-  var mkCostModel = function( resource, amt, depth ) {
+  let mkCostModel = function( resource, amt, depth ) {
     if ( typeof amt == "undefined" ) {
       amt = 1;
     }
@@ -303,13 +371,14 @@
       depth = 1;
     }
 
-    var model_data = {
+    let model_data = {
       initial_amt: amt,
       resource: resource,
       have: 0,
       display_needed: amt,
       currently_needed: amt,
       composition: data[resource],
+      attributes: {},
       update_fns: [],
     };
 
@@ -328,6 +397,13 @@
         chld.setNeeded( needed );
       });
     }
+
+    if( typeof AlbionData.attributes[resource] != "undefined" ) {
+      model_data.attributes = AlbionData.attributes[resource];
+    } else {
+      model_data.attributes = {};
+    }
+
     model_data.setNeeded = function( amt ) {
       model_data.currently_needed = Number.parseInt( amt );
       model_data.update();
@@ -351,37 +427,40 @@
     return model_data;
   };
 
-  var gen_reso_line = function( model, depth ) {
+  let gen_reso_line = function( model, depth ) {
     if ( typeof depth == "undefined" ) {
       depth = 1;
     }
 
-    var xdiv = document.createElement("div");
+    let xdiv = document.createElement("div");
     xdiv.className = "resource_group resource_" + depth;
+    if ( typeof model.attributes["tier"]  != "undefined" ) {
+      xdiv.className = xdiv.className + " rlevel" + model.attributes["tier"];
+    }
 
-    var divname = document.createElement("span");
+    let divname = document.createElement("span");
     divname.className = "resoname";
     divname.textContent = model.resource;
     xdiv.appendChild(divname);
 
-    var divcnt = document.createElement("span");
+    let divcnt = document.createElement("span");
     divcnt.className = "resocount";
     divcnt.textContent = model.initial_amt;
     xdiv.appendChild(divcnt);
 
-    var have_amt_label = document.createElement("label");
+    let have_amt_label = document.createElement("label");
     have_amt_label.textContent = "Have"
     have_amt_label.className = "have_label";
     xdiv.appendChild(have_amt_label);
 
-    var have_amt = document.createElement("input");
+    let have_amt = document.createElement("input");
     have_amt.type = "text"
     have_amt.value = 0;
     have_amt.className = "have_amt";
     xdiv.appendChild( have_amt );
 
 
-    var timeout_debounce = false;
+    let timeout_debounce = false;
     have_amt.addEventListener("keyup", function() {
       if ( timeout_debounce ) { window.clearTimeout( timeout_debounce ); }
       timeout_debounce = window.setTimeout(function() {
@@ -397,7 +476,7 @@
     });
 
     if ( typeof model['children'] != "undefined" ) {
-      var  child_node = document.createElement("div");
+      let  child_node = document.createElement("div");
       child_node.className = "components";
       for( let child of model['children'] ) {
         child_node.appendChild( gen_reso_line( child, depth + 1 ));
@@ -412,8 +491,8 @@
     return xdiv;
   };
 
-  var calc_bom = function() {
-    var camt = Number.parseInt(amt.value);
+  let calc_bom = function() {
+    let camt = Number.parseInt(amt.value);
     if ( "" + camt  == "NaN" ) {
       camt = 0;
       amt.value = "";
@@ -427,20 +506,21 @@
       return;
     }
 
-    var resource = dd.value;
+    let resource = dd.value;
     if ( typeof data[resource] == "undefined" ) {
       throw "Can't get costs for: " + resource;
     }
 
     out.appendChild(gen_reso_line( mkCostModel( resource, camt ), 1 ));
   };
-  var marker = false;
-  var auto_change_input = function() {
+  let marker = false;
+  let auto_change_input = function() {
     if( marker ) { window.clearTimeout(marker); }
     marker = window.setTimeout(function(){ marker = false;  calc_bom() }, 750);
   };
   dd.addEventListener("change", auto_change_input);
   amt.addEventListener("keyup", auto_change_input);
+})();
   </script>
  </body>
 </html>
