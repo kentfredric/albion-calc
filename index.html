@@ -333,6 +333,7 @@
  </script>
  <body>
   <div id="in">
+     <label>Item Search:</label><input id="itemfilter" type="text" value=""></select>
      <label>Item:</label><select id="dd"></select>
      <label>Amount:</label><input id="amt" type="text" value="" />
   </div>
@@ -347,21 +348,52 @@
   let dd  = document.getElementById("dd");
   let amt = document.getElementById("amt");
   var out = document.getElementById("out");
+  var itemfilter = document.getElementById("itemfilter");
 
   let AlbionData = document.AlbionData;
-  let item_names = document.AlbionData.item_names;
   let data       = document.AlbionData.items;
 
-  item_names.sort();
-  for ( let reso_name of item_names ) {
-    let opt = document.createElement("option");
-    opt.innerHTML = reso_name;
-    if ( typeof AlbionData.attributes[reso_name]["tier"] != "undefined" ) {
-      opt.className = "rlevel" +  AlbionData.attributes[reso_name]["tier"];
-    }
-    dd.appendChild(opt);
-  }
+  AlbionData.item_names.sort();
 
+  let renderddopts = function(item_names) {
+    dd.innerHTML = "";
+    for ( let reso_name of item_names ) {
+      let opt = document.createElement("option");
+      opt.innerHTML = reso_name;
+      if ( typeof AlbionData.attributes[reso_name]["tier"] != "undefined" ) {
+        opt.className = "rlevel" +  AlbionData.attributes[reso_name]["tier"];
+      }
+      dd.appendChild(opt);
+    }
+  };
+
+  renderddopts(AlbionData.item_names);
+
+  let itemFilter_debounce = false;
+  itemfilter.addEventListener("keyup", function() {
+    if ( itemFilter_debounce ) { window.clearTimeout( itemFilter_debounce ) }
+    itemFilter_debounce = window.setTimeout(function() {
+      let search = itemfilter.value;
+      search = search.replace(/^\s+/, "");
+      search = search.replace(/\s+$/, "");
+      search = search.replace(/\s+/g, " ");
+      console.log("Search", search);
+      if ( search.length < 1 ) {
+        return renderddopts(AlbionData.item_names);
+      }
+      let res = search.match(/^T(?:ier|eir|)(?:\s*)([0-9]+)$/i);
+      if ( res != null ){
+        console.log("Teir Search", res[1]);
+        let out = [];
+        for ( let reso_name of AlbionData.item_names ) {
+          if ( typeof AlbionData.attributes[reso_name]["tier"] != "undefined" && AlbionData.attributes[reso_name]["tier"] == res[1] ) {
+            out.push(reso_name);
+          }
+        }
+        return renderddopts(out);
+      }
+    }, 500);
+  });
 
   let mkCostModel = function( resource, amt, depth ) {
     if ( typeof amt == "undefined" ) {
