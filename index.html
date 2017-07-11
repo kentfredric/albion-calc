@@ -370,34 +370,54 @@
   add_item("Elders House" ,  { "Grandmasters House": 1, "Rough Logs": 1920, "Rough Stone": 192, "Marble Block": 180 } , { tier: 8 });
   add_item("Legendary Explorers Palace", { "Legendary Explorers Manor" : 1, "Rough Logs": 1920, "Rough Stone": 192, "Marble Block": 180 }, { tier: 8 });
 
-/* */
-
-
-
-  add_item("Farm",          { "Rough Logs" : 15, "Rough Stone" : 15 }, {tier: 1});
+  /* Craft -> T1 */
   add_item("Workbench", { "Rough Logs" : 25, "Rough Stone" : 100 }, {tier: 1});
 
+  /* Craft -> T2 */
+  add_item("Novices Cook",          { "Rough Logs" : 50, "Rough Stone": 5, "Limestone Block" : 300 }, {tier: 2});
+  add_item("Novice Warriors Forge", { "Rough Logs" : 50, "Rough Stone": 5, "Limestone Block" : 300 }, {tier: 2});
+  add_item("Novice Alchemists Lab", { "Rough Logs" : 50, "Rough Stone": 5, "Limestone Block" : 300 }, {tier: 2});
+  add_item("Novices Toolmaker",     { "Rough Logs" : 50, "Rough Stone": 5, "Limestone Block" : 300 }, {tier: 2});
+  add_item("Novice Mages Tower",    { "Rough Logs" : 50, "Rough Stone": 5, "Limestone Block" : 300 }, {tier: 2});
+  add_item("Novice Hunters Lodge",  { "Rough Logs" : 50, "Rough Stone": 5, "Limestone Block" : 300 }, {tier: 2});
 
-  add_item("Novices Lumbermill",  { "Rough Logs" : 25 , "Rough Stone" : 3 , "Limestone Block" : 150 }, {tier: 2});
   add_item("Novices Smelter",     { "Rough Logs" : 25 , "Rough Stone" : 3 , "Limestone Block" : 150 }, {tier: 2});
   add_item("Novices Tanner",      { "Rough Logs" : 25 , "Rough Stone" : 3 , "Limestone Block" : 150 }, {tier: 2});
   add_item("Novices Weaver",      { "Rough Logs" : 25 , "Rough Stone" : 3 , "Limestone Block" : 150 }, {tier: 2});
-  add_item("Novices Toolmaker",   { "Rough Logs" : 50 , "Rough Stone" : 5 , "Limestone Block" : 300 }, {tier: 2});
+  add_item("Novices Lumbermill",  { "Rough Logs" : 25 , "Rough Stone" : 3 , "Limestone Block" : 150 }, {tier: 2});
+
   add_item("Novices Stonemason",  { "Rough Logs" : 25 , "Rough Stone" : 25, "Limestone"       : 150 }, {tier: 2});
-  add_item("Novices Repair Station",  { "Rough Logs"   : 90 , "Rough Stone"     : 90,
-                                        "Birch Planks" : 90 , "Limestone Block" : 90  }, {tier: 2});
-  add_item("Novices Alchemists Lab",  { "Rough Logs" : 50, "Rough Stone" : 5, "Limestone Block" : 300 }, {tier: 2});
-  add_item("Novices Cook",            { "Rough Logs" : 50, "Rough Stone" : 5, "Limestone Block" : 300 }, {tier: 2});
 
-  add_item("Novice Warriors Forge", { "Rough Logs": 50, "Rough Stone": 5, "Limestone Block" : 300 }, {tier: 2});
-  add_item("Novice Mages Tower",    { "Rough Logs": 50, "Rough Stone": 5, "Limestone Block" : 300 }, {tier: 2});
-  add_item("Novice Hunters Lodge",  { "Rough Logs": 50, "Rough Stone": 5, "Limestone Block" : 300 }, {tier: 2});
-
-  add_item("Herb Garden",   { "Rough Logs" : 25, "Rough Stone" : 25, "Birch Planks": 25, "Limestone Block": 25 }, {tier: 2});
-
+  /* Craft -> T3 */
   add_item("Journeymans Mill",        { "Rough Logs" : 50, "Rough Stone" : 5, "Sandstone Block" : 150 }, {tier: 3});
   add_item("Journeymans Butcher",     { "Rough Logs" : 50, "Rough Stone" : 5, "Sandstone Block" : 150 }, {tier: 3});
+
   add_item("Journeymans Saddler",     { "Rough Logs" : 100, "Rough Stone" : 10, "Sandstone Block" : 300 }, {tier: 3});
+
+  add_item("Journeymans Cook",          { "Novices Cook": 1,                "Rough Logs": 100, "Rough Stone": 10, "Sandstone Block": 300 }, {tier: 3});
+  add_item("Journeyman Warriors Forge", { "Novice Warriors Forge":      1,  "Rough Logs": 100, "Rough Stone": 10, "Sandstone Block": 300 }, {tier: 3});
+  add_item("Journeyman Alchemists Lab", { "Novice Alchemists Lab":      1,  "Rough Logs": 100, "Rough Stone":  10, "Sandstone Block" : 300 }, {tier: 3});
+  add_item("Journeymans Toolmaker",     { "Novices Toolmaker":          1,  "Rough Logs": 100, "Rough Stone":  10, "Sandstone Block" : 300 }, {tier: 3});
+  add_item("Journeyman Mages Tower",    { "Novice Mages Tower":         1,  "Rough Logs": 100, "Rough Stone":  10, "Sandstone Block" : 300 }, {tier: 3});
+  add_item("Journeyman Hunters Lodge",  { "Novice Hunters Lodge":       1,  "Rough Logs": 100, "Rough Stone":  10, "Sandstone Block" : 300 }, {tier: 3});
+
+  add_item("Journeymans Smelter",       { "Novices Smelter":            1,  "Rough Logs": 50, "Rough Stone":  5, "Sandstone Block" : 150 }, {tier: 3});
+  add_item("Journeymans Tanner",        { "Novices Tanner":             1,  "Rough Logs": 50, "Rough Stone":  5, "Sandstone Block" : 150 }, {tier: 3});
+  add_item("Journeymans Weaver",        { "Novices Weaver":             1,  "Rough Logs": 50, "Rough Stone":  5, "Sandstone Block" : 150 }, {tier: 3});
+  add_item("Journeymans Lumbermill",    { "Novices Lumbermill":         1,  "Rough Logs": 50, "Rough Stone":  5, "Sandstone Block" : 150 }, {tier: 3});
+
+  add_item("Journeymans Stonemason",    { "Novices Stonemason":         1, "Rough Logs": 50, "Rough Stone": 50, "Sandstone": 150 }, {tier: 3});
+
+  add_item("Journeymans Transmutator",  { "Rough Logs": 60, "Rough Stone": 6, "Sandstone Block": 180}, { tier: 3 });
+
+  add_item("Farm",          { "Rough Logs" : 15, "Rough Stone" : 15 }, {tier: 1});
+
+
+  add_item("Novices Repair Station",  { "Rough Logs"   : 90 , "Rough Stone"     : 90,
+                                        "Birch Planks" : 90 , "Limestone Block" : 90  }, {tier: 2});
+
+
+  add_item("Herb Garden",   { "Rough Logs" : 25, "Rough Stone" : 25, "Birch Planks": 25, "Limestone Block": 25 }, {tier: 2});
 
   add_item("Pasture",  { "Rough Logs" : 30, "Rough Stone" : 30, "Chestnut Planks": 30, "Sandstone Block": 30 }, {tier: 3});
 
