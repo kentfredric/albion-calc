@@ -154,6 +154,7 @@
   /* T1 Materials */
   add_item( "Rough Logs"  , {}, { tier: 1 });
   add_item( "Rough Stone" , {}, { tier: 1 });
+  add_item( "Scraps of Hide", {}, { tier: 1 });
 
   /* T2 Materials */
   add_item( "Copper Ore"  , {}, { tier: 2 } );
@@ -167,16 +168,19 @@
   add_item( "Chestnut Logs"  , { "Birch Logs":  3 }, { tier: 3 });
   add_item( "Thin Hide"      , { "Rugged Hide": 3 }, { tier: 3 });
   add_item( "Tin Ore"        , { "Copper Ore":  3 }, { tier: 3 });
+  add_item( "Flax"           , { "Cotton":      3 }, { tier: 3 });
 
   /* T4 Materials */
   add_item( "Travertine"    , { "Sandstone" : 6 }, { tier: 4 });
   add_item( "Medium Hide"   , { "Thin Hide" : 6 }, { tier: 4 });
   add_item( "Iron Ore"      , { "Tin Ore" : 6   }, { tier: 4 });
   add_item( "Pine Logs"     , { "Chestnut Logs": 6 }, { tier: 4 });
+  add_item( "Hemp"          , { "Flax": 6 }, { tier:  4 });
 
   add_item( "Uncommon Medium Hide",     { "Medium Hide" :           1, "Silver": 6000   }, { tier: 4 });
   add_item( "Rare Medium Hide",         { "Uncommon Medium Hide" :  1, "Silver": 12000  }, { tier: 4 });
   add_item( "Exceptional Medium Hide",  { "Rare Medium Hide" :      1, "Silver": 24000  }, { tier: 4 });
+
   add_item( "Uncommon Iron Ore",        { "Iron Ore" :              1, "Silver": 6000   }, { tier: 4 });
   add_item( "Rare Iron Ore",            { "Uncommon Iron Ore" :     1, "Silver": 12000  }, { tier: 4 });
   add_item( "Exceptional Iron Ore",     { "Rare Iron Ore" :         1, "Silver": 24000  }, { tier: 4 });
@@ -185,19 +189,29 @@
   add_item( "Cedar Logs",   { "Pine Logs"  : 9 }, {tier: 5 });
   add_item( "Granite",      { "Travertine" : 9 }, {tier: 5 });
   add_item( "Titanium Ore", { "Iron Ore"   : 9 }, {tier: 5 });
+  add_item( "Heavy Hide",  { "Medium Hide" : 9 }, { tier: 5 });
+  add_item( "Skyflower", { "Hemp": 9 }, { tier: 5 });
 
   /* T6 Materials */
   add_item( "Bloodoak Logs" , { "Cedar Logs"   : 15 }, {tier: 6});
   add_item( "Slate",          { "Granite"      : 15 }, {tier: 6});
   add_item( "Runite Ore"    , { "Titanium Ore" : 15 }, {tier: 6});
+  add_item( "Robust Hide",    { "Heavy Hide"   : 15 }, {tier: 6});
+  add_item( "Readleaf Cotton", { "Skyflower"   : 15 }, {tier: 6});
 
   /* T7 Materials */
   add_item( "Ashenbark Logs", { "Bloodoak Logs" : 25 }, {tier: 7});
   add_item( "Basalt"        , { "Slate"         : 25 }, {tier: 7});
   add_item( "Meteorite Ore" , { "Runite Ore"    : 25 }, {tier: 7});
+  add_item( "Thick Hide",     { "Robust Hide"   : 25 }, {tier: 7});
+  add_item( "Sunflax",        { "Readleaf Cotton": 25}, {tier: 7});
 
   /* T8 Materials */
   add_item( "Marble"        , { "Basalt"        : 42 }, {tier: 8});
+  add_item( "Resilient Hide", { "Thick Hide"    : 42 }, {tier: 8});
+  add_item( "Whitewood Logs", { "Ashenbark Logs": 42 }, {tier: 8});
+  add_item( "Ghost Hemp",     { "Sunflax":        42 }, {tier: 8});
+  add_item( "Adamantium Ore", { "Meteorite Ore":  42 }, {tier: 8});
 
 /* Crops */
   /* T2 Crops */
@@ -221,12 +235,14 @@
   add_item( "Sandstone Block", { "Sandstone" :    2, "Limestone Block": 1 }, { tier: 3 });
   add_item( "Thick Leather",   { "Thin Hide" :    2, "Stiff Leather":   1 }, { tier: 3 });
   add_item( "Bronze Bar",      { "Tin Ore"   :    2, "Copper Bar":      1 }, { tier: 3 });
+  add_item( "Neat Cloth",      { "Flax"      :    2, "Simple Cloth":    1 }, { tier: 3 });
 
   /* T4 Materials */
   add_item( "Travertine Block", { "Travertine" : 2, "Sandstone Block" : 1 }, { tier: 4 });
   add_item( "Worked Leather",  { "Medium Hide" :  2, "Thick Leather":   1 }, { tier: 4 });
   add_item( "Steel Bar", { "Iron Ore": 2, "Bronze Bar" : 1 }, { tier: 4 });
   add_item( "Pine Planks", { "Pine Logs": 2, "Chestnut Planks": 1 }, { tier: 4 });
+  add_item( "Fine Cloth", { "Hemp" : 2, "Neat Cloth": 1 }, { tier: 4 });
 
   add_item( "Uncommon Worked Leather", { "Uncommon Medium Hide" : 2, "Thick Leather" : 1 }, { tier: 4 });
   add_item( "Rare Worked Leather", { "Rare Medium Hide" : 2, "Thick Leather" : 1 }, { tier: 4 });
@@ -239,19 +255,29 @@
   add_item( "Cedar Planks",  { "Cedar Logs": 3, "Pine Planks" : 1   }, {tier: 5});
   add_item( "Granite Block", { "Granite" : 3, "Travertine Block": 1 }, {tier: 5});
   add_item( "Titanium Steel Bar", { "Titanium Ore": 3, "Steel Bar": 1 }, {tier: 5});
+  add_item( "Ornate Cloth", { "Skyflower": 3, "Fine Cloth": 1 }, { tier: 5 });
+  add_item( "Cured Leather", { "Heavy Hide": 3, "Worked Leather": 1 }, { tier: 5 });
 
   /* T6 Materials */
   add_item( "Bloodoak Planks", { "Bloodoak Logs": 4, "Cedar Planks": 1  }, {tier: 6});
   add_item( "Slate Block",     { "Slate" : 4,        "Granite Block": 1 }, {tier: 6});
   add_item( "Runite Steel Bar", { "Runite Ore": 4,        "Titanium Steel Bar": 1 }, {tier: 6});
+  add_item( "Lavish Cloth", { "Readleaf Cotton": 4, "Ornate Cloth": 1 }, { tier: 6 });
+  add_item( "Hardened Leather", { "Robust Hide": 4, "Cured Leather": 1 }, { tier: 6 });
 
   /* T7 Materials */
   add_item( "Ashenbark Planks", { "Ashenbark Logs": 5, "Bloodoak Planks" : 1 }, {tier: 7});
   add_item( "Basalt Block",     { "Basalt":         5, "Slate Block"     : 1 }, {tier: 7});
   add_item( "Meteorite Steel Bar", { "Meteorite Ore": 5, "Runite Steel Bar": 1 }, {tier: 7});
+  add_item( "Opulent Cloth", { "Sunflax": 5, "Lavish Cloth": 1 }, { tier: 7 });
+  add_item( "Reinforced Leather", { "Thick Hide": 5, "Hardened Leather": 1 }, { tier: 7 });
 
   /* T8 Materials */
   add_item( "Marble Block",     { "Marble":         5, "Basalt Block"    : 1 }, {tier: 8});
+  add_item( "Baroque Cloth",    { "Ghost Hemp":     5, "Opulent Cloth"   : 1 }, {tier: 8});
+  add_item( "Fortified Leather",{ "Resilient Hide": 5, "Reinforced Leather": 1 }, {tier: 8});
+  add_item( "Adamantium Steel Bar", { "Adamantium Ore": 5, "Meteorite Steel Bar": 1}, {tier: 8});
+  add_item( "Whitewood Planks", { "Whitewood Logs": 5, "Ashenbark Planks":1 }, {tier: 8});
 
 /* Toolmaker */
   /* Novices Toolmaker -> Tools */
