@@ -522,19 +522,31 @@
 
   add_item("Elders Transmutator",  { "Grandmasters Transmutator":        1, "Rough Logs": 1920, "Rough Stone": 192, "Marble Block": 180}, {tier: 8});
 
+  /* Farm */
 
   add_item("Farm",          { "Rough Logs" : 15, "Rough Stone" : 15 }, {tier: 1});
-
-
-  add_item("Novices Repair Station",  { "Rough Logs"   : 90 , "Rough Stone"     : 90,
-                                        "Birch Planks" : 90 , "Limestone Block" : 90  }, {tier: 2});
-
 
   add_item("Herb Garden",   { "Rough Logs" : 25, "Rough Stone" : 25, "Birch Planks": 25, "Limestone Block": 25 }, {tier: 2});
 
   add_item("Pasture",  { "Rough Logs" : 30, "Rough Stone" : 30, "Chestnut Planks": 30, "Sandstone Block": 30 }, {tier: 3});
 
   add_item("Kennel",   { "Bloodoak Logs" : 50, "Slate" : 50, "Runite Steel Bar" : 10 }, {tier: 6});
+
+  /* Meld */
+  add_item("Artifact Foundry", { "Rough Logs": 3200, "Marble Block": 300 }, { tier: 8 });
+
+  /* Repair */
+  add_item("Novices Repair Station",  { "Rough Logs"   : 90 , "Rough Stone"     : 90,
+                                        "Birch Planks" : 90 , "Limestone Block" : 90  }, {tier: 2});
+
+  add_item("Journeymans Repair Station",  {  "Novices Repair Station": 1,   "Rough Logs"   : 90 , "Rough Stone"     : 90,   "Chestnut Planks" : 90 , "Sandstone Block" : 90  }, {tier: 3});
+  add_item("Adepts Repair Station",  {  "Journeymans Repair Station": 1,   "Rough Logs"   : 90 , "Rough Stone"     : 90,   "Pine Planks" : 90 , "Travertine Block" : 90  }, {tier: 4});
+  add_item("Experts Repair Station",  {  "Adepts Repair Station": 1,   "Rough Logs"   : 90 , "Rough Stone"     : 90,   "Cedar Planks" : 90 , "Granite Block" : 90  }, {tier: 5});
+  add_item("Masters Repair Station",  {  "Experts Repair Station": 1,   "Rough Logs"   : 90 , "Rough Stone"     : 90,   "Bloodoak Planks" : 90 , "Slate Block" : 90  }, {tier: 6});
+  add_item("Grandmasters Repair Station",  {  "Masters Repair Station": 1,   "Rough Logs"   : 90 , "Rough Stone"     : 90,   "Ashenbark Planks" : 90 , "Basalt Block" : 90  }, {tier: 7});
+  add_item("Elders Repair Station",  {  "Grandmasters Repair Station": 1,   "Rough Logs"   : 90 , "Rough Stone"     : 90,   "Whitewood Planks" : 90 , "Marble Block" : 90  }, {tier: 8});
+
+
 
  })();
  </script>
