@@ -591,11 +591,9 @@
   let calc_bom = function() {
     let camt = Number.parseInt(amt.value);
     if ( "" + camt  == "NaN" ) {
-      camt = 0;
-      amt.value = "";
-      return;
-    }
-    if ( ( "" + camt  ) != amt.value ) {
+      camt = 1;
+      amt.value = "1";
+    } else if ( ( "" + camt  ) != amt.value ) {
       amt.value = camt;
     }
     out.innerHTML = "";
