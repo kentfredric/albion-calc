@@ -788,7 +788,6 @@
 
     let have_amt = document.createElement("input");
     have_amt.type = "text"
-    have_amt.value = model.have;
     have_amt.className = "have_amt";
 
     xdiv.appendChild( have_amt );
@@ -828,7 +827,13 @@
       }
     };
     model.update_fns.push(autohide);
-    model.setHave(have_amt.value);
+    if ( depth > 1 ) {
+      have_amt.value = model.have;
+      model.setHave(have_amt.value);
+    } else {
+      have_amt.value = 0;
+      model.setHave(0);
+    }
 
     return xdiv;
   };
