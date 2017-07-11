@@ -679,7 +679,7 @@
       }
       return renderddopts(out);
 
-    }, 500);
+    }, 150);
   });
 
 
@@ -805,7 +805,7 @@
           return model.setHave( Number.parseInt( 0 ) );
         }
         model.setHave( amtv );
-      }, 750);
+      }, 150);
     });
 
     let child_node = false;
@@ -861,7 +861,7 @@
   let marker = false;
   let auto_change_input = function() {
     if( marker ) { window.clearTimeout(marker); }
-    marker = window.setTimeout(function(){ marker = false;  calc_bom() }, 750);
+    marker = window.setTimeout(function(){ marker = false;  calc_bom() }, 150);
   };
   dd.addEventListener("change", auto_change_input);
   amt.addEventListener("keyup", auto_change_input);
