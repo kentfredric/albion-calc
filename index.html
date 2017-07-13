@@ -734,19 +734,17 @@
       if ( typeof model_data['children'] == "undefined" ) {
         model_data.children = [];
       }
-
-      let resources_per_child = model_data.composition[needed_resource];
-      let needed_children = amt * resources_per_child;
-
-      let chld = mkCostModel( needed_resource, needed_children, depth + 1 );
-
+      let my_needed_resource = needed_resource;
+      let chld = mkCostModel(
+        needed_resource,
+        model_data.resource_data.resources_needed(my_needed_resource, amt ),
+        depth + 1
+      );
       model_data.children.push( chld );
       model_data.update_fns.push( function() {
-        // TODO: Work out why this work
-        let needed_children =  model_data.display_needed * resources_per_child;
-        // TODO: And why this creates a garbage fountain
-        // let needed_children =  model_data.display_needed * model_data.composition[needed_resource];
-        chld.setNeeded( needed_children );
+        chld.setNeeded(
+          model_data.resource_data.resources_needed(my_needed_resource, model_data.display_needed)
+        );
       });
     }
 
