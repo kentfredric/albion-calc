@@ -11,6 +11,9 @@
       padding-left: 10px;
       padding-bottom: 5px;
    }
+   div.transmutation {
+     background-color: rgba( 200, 200, 0, 0.5 );
+   }
    div.hidden {
      display: none;
    }
@@ -106,6 +109,27 @@
 
   document.AlbionData = AlbionData;
 
+  let legal_attributes = {
+    tier: function(value) {
+      if ( 1 > value  ) {
+        throw "Invalid tier: " + value + " < 1";
+      }
+      if (value > 8 ) {
+        throw "Invalid tier: " + value + " > 8";
+      }
+    },
+    transmute_from: function( resource_map ) {
+      for ( let key in resource_map ) {
+        if ( !resource_map.hasOwnProperty(key) ) {
+          continue;
+        }
+        if( typeof AlbionData.items[key] == "undefined" ) {
+          throw "Resource " + key + " not already defined";
+        }
+      }
+    }
+  };
+
   AlbionData.add_item = function( name, resources, attributes ) {
     if( typeof AlbionData.items[name] != "undefined" ) {
       throw "Field: " + name + " already defined";
@@ -119,7 +143,7 @@
 
     let resource = {
       resources: {},
-      attributes: attributes,
+      attributes: {},
     };
 
     for ( let key in resources ) {
@@ -130,6 +154,16 @@
         throw "Field: " + key + " of " + name + " not already defined";
       }
       resource.resources[key] = resources[key];
+    }
+    for ( let key in attributes ) {
+      if ( !attributes.hasOwnProperty(key) ) {
+        continue;
+      }
+      if( typeof legal_attributes[key] == "undefined" ) {
+        throw "Attribute: " + key + " of " + name + " not legal";
+      }
+      legal_attributes[key]( attributes[key] );
+      resource.attributes[key] = attributes[key];
     }
     AlbionData.items[name] = resource;
     AlbionData.item_names.push(name);
@@ -145,10 +179,13 @@
       throw "No such resource: " + resource;
     }
     let data_internal = AlbionData.items[name];
-    let data = {};
-    data.resources = data_internal.resources;
-    data.attributes = data_internal.attributes;
+    let data = {
+      resources: data_internal.resources,
+      attributes: data_internal.attributes
+    };
+
     data.has_tier   = ( typeof data.attributes['tier'] != "undefined" );
+
     if ( data.has_tier ) {
       data.tier = data.attributes["tier"];
     }
@@ -164,8 +201,23 @@
     }
     data.resource_names.sort();
     data.resources_needed = function( name, amt ) {
+      if ( data.can_transmute && typeof data.transmute_from[name] != "undefined" ) {
+        return data.transmute_from[name] * amt;
+      }
       return data.resources[name] * amt;
     };
+
+    data.can_transmute = false;
+    if ( typeof data.attributes['transmute_from'] != "undefined" ) {
+      data.can_transmute = true;
+      data.transmute_from_names = [];
+      for ( let needed_resource in data.attributes['transmute_from'] ) {
+        if ( data.attributes['transmute_from'].hasOwnProperty(needed_resource) ) {
+         data.transmute_from_names.push(needed_resource);
+        }
+      }
+      data.transmute_from = data.attributes['transmute_from'];
+    }
     return data;
   };
   AlbionData.log = function() {
@@ -735,6 +787,7 @@
       currently_needed: amt,
       resource_data: AlbionData.get_resource(resource),
       update_fns: [],
+      is_transmutation: false,
     };
 
     if ( workbackwards.checked ) {
@@ -757,6 +810,27 @@
         );
       });
     }
+    if ( model_data.resource_data.can_transmute ) {
+      for ( let needed_resource of model_data.resource_data.transmute_from_names ) {
+        if ( typeof model_data['children'] == "undefined" ) {
+          model_data.children = [];
+        }
+        let my_needed_resource = needed_resource;
+        let chld = mkCostModel(
+          needed_resource,
+          model_data.resource_data.resources_needed(my_needed_resource, amt ),
+          depth + 1
+        );
+        chld.is_transmutation = true;
+        model_data.children.push( chld );
+        model_data.update_fns.push( function() {
+          chld.setNeeded(
+            model_data.resource_data.resources_needed(my_needed_resource, model_data.display_needed)
+          );
+        });
+      }
+    }
+
 
     model_data.setNeeded = function( namt ) {
       AlbionData.log("[%s] setNeeded", depth, model_data.resource, namt );
@@ -793,6 +867,9 @@
     xdiv.className = "resource_group resource_" + depth;
     if ( model.resource_data.has_tier  ) {
       xdiv.className = xdiv.className + " rlevel" + model.resource_data.tier;
+    }
+    if ( model.is_transmutation ) {
+      xdiv.classList.add("transmutation");
     }
 
     let divname = document.createElement("span");
