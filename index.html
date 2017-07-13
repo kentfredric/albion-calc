@@ -99,7 +99,6 @@
   var AlbionData = {
     items:      {},
     item_names: [],
-    attributes: {}
   };
 
   document.AlbionData = AlbionData;
@@ -108,14 +107,18 @@
     if( typeof AlbionData.items[name] != "undefined" ) {
       throw "Field: " + name + " already defined";
     }
-    AlbionData.item_names.push(name);
-    AlbionData.items[name] = {};
     if ( typeof resources == "undefined" ) {
       resources = {};
     }
     if ( typeof attributes == "undefined" ) {
       attributes = {};
     }
+
+    let resource = {
+      resources: {},
+      attributes: attributes,
+    };
+
     for ( let key in resources ) {
       if ( !resources.hasOwnProperty(key) ) {
         continue;
@@ -123,24 +126,22 @@
       if( typeof AlbionData.items[key] == "undefined" ) {
         throw "Field: " + key + " of " + name + " not already defined";
       }
-      AlbionData.items[name][key] = resources[key];
+      resource.resources[key] = resources[key];
     }
-    AlbionData.attributes[name] = attributes;
+    AlbionData.items[name] = resource;
+    AlbionData.item_names.push(name);
   };
   AlbionData.get_resources = function( name ) {
     if ( typeof AlbionData.items[name] == "undefined" ) {
       throw "Can't get costs for: " + resource;
     }
-    return AlbionData.items[name];
+    return AlbionData.items[name].resources;
   };
   AlbionData.get_attributes = function( name ) {
     if ( typeof AlbionData.items[name] == "undefined" ) {
       throw "No such resource: " + resource;
     }
-    if ( typeof AlbionData.attributes[name] == "undefined" ) {
-      return {};
-    }
-    return AlbionData.attributes[name];
+    return AlbionData.items[name].attributes;
   };
 
 })();
