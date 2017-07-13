@@ -107,6 +107,7 @@
  </head>
  <script>
 <!include_script "js/polyfill/Array.js">
+<!include_script "js/AlbionItem.js">
 <!include_script "js/AlbionData.js">
 <!include_script "jsd/items.js">
  </script>
