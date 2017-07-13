@@ -131,6 +131,22 @@
     }
     AlbionData.attributes[name] = attributes;
   };
+  AlbionData.get_resources = function( name ) {
+    if ( typeof AlbionData.items[name] == "undefined" ) {
+      throw "Can't get costs for: " + resource;
+    }
+    return AlbionData.items[name];
+  };
+  AlbionData.get_attributes = function( name ) {
+    if ( typeof AlbionData.items[name] == "undefined" ) {
+      throw "No such resource: " + resource;
+    }
+    if ( typeof AlbionData.attributes[name] == "undefined" ) {
+      return {};
+    }
+    return AlbionData.attributes[name];
+  };
+
 })();
 (function() {
   let add_item = document.AlbionData.add_item;
@@ -601,7 +617,6 @@
   var workbackwards = document.getElementById("workbackwards");
 
   let AlbionData = document.AlbionData;
-  let data       = document.AlbionData.items;
 
   AlbionData.item_names.sort();
 
@@ -610,8 +625,9 @@
     for ( let reso_name of item_names ) {
       let opt = document.createElement("option");
       opt.innerHTML = reso_name;
-      if ( typeof AlbionData.attributes[reso_name]["tier"] != "undefined" ) {
-        opt.className = "rlevel" +  AlbionData.attributes[reso_name]["tier"];
+      var attrs = AlbionData.get_attributes(reso_name);
+      if ( typeof attrs["tier"] != "undefined" ) {
+        opt.className = "rlevel" +  attrs["tier"];
       }
       dd.appendChild(opt);
     }
@@ -637,7 +653,8 @@
       if ( res != null ){
         console.log("Teir Search", res[1]);
         for ( let reso_name of AlbionData.item_names ) {
-          if ( typeof AlbionData.attributes[reso_name]["tier"] != "undefined" && AlbionData.attributes[reso_name]["tier"] == res[1] ) {
+          let attrs = AlbionData.get_attributes(reso_name);
+          if ( typeof attrs["tier"] != "undefined" && attrs["tier"] == res[1] ) {
             out.push(reso_name);
           }
         }
@@ -679,8 +696,8 @@
       have: 0,
       display_needed: amt,
       currently_needed: amt,
-      composition: data[resource],
-      attributes: {},
+      composition: AlbionData.get_resources(resource),
+      attributes:  AlbionData.get_attributes(resource),
       update_fns: [],
     };
 
@@ -708,12 +725,6 @@
         // let needed_children =  model_data.display_needed * model_data.composition[needed_resource];
         chld.setNeeded( needed_children );
       });
-    }
-
-    if( typeof AlbionData.attributes[resource] != "undefined" ) {
-      model_data.attributes = AlbionData.attributes[resource];
-    } else {
-      model_data.attributes = {};
     }
 
     model_data.setNeeded = function( namt ) {
@@ -834,9 +845,7 @@
     }
 
     let resource = dd.value;
-    if ( typeof data[resource] == "undefined" ) {
-      throw "Can't get costs for: " + resource;
-    }
+    let resource_mats = AlbionData.get_resources(resource);
     AlbionData.costModel = mkCostModel( resource, camt );
     out.appendChild(gen_reso_line( AlbionData.costModel, 1 ));
   };
