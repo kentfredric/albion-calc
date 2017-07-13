@@ -106,6 +106,18 @@
   </style>
  </head>
  <script>
+/* included from js/polyfill/Array.js  */
+(function() {
+  if ( Array.prototype.unique === undefined ) {
+    Array.prototype.unique = function() {
+      return Object.keys(this.reduce(function(acc,elem) {
+          acc[elem] = true;
+          return acc;
+      },{}));
+    };
+  }
+})();
+
 /* included from js/AlbionData.js  */
 (function() {
   var AlbionData = {
