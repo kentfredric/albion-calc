@@ -104,13 +104,11 @@
 
   document.AlbionData = AlbionData;
 
-  let item_names = AlbionData.item_names;
-
   AlbionData.add_item = function( name, resources, attributes ) {
     if( typeof AlbionData.items[name] != "undefined" ) {
       throw "Field: " + name + " already defined";
     }
-    item_names.push(name);
+    AlbionData.item_names.push(name);
     AlbionData.items[name] = {};
     if ( typeof resources == "undefined" ) {
       resources = {};
