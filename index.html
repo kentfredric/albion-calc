@@ -95,7 +95,6 @@
     font-size: 14px;
   }
   </style>
-
  </head>
  <script>
 (function() {
@@ -129,6 +128,29 @@
       }
     }
   };
+
+  AlbionData.item_names_copy = function() {
+    let out = [];
+    Array.prototype.push.apply(out, AlbionData.item_names);
+    return out;
+  };
+
+  AlbionData.filter_itemlist = function( itemlist, callback ) {
+    let out = [];
+    for ( let item of itemlist ) {
+      let itemdata = AlbionData.get_resource(item);
+      if ( callback(itemdata, item) ) {
+        out.push(item);
+      }
+    }
+    return out;
+  }
+
+  AlbionData.filter_tier = function( itemlist, tier ) {
+    return AlbionData.filter_itemlist( itemlist, function(item) {
+      return item.has_tier && item.tier == tier;
+    });
+  }
 
   AlbionData.add_item = function( name, resources, attributes ) {
     if( typeof AlbionData.items[name] != "undefined" ) {
@@ -675,11 +697,11 @@
 
     <h5>Finding Items in the Drop Down</h5>
     <p>You can reduce the number of items to hunt through in the drop down if you know what you're looking for.</p>
-    <p>However, the search only currently supports searching by a single term</p>
     <ul>
       <li>A search term that can be found in your items name will show all items containing that term (eg: <em>stone</em>)</li>
       <li>Setting your search term to <code>T3</code> ( or any other Tier, <code>T1</code> to <code>T8</code> ) will
         filter the drop down list to show only items of that Tier</li>
+      <li>Combining search terms like <code>T3 Cloth</code> will find all <strong class="rlevel3">Tier 3</strong> items that contain that term, (eg: <strong class="rlevel3">Neat Cloth</strong>)
     </ul>
 
     <h5>Keeping the Clutter Down</h5>
@@ -725,40 +747,39 @@
 
   renderddopts(AlbionData.item_names);
 
+  let eat_whitespace = function(term) {
+    term = term.replace(/^\s+/, "");
+    term = term.replace(/\s+$/, "");
+    term = term.replace(/\s+/g, " ");
+    return term;
+  };
+
   let itemFilter_debounce = false;
   itemfilter.addEventListener("keyup", function() {
     if ( itemFilter_debounce ) { window.clearTimeout( itemFilter_debounce ) }
     itemFilter_debounce = window.setTimeout(function() {
-      let search = itemfilter.value;
-      search = search.replace(/^\s+/, "");
-      search = search.replace(/\s+$/, "");
-      search = search.replace(/\s+/g, " ");
+      let search = eat_whitespace(itemfilter.value);
       AlbionData.log("Search", search);
       if ( search.length < 1 ) {
         return renderddopts(AlbionData.item_names);
       }
-      let res = search.match(/^T(?:ier|eir|)(?:\s*)([0-8]+)$/i);
-      let out = [];
+      let res = search.match(/(?:^|\s)T(?:ier|eir|)(?:\s*)([0-8]+)(?:$|\s)/i);
+      let out = AlbionData.item_names_copy();
 
       if ( res != null ){
         AlbionData.log("Teir Search", res[1]);
-        for ( let reso_name of AlbionData.item_names ) {
-          if ( AlbionData.get_resource(reso_name).is_tier(res[1]) ) {
-            out.push(reso_name);
-          }
-        }
-      } else {
-        /* Fallback search by term */
-        AlbionData.log("Generic Search");
-        let sterm = search.toLowerCase();
-
-        for ( let reso_name of AlbionData.item_names ) {
-          if ( reso_name.toLowerCase().indexOf(sterm) > -1 ) {
-            out.push(reso_name);
-          }
-        }
+        out = AlbionData.filter_tier( out, res[1] );
+        search = search.replace(/(?:^|\s)T(?:ier|eir|)(?:\s*)(?:[0-8]+)(?:$|\s)/i, "");
+        search = eat_whitespace(search);
       }
-      console.log(out);
+      if ( search.length > 0 ) {
+        /* Fallback search by term */
+        AlbionData.log("Generic Search", search);
+        let sterm = search.toLowerCase();
+        out = AlbionData.filter_itemlist( out, function(item, name) {
+          return name.toLowerCase().indexOf(sterm) > - 1;
+        });
+      }
       if ( out.length < 1  ) {
         itemfilter.classList.add("invalid");
         return;
