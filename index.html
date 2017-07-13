@@ -166,6 +166,9 @@
       }
     }
     data.resource_names.sort();
+    data.resources_needed = function( name, amt ) {
+      return data.resources[name] * amt;
+    };
     return data;
   };
 
