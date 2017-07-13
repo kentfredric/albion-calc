@@ -143,6 +143,24 @@
     }
     return AlbionData.items[name].attributes;
   };
+  AlbionData.get_resource = function( name ) {
+    if ( typeof AlbionData.items[name] == "undefined" ) {
+      throw "No such resource: " + resource;
+    }
+    let data_internal = AlbionData.items[name];
+    let data = {};
+    data.resources = data_internal.resources;
+    data.attributes = data_internal.attributes;
+    data.has_tier   = ( typeof data.attributes['tier'] != "undefined" );
+    if ( data.has_tier ) {
+      data.tier = data.attributes["tier"];
+    }
+    data.is_tier    = function( tier ) {
+      if ( data.has_tier ) { return data.tier == tier }
+      return false;
+    };
+    return data;
+  };
 
 })();
 (function() {
@@ -622,9 +640,10 @@
     for ( let reso_name of item_names ) {
       let opt = document.createElement("option");
       opt.innerHTML = reso_name;
-      var attrs = AlbionData.get_attributes(reso_name);
-      if ( typeof attrs["tier"] != "undefined" ) {
-        opt.className = "rlevel" +  attrs["tier"];
+
+      let reso = AlbionData.get_resource(reso_name);
+      if ( reso.has_tier ) {
+        opt.className = "rlevel" +  reso.tier;
       }
       dd.appendChild(opt);
     }
@@ -650,8 +669,7 @@
       if ( res != null ){
         console.log("Teir Search", res[1]);
         for ( let reso_name of AlbionData.item_names ) {
-          let attrs = AlbionData.get_attributes(reso_name);
-          if ( typeof attrs["tier"] != "undefined" && attrs["tier"] == res[1] ) {
+          if ( AlbionData.get_resource(reso_name).is_tier(res[1]) ) {
             out.push(reso_name);
           }
         }
