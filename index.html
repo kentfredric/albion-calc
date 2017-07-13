@@ -159,6 +159,13 @@
       if ( data.has_tier ) { return data.tier == tier }
       return false;
     };
+    data.resource_names = [];
+    for ( let needed_resource in data.resources ) {
+      if ( data.resources.hasOwnProperty(needed_resource) ) {
+         data.resource_names.push(needed_resource);
+      }
+    }
+    data.resource_names.sort();
     return data;
   };
 
