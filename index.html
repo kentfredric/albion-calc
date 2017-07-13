@@ -104,16 +104,14 @@
 
   document.AlbionData = AlbionData;
 
-  let data = AlbionData.items;
-
   let item_names = AlbionData.item_names;
 
   AlbionData.add_item = function( name, resources, attributes ) {
-    if( typeof data[name] != "undefined" ) {
+    if( typeof AlbionData.items[name] != "undefined" ) {
       throw "Field: " + name + " already defined";
     }
     item_names.push(name);
-    data[name] = {};
+    AlbionData.items[name] = {};
     if ( typeof resources == "undefined" ) {
       resources = {};
     }
@@ -124,10 +122,10 @@
       if ( !resources.hasOwnProperty(key) ) {
         continue;
       }
-      if( typeof data[key] == "undefined" ) {
+      if( typeof AlbionData.items[key] == "undefined" ) {
         throw "Field: " + key + " of " + name + " not already defined";
       }
-      data[name][key] = resources[key];
+      AlbionData.items[name][key] = resources[key];
     }
     AlbionData.attributes[name] = attributes;
   };
