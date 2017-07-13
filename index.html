@@ -53,29 +53,30 @@
     background-color: #fff;
     font-weight: bold;
   }
-  div > span.resoname,  strong.rlevel1, strong.rlevel2, strong.rlevel3,
+  span.resoname,  strong.rlevel1, strong.rlevel2, strong.rlevel3,
   strong.rlevel4, strong.rlevel5, strong.rlevel6, strong.rlevel7, strong.rlevel8 {  color: #fff }
 
   option.rlevel1 {   color: #444a50;   }
-  div.rlevel1 > span.resoname, strong.rlevel1 {   background-color: #444a50 }
+  .rlevel1 > span.resoname, strong.rlevel1 {   background-color: #444a50 }
 
   option.rlevel2 { color: #7c6758 }
-  div.rlevel2 > span.resoname, strong.rlevel2 {   background-color: #7c6758;  }
+  .rlevel2 > span.resoname, strong.rlevel2 {   background-color: #7c6758;  }
 
   option.rlevel3 { color: #4c623c }
-  div.rlevel3 > span.resoname, strong.rlevel3 {  background-color: #4c623c;  }
+  .rlevel3 > span.resoname, strong.rlevel3 {  background-color: #4c623c;  }
 
   option.rlevel4 { color: #4c6f84;  }
-  div.rlevel4 > span.resoname, strong.rlevel4 { background-color: #4c6f84;  }
+  .rlevel4 > span.resoname, strong.rlevel4 { background-color: #4c6f84;  }
 
   option.rlevel5 { color: #833a34;  }
-  div.rlevel5 > span.resoname, strong.rlevel5 { background-color: #833a34;  }
+  .rlevel5 > span.resoname, strong.rlevel5 { background-color: #833a34;  }
 
   option.rlevel6 { color: #d47e3b;  }
-  div.rlevel6 > span.resoname, strong.rlevel6 { background-color: #d47e3b;  }
+  .rlevel6 > span.resoname, strong.rlevel6 { background-color: #d47e3b;  }
 
   option.rlevel7 { color: #d3b654; }
-  div.rlevel7 > span.resoname, strong.rlevel7 { background-color: #d3b654;  }
+  .rlevel7 > span.resoname, strong.rlevel7 { background-color: #d3b654;  }
+
 
   option.rlevel8 {
     background-color: #000;
@@ -94,6 +95,14 @@
   #halp p {
     font-size: 14px;
   }
+  li.resource_group {
+    background-color: rgba( 0, 0, 0, 0.1 );
+    padding: 2px;
+    display: inline-block;
+    margin-right: 5px;
+    margin-bottom: 3px;
+  }
+
   </style>
  </head>
  <script>
@@ -694,6 +703,8 @@
      <label>Amount:</label><input id="amt" type="text" value="" />
      <label>Assume Having Everything:</label><input id="workbackwards" type="checkbox" value="" />
   </div>
+  <div id="outtotals">
+  </div>
   <div id="out">
 
   </div>
@@ -760,6 +771,7 @@
   var out = document.getElementById("out");
   var itemfilter = document.getElementById("itemfilter");
   var workbackwards = document.getElementById("workbackwards");
+  let outtotals = document.getElementById("outtotals");
 
   let AlbionData = document.AlbionData;
 
@@ -909,8 +921,69 @@
 
     return model_data;
   };
+  let newTotal = function( ) {
+    let me = {
+      sequence_id: 0,
+      items: { },
+      update_hooks: [],
+    };
 
-  let gen_reso_line = function( model, depth ) {
+    me.add_item = function ( item ) {
+      let uuid = me.sequence_id;
+      me.sequence_id++;
+      me.items[uuid] = item;
+      AlbionData.log("Add item", uuid, item );
+      me.on_update();
+      return uuid;
+    };
+
+    me.remove_item = function ( uuid ) {
+      AlbionData.log("Remove item", uuid );
+      delete me.items[uuid];
+      me.on_update();
+    };
+
+    me.update_item = function( uuid, item ) {
+      AlbionData.log("Update item", uuid, item );
+      me.items[uuid] = item;
+      me.on_update();
+    };
+
+    me.get_totals = function( ) {
+      let totals = {};
+      for ( let item_id in me.items ) {
+        if ( !me.items.hasOwnProperty(item_id) ) {
+          continue;
+        }
+        for ( let item_name in me.items[item_id] ) {
+          if ( !me.items[item_id].hasOwnProperty(item_name) ) {
+            continue;
+          }
+          if( !totals.hasOwnProperty(item_name) ) {
+            totals[item_name] = 0;
+          }
+          totals[item_name] = totals[item_name] + me.items[item_id][item_name];
+        }
+      }
+      for ( let total_name in totals ) {
+        if( totals.hasOwnProperty(total_name) && totals[total_name] == 0 ) {
+          delete totals[total_name];
+        }
+      }
+      return totals;
+    };
+
+    me.on_update = function() {
+      let totals = me.get_totals();
+      console.log("totals", totals);
+      for ( let callback of me.update_hooks ) {
+        callback( totals );
+      }
+    };
+    return me;
+  };
+
+  let gen_reso_line = function( model, totals, depth ) {
     if ( typeof depth == "undefined" ) {
       depth = 1;
     }
@@ -942,9 +1015,70 @@
     let have_amt = document.createElement("input");
     have_amt.type = "text"
     have_amt.className = "have_amt";
-
     xdiv.appendChild( have_amt );
 
+    let include_total_label = document.createElement("label");
+    include_total_label.textContent = "Include In Resource Totals"
+    include_total_label.className = "include_total_label";
+    xdiv.appendChild(include_total_label);
+
+    let include_total = document.createElement("input");
+    include_total.type = "checkbox";
+
+    let my_total_id = false;
+    let child_nodes = [];
+    xdiv.AlbionData = {};
+
+    xdiv.AlbionData.set_checked = function( checked ) {
+      if ( checked == include_total.checked ) {
+        return;
+      }
+      if ( checked ) {
+        include_total.checked = true;
+        xdiv.AlbionData.checked_trigger( true );
+      };
+      include_total.checked = false;
+      xdiv.AlbionData.checked_trigger(false);
+    };
+    xdiv.AlbionData.set_checked_recursive = function( checked ) {
+      xdiv.AlbionData.set_checked( checked );
+      for ( let child of child_nodes ) {
+            child.AlbionData.set_checked_recursive(false);
+      }
+    };
+
+    xdiv.AlbionData.checked_trigger = function( checked ) {
+      var ticket = {};
+      ticket[model.resource] = model.display_needed;
+
+      if ( my_total_id === false ) {
+        if ( checked ) {
+          my_total_id = totals.add_item(ticket);
+          return;
+        }
+      } else {
+        if ( checked ) {
+          totals.update_item( my_total_id, ticket );
+          return;
+        } else {
+          AlbionData.log("Unchecked, id: ", my_total_id );
+          totals.remove_item(my_total_id);
+          my_total_id = false;
+        }
+      }
+    };
+
+    if ( !model.is_transmutation && depth > 1 ) {
+      include_total.checked = true;
+      var ticket = {};
+      ticket[model.resource] = model.initial_amt;
+      my_total_id = totals.add_item(ticket);
+    } else {
+      totals.on_update();
+    }
+
+    include_total.className = "include_total";
+    xdiv.appendChild(include_total);
 
     let timeout_debounce = false;
     have_amt.addEventListener("keyup", function() {
@@ -958,16 +1092,28 @@
           return model.setHave( Number.parseInt( 0 ) );
         }
         model.setHave( amtv );
+        if ( my_total_id !== false ) {
+          var ticket = {};
+          ticket[model.resource] = model.display_needed;
+          totals.update_item( my_total_id, ticket );
+        }
       }, 150);
     });
 
+    include_total.addEventListener("change", function() {
+      xdiv.AlbionData.checked_trigger( include_total.checked );
+    });
+
     let child_node = false;
+
 
     if ( typeof model['children'] != "undefined" ) {
       child_node = document.createElement("div");
       child_node.className = "components";
       for( let child of model['children'] ) {
-        child_node.appendChild( gen_reso_line( child, depth + 1 ));
+        var inner_child = gen_reso_line( child, totals, depth + 1 );
+        child_nodes.push( inner_child );
+        child_node.appendChild( inner_child );
       }
       xdiv.appendChild( child_node );
     }
@@ -975,6 +1121,7 @@
       divcnt.textContent = model.display_needed;
       if ( model.display_needed < 1 && child_node ) {
         child_node.classList.add("hidden");
+        xdiv.AlbionData.set_checked_recursive( false );
       } else if ( child_node ) {
         child_node.classList.remove("hidden");
       }
@@ -1007,7 +1154,55 @@
     let resource = dd.value;
     let resource_mats = AlbionData.get_resources(resource);
     AlbionData.costModel = mkCostModel( resource, camt );
-    out.appendChild(gen_reso_line( AlbionData.costModel, 1 ));
+    let totalCosts = newTotal();
+    let draw_bounce = false;
+    totalCosts.update_hooks.push(function(totals) {
+      if ( draw_bounce !== false ) { window.clearTimeout(draw_bounce) }
+      draw_bounce = window.setTimeout( function() {
+        outtotals.innerHTML = "";
+        let header = document.createElement("h2");
+        header.textContent = "Totals";
+        outtotals.appendChild(header);
+        let ul = document.createElement('ul');
+        let keys = [];
+        for ( let key in totals ) {
+          if ( totals.hasOwnProperty( key ) ) {
+            keys.push(key);
+          }
+        }
+        keys.sort();
+        for ( let key of keys ) {
+          if ( totals.hasOwnProperty( key ) ) {
+            let resodata = AlbionData.get_resource( key );
+
+            let container = document.createElement("li");
+            container.className = "resource_group";
+            if ( resodata.has_tier ) {
+              container.classList.add("rlevel" + resodata.tier );
+            }
+
+            let obj  = document.createElement("span");
+            obj.className ="resoname";
+            obj.textContent = key;
+
+            container.appendChild(obj);
+
+            let num = document.createElement("span");
+            num.className = "resocount";
+            num.textContent = totals[key];
+
+            container.appendChild(num);
+
+            ul.appendChild(container);
+          }
+        }
+        outtotals.appendChild(ul);
+      }, 150 );
+    });
+    let header = document.createElement("h2");
+    header.textContent = "Breakdown";
+    out.appendChild(header);
+    out.appendChild(gen_reso_line( AlbionData.costModel, totalCosts, 1 ));
   };
   let marker = false;
   let auto_change_input = function() {
