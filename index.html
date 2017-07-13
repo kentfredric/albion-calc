@@ -781,8 +781,8 @@
 
     let xdiv = document.createElement("div");
     xdiv.className = "resource_group resource_" + depth;
-    if ( typeof model.attributes["tier"]  != "undefined" ) {
-      xdiv.className = xdiv.className + " rlevel" + model.attributes["tier"];
+    if ( model.resource_data.has_tier  ) {
+      xdiv.className = xdiv.className + " rlevel" + model.resource_data.tier;
     }
 
     let divname = document.createElement("span");
