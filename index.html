@@ -137,12 +137,6 @@
     }
     return AlbionData.items[name].resources;
   };
-  AlbionData.get_attributes = function( name ) {
-    if ( typeof AlbionData.items[name] == "undefined" ) {
-      throw "No such resource: " + resource;
-    }
-    return AlbionData.items[name].attributes;
-  };
   AlbionData.get_resource = function( name ) {
     if ( typeof AlbionData.items[name] == "undefined" ) {
       throw "No such resource: " + resource;
