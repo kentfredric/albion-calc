@@ -723,16 +723,14 @@
       currently_needed: amt,
       composition: AlbionData.get_resources(resource),
       attributes:  AlbionData.get_attributes(resource),
+      resource_data: AlbionData.get_resource(resource),
       update_fns: [],
     };
 
     if ( workbackwards.checked ) {
       model_data.have = model_data.initial_amt;
     }
-    for ( let needed_resource in model_data.composition ) {
-      if ( !model_data.composition.hasOwnProperty(needed_resource) ) {
-         continue;
-      }
+    for ( let needed_resource of model_data.resource_data.resource_names ) {
       if ( typeof model_data['children'] == "undefined" ) {
         model_data.children = [];
       }
