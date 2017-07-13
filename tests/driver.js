@@ -48,6 +48,25 @@
     fail.appendChild( diag );
     return fail;
   };
+  window.like = function( got, reg, msg ) {
+    if ( ( " " + got ).match(reg) ) {
+      return window.pass(msg);
+    }
+    let diag = document.createElement("ul");
+    diag.className = "diag";
+    let got_content = document.createElement("li");
+    got_content.textContent = "got:" + got;
+    got_content.className = "got";
+    diag.appendChild(got_content);
+    let exp_content = document.createElement("li");
+    exp_content.textContent = "expected matching:" + reg;
+    exp_content.className = "expected";
+    diag.appendChild(exp_content);
+    let fail = window.fail(msg);
+    fail.appendChild( diag );
+    return fail;
+
+  };
   window.subtest = function( reason, callback ) {
     /* set up dom */
     var subtest_node = document.createElement("li");

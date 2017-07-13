@@ -3,8 +3,13 @@
     <title>Test Suite</title>
     <script src="./tests/driver.js"></script>
     <script src="./js/ArrayUtils.js"></script>
+    <script src="./js/AlbionItemAttributes.js"></script>
     <script src="./js/AlbionItem.js"></script>
     <script src="./tests/AlbionItem.js"></script>
+    <script src="./tests/AlbionItemAttributes.js"></script>
+    <script>window.add_suite(function() {
+      done_testing();
+    });</script>
     <style>
       * { font-family: sans-serif; font-size: 12px }
       .subtest { background-color: rgba(100,150,255,0.1) }
@@ -16,7 +21,6 @@
       ol.fail { background-color: rgba(255,0,0, 0.7); color: #000 }
       li.pass { background-color: rgba(0,255,0,0.7); color: #000 }
       li.fail { background-color: rgba(255,0,0, 0.7); color: #000 }
-
     </style>
   </head>
   <body>
