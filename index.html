@@ -106,21 +106,24 @@
   </style>
  </head>
  <script>
-/* included from js/polyfill/Array.js  */
-(function() {
-  if ( Array.prototype.unique === undefined ) {
-    Array.prototype.unique = function() {
-      return Object.keys(this.reduce(function(acc,elem) {
+/* included from js/ArrayUtils.js  */
+window.ArrayUtils = (function() {
+
+  let utils  = {};
+
+  utils.unique = function(array) {
+      return Object.keys(array.reduce(function(acc,elem) {
           acc[elem] = true;
           return acc;
       },{}));
-    };
-  }
+  };
+
+  return utils;
 })();
 
 /* included from js/AlbionItem.js  */
-/* Needs js/polyfill/Array */
-(function() {
+window.AlbionItem = (function(ArrayUtils) {
+
   function AlbionItem(  name, resources, attributes ) {
     this.name       = name;
     this.resources  = resources  || {};
@@ -205,7 +208,7 @@
     let out = [];
     Array.prototype.push.apply( out, this.crafting_resource_names() );
     Array.prototype.push.apply( out, this.transmuting_resource_names() );
-    return out.unique();
+    return ArrayUtils.unique(out);
   }
 
   AlbionItem.prototype.get_cost = function (resource) {
@@ -215,8 +218,9 @@
       ? this.attributes.transmute_from[resource]
       : 0;
   }
-  window.AlbionItem = AlbionItem;
-})();
+
+  return AlbionItem;
+})(ArrayUtils);
 
 /* included from js/AlbionData.js  */
 (function() {

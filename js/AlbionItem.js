@@ -1,5 +1,5 @@
-/* Needs js/polyfill/Array */
-(function() {
+window.AlbionItem = (function(ArrayUtils) {
+
   function AlbionItem(  name, resources, attributes ) {
     this.name       = name;
     this.resources  = resources  || {};
@@ -84,7 +84,7 @@
     let out = [];
     Array.prototype.push.apply( out, this.crafting_resource_names() );
     Array.prototype.push.apply( out, this.transmuting_resource_names() );
-    return out.unique();
+    return ArrayUtils.unique(out);
   }
 
   AlbionItem.prototype.get_cost = function (resource) {
@@ -94,5 +94,6 @@
       ? this.attributes.transmute_from[resource]
       : 0;
   }
-  window.AlbionItem = AlbionItem;
-})();
+
+  return AlbionItem;
+})(ArrayUtils);
