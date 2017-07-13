@@ -131,24 +131,6 @@
     }
     AlbionData.attributes[name] = attributes;
   };
-  var get_costs = function( resource , how_many ) {
-     if ( typeof how_many == "undefined" ) {
-       how_many = 1;
-     }
-     if ( typeof data[resource] == "undefined" ) {
-       throw "Can't get costs for: " + resource;
-     }
-     let out = {};
-     for ( let needed_resource in data[resource] ) {
-       if ( !data[resource].hasOwnProperty(needed_resource) ) {
-         continue;
-       }
-       out[needed_resource] = {};
-       out[needed_resource].amount_needed = how_many * data[resource][needed_resource];
-       out[needed_resource].components    = get_costs( needed_resource, out[needed_resource].amount_needed );
-     }
-     return out;
-  };
 })();
 (function() {
   let add_item = document.AlbionData.add_item;
