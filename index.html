@@ -99,6 +99,9 @@
   var AlbionData = {
     items:      {},
     item_names: [],
+    log_items:  [],
+    keep_logs:  false,
+    print_logs: false
   };
 
   document.AlbionData = AlbionData;
@@ -166,7 +169,20 @@
     return data;
   };
   AlbionData.log = function() {
-    true && console.log.apply(console, arguments);
+    if( AlbionData.print_logs ) {
+      return console.log.apply(console, arguments);
+    }
+    if ( AlbionData.keep_logs ) {
+      AlbionData.log_items.push(arguments);
+    }
+  };
+  AlbionData.print_log = function() {
+    if ( !AlbionData.keep_logs ) {
+      return;
+    }
+    for ( let row of AlbionData.log_items ) {
+      console.log.apply(console, row);
+    }
   };
 })();
 (function() {
