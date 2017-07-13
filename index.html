@@ -151,6 +151,15 @@
       return item.has_tier && item.tier == tier;
     });
   }
+  AlbionData.filter_keyword = function( itemlist, keyword ) {
+    let sterm = keyword.toLowerCase();
+    return AlbionData.filter_itemlist( itemlist, function(item, name) {
+      if ( name.toLowerCase().indexOf(sterm) > - 1 ) {
+        return true;
+      }
+      return false;
+    });
+  }
 
   AlbionData.add_item = function( name, resources, attributes ) {
     if( typeof AlbionData.items[name] != "undefined" ) {
@@ -776,10 +785,7 @@
       if ( search.length > 0 ) {
         /* Fallback search by term */
         AlbionData.log("Generic Search", search);
-        let sterm = search.toLowerCase();
-        out = AlbionData.filter_itemlist( out, function(item, name) {
-          return name.toLowerCase().indexOf(sterm) > - 1;
-        });
+        out = AlbionData.filter_keyword( out, search );
       }
       if ( out.length < 1  ) {
         itemfilter.classList.add("invalid");
