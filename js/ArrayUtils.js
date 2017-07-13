@@ -9,5 +9,10 @@ window.ArrayUtils = (function() {
       },{}));
   };
 
+  utils.extend = function(array_orig, array_new) {
+    Array.prototype.push.apply( array_orig, array_new );
+    return array_orig;
+  }
+
   return utils;
 })();

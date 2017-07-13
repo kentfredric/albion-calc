@@ -81,10 +81,7 @@ window.AlbionItem = (function(ArrayUtils) {
   };
 
   AlbionItem.prototype.all_resource_names = function() {
-    let out = [];
-    Array.prototype.push.apply( out, this.crafting_resource_names() );
-    Array.prototype.push.apply( out, this.transmuting_resource_names() );
-    return ArrayUtils.unique(out);
+    return ArrayUtils.unique( ArrayUtils.extend( [], this.crafting_resource_names(), this.transmuting_resource_names() ) );
   }
 
   AlbionItem.prototype.get_cost = function (resource) {
