@@ -118,8 +118,8 @@ window.ArrayUtils = (function() {
       },{}));
   };
 
-  utils.extend = function(array_orig, array_new) {
-    Array.prototype.push.apply( array_orig, array_new );
+  utils.extend = function(array_orig) {
+    for ( let i = 1; i < arguments.length; i++ ) Array.prototype.push.apply( array_orig, arguments[i] );
     return array_orig;
   }
 
