@@ -104,7 +104,6 @@
   }
 
   </style>
- </head>
  <script>
 <!include_script "js/ArrayUtils.js">
 <!include_script "js/AlbionItemAttributes.js">
@@ -112,6 +111,7 @@
 <!include_script "js/AlbionData.js">
 <!include_script "jsd/items.js">
  </script>
+ </head>
  <body>
   <div id="in">
      <label>Item Search:</label><input id="itemfilter" type="text" value="" />
