@@ -61,7 +61,9 @@
       if ( search.length > 0 ) {
         /* Fallback search by term */
         AlbionData.log("Generic Search", search);
-        out = AlbionData.filter_keyword( out, search );
+        for ( let subword of search.split(/\s+/) ) {
+          out = AlbionData.filter_keyword( out, subword );
+        }
       }
       if ( out.length < 1  ) {
         itemfilter.classList.add("invalid");
