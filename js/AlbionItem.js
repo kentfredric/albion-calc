@@ -57,7 +57,7 @@ window.AlbionItem = (function(ArrayUtils) {
     let out = [];
     if ( this.attributes.hasOwnProperty('transmute_from') ) {
       for ( let needed_resource in this.attributes.transmute_from ) {
-        if ( this.attributes.transform_from.hasOwnProperty(needed_resource) ) {
+        if ( this.attributes.transmute_from.hasOwnProperty(needed_resource) ) {
           out.push( needed_resource );
         }
       }
