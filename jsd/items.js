@@ -138,20 +138,36 @@
   add_item( "Beginners Skinning Kinfe",  { "Rough Stone":   3, "Rough Logs": 3 }, {tier: 1});
   add_item( "Beginners Sickle",          { "Rough Stone":   3, "Rough Logs": 3 }, {tier: 1});
   add_item( "Beginners Stone Hammer",    { "Rough Stone":   3, "Rough Logs": 3 }, {tier: 1});
+
   add_item( "Novices Sickle",            { "Birch Planks":  6, "Copper Bar": 2 }, {tier: 2});
   add_item( "Novices Pickaxe",           { "Birch Planks":  6, "Copper Bar": 2 }, {tier: 2});
   add_item( "Novices Skinning Kinfe",    { "Birch Planks":  6, "Copper Bar": 2 }, {tier: 2});
   add_item( "Novices Stone Hammer",      { "Birch Planks":  6, "Copper Bar": 2 }, {tier: 2});
   add_item( "Novices Demolition Hammer", { "Birch Planks": 12, "Copper Bar": 12}, {tier: 2});
 
+  add_item( "Journeymans Sickle",            { "Chestnut Planks":  6, "Bronze Bar": 2 }, {tier: 3});
+  add_item( "Journeymans Pickaxe",           { "Chestnut Planks":  6, "Bronze Bar": 2 }, {tier: 3});
+  add_item( "Journeymans Skinning Kinfe",    { "Chestnut Planks":  6, "Bronze Bar": 2 }, {tier: 3});
+  add_item( "Journeymans Stone Hammer",      { "Chestnut Planks":  6, "Bronze Bar": 2 }, {tier: 3});
+  add_item( "Journeymans Demolition Hammer", { "Chestnut Planks":  8, "Bronze Bar": 8 }, {tier: 3});
+
+
   /* Novices Toolmaker -> Accessories */
   add_item( "Novices Bag",  { "Simple Cloth" : 12, "Stiff Leather" : 12 }, {tier: 2});
   add_item( "Novices Cape", { "Simple Cloth" :  4, "Stiff Leather" :  4 }, {tier: 2});
+
+  add_item( "Journeymans Bag",  { "Neat Cloth" : 8, "Thick Leather" : 8 }, {tier: 3});
+  add_item( "Journeymans Cape", { "Neat Cloth" : 4, "Thick Leather" : 4 }, {tier: 3});
 
   /* Novices Toolmaker -> Furniture */
   add_item( "Novices Chest", { "Birch Planks" : 20, "Copper Bar": 10 }, {tier: 2});
   add_item( "Novices Bed",   { "Birch Planks" : 10, "Copper Bar": 20 }, {tier: 2});
   add_item( "Novices Table", { "Birch Planks" : 30, "Copper Bar": 30 }, {tier: 2});
+
+  add_item( "Journeymans Chest", { "Chestnut Planks" : 20, "Bronze Bar": 10 }, {tier: 3});
+  add_item( "Journeymans Bed",   { "Chestnut Planks" : 10, "Bronze Bar": 20 }, {tier: 3});
+  add_item( "Journeymans Table", { "Chestnut Planks" : 30, "Bronze Bar": 30 }, {tier: 3});
+
 
 /* Warriors Forge */
   /* Novices Warriors Forge -> Weapons */
