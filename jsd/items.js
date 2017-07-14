@@ -174,12 +174,25 @@
   add_item("Beginners Broadsword", { "Rough Stone"  :  6, "Rough Logs":    6 }, {tier: 1});
   add_item("Beginners Shield",     { "Rough Logs"   :  4                     }, {tier: 1});
   add_item("Novices Broadsword",   { "Copper Bar"   : 16, "Stiff Leather": 8 }, {tier: 2});
-  add_item("Novices Sheild",       { "Birch Planks" :  4, "Copper Bar"   : 4 }, {tier: 2});
+  add_item("Novices Shield",       { "Birch Planks" :  4, "Copper Bar"   : 4 }, {tier: 2});
+
+  /* Journeyman Warriors Forge -> Weapons */
+  add_item("Journeymans Broadsword",  { "Bronze Bar"   : 16, "Thick Leather"  : 8 }, {tier: 3});
+  add_item("Journeymans Battleaxe",   { "Chestnut Planks" :  8, "Bronze Bar"  : 16 }, {tier: 3});
+  add_item("Journeymans Mace",        { "Bronze Bar" :  16, "Neat Cloth"      : 8 }, {tier: 3});
+  add_item("Journeymans Crossbow",    { "Chestnut Planks" :  20, "Bronze Bar" : 12 }, {tier: 3});
+  add_item("Journeymans Hammer",      { "Bronze Bar" : 24 }, {tier: 3});
+  add_item("Journeymans Shield",      { "Chestnut Planks": 4, "Bronze Bar" : 4 }, {tier: 3});
 
   /* Novices Warriors Forge -> Armor */
   add_item("Novices Soldier Helmet", { "Copper Bar" : 8  }, { tier: 2});
   add_item("Novices Soldier Armor",  { "Copper Bar" : 16 }, { tier: 2});
   add_item("Novices Soldier Boots",  { "Copper Bar" : 8  }, { tier: 2});
+
+  /* Journeymans */
+  add_item("Journeymans Soldier Helmet", { "Bronze Bar" : 8  }, { tier: 3});
+  add_item("Journeymans Soldier Armor",  { "Bronze Bar" : 16 }, { tier: 3});
+  add_item("Journeymans Soldier Boots",  { "Bronze Bar" : 8  }, { tier: 3});
 
 /* Hunters Lodge */
   /* Novices Weapons */
