@@ -33,6 +33,13 @@
     return term;
   };
 
+  let calc_bom = undefined;
+
+  let auto_change_input = function() {
+    if( marker ) { window.clearTimeout(marker); }
+    marker = window.setTimeout(function(){ marker = false;  calc_bom() }, 150);
+  };
+
   let itemFilter_debounce = false;
   itemfilter.addEventListener("keyup", function() {
     if ( itemFilter_debounce ) { window.clearTimeout( itemFilter_debounce ) }
@@ -61,6 +68,7 @@
         return;
       } else {
         itemfilter.classList.remove("invalid");
+        auto_change_input();
       }
       return renderddopts(out);
 
@@ -371,7 +379,7 @@
     return xdiv;
   };
 
-  let calc_bom = function() {
+  calc_bom = function() {
     let camt = Number.parseInt(amt.value);
     if ( "" + camt  == "NaN" ) {
       camt = 1;
@@ -438,10 +446,6 @@
     out.appendChild(gen_reso_line( AlbionData.costModel, totalCosts, 1 ));
   };
   let marker = false;
-  let auto_change_input = function() {
-    if( marker ) { window.clearTimeout(marker); }
-    marker = window.setTimeout(function(){ marker = false;  calc_bom() }, 150);
-  };
   dd.addEventListener("change", auto_change_input);
   dd.addEventListener("mouseup", auto_change_input);
   amt.addEventListener("keyup", auto_change_input);
