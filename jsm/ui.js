@@ -443,6 +443,7 @@
     marker = window.setTimeout(function(){ marker = false;  calc_bom() }, 150);
   };
   dd.addEventListener("change", auto_change_input);
+  dd.addEventListener("mouseup", auto_change_input);
   amt.addEventListener("keyup", auto_change_input);
   workbackwards.addEventListener("change", auto_change_input );
 })();
