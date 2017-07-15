@@ -122,6 +122,7 @@
 <!include_script "jsd/buildings/alchemists-lab.js">
 <!include_script "jsd/buildings/cook.js">
 <!include_script "jsd/buildings/mage-tower.js">
+<!include_script "jsd/buildings/saddler.js">
 <!include_script "jsd/items.js">
  </script>
  </head>
