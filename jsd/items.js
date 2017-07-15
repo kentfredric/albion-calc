@@ -10,47 +10,6 @@
 /* Drops / Uniques */
   add_item( "Explorers Anchor" , {}, { tier: 3 });
 
-  /* Enchanted Items */
-  /** For Warriors **/
-  add_item("Adepts Ancient Bindings",         {}, {tier: 4});
-  add_item("Adepts Ancient Chain Rings",      {}, {tier: 4});
-  add_item("Adepts Ancient Hammer Head",      {}, {tier: 4});
-  add_item("Adepts Ancient Padding",          {}, {tier: 4});
-  add_item("Adepts Ancient Shield Core",      {}, {tier: 4});
-  add_item("Adepts Bloodforged Blade",        {}, {tier: 4});
-  add_item("Adepts Demonic Blade",            {}, {tier: 4});
-  add_item("Adepts Demonic Filling",          {}, {tier: 4});
-  add_item("Adepts Demonic Plates",           {}, {tier: 4});
-  add_item("Adepts Demonic Scraps",           {}, {tier: 4});
-  add_item("Adepts Hellish Bolts",            {}, {tier: 4});
-  add_item("Adepts Hellish Hammer Heads",     {}, {tier: 4});
-  add_item("Adepts Hellish Sicklehead",       {}, {tier: 4});
-  add_item("Adepts Infernal Mace Head",       {}, {tier: 4});
-  add_item("Adepts Infernal Shield Core",     {}, {tier: 4});
-  add_item("Adepts Lost Crossbow Mechanism",  {}, {tier: 4});
-  add_item("Adepts Morgana Halberd Head",     {}, {tier: 4});
-  add_item("Adepts Runed Rock",               {}, {tier: 4});
-
-  /** For Ranged **/
-  add_item("Adepts Black Leather",            {}, {tier: 4});
-  add_item("Adepts Demonhide Bindings",       {}, {tier: 4});
-  add_item("Adepts Demonhide Leather",        {}, {tier: 4});
-  add_item("Adepts Demonhide Padding",        {}, {tier: 4});
-  add_item("Adepts Demonic Arrowheads",       {}, {tier: 4});
-  add_item("Adepts Druidic Inscriptions",     {}, {tier: 4});
-  add_item("Adepts Ghastly Arrows",           {}, {tier: 4});
-  add_item("Adepts Hardened Debole",          {}, {tier: 4});
-  add_item("Adepts Hellish Handle",           {}, {tier: 4});
-  add_item("Adepts Hellish Sicklehead Pair",  {}, {tier: 4});
-  add_item("Adepts Imbued Leather Folds",     {}, {tier: 4});
-  add_item("Adepts Imbued Soles",             {}, {tier: 4});
-  add_item("Adepts Imbued Visor",             {}, {tier: 4});
-  add_item("Adepts Infernal Harpoon Tip",     {}, {tier: 4});
-  add_item("Adepts Keeper Spearhead",         {}, {tier: 4});
-  add_item("Adepts Reinforced Morgana Pole",  {}, {tier: 4});
-  add_item("Adepts Runed Horn",               {}, {tier: 4});
-  add_item("Adepts Symbol of Blight",         {}, {tier: 4});
-
 /* Toolmaker */
   /* Novices Toolmaker -> Tools */
   add_item( "Beginners Pickaxe",         { "Rough Stone":   3, "Rough Logs": 3 }, {tier: 1});
