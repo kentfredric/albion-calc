@@ -1,14 +1,6 @@
 (function() {
   let add_item = document.AlbionData.add_item;
 
-/* Animals */
-  add_item("Journeymans Horse", {}, {tier: 3});
-  add_item("Journeymans Ox",    {}, {tier: 3});
-  add_item("Adepts Horse", {}, {tier: 3});
-  add_item("Adepts Ox",    {}, {tier: 3});
-
-  add_item("Adepts Tame Giant Stag",    {}, {tier: 4});
-
 /* Crops */
   /* T2 Crops */
   add_item("Arcane Agaric" , {}, {tier: 2, keywords: ['crop']});
