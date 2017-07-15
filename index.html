@@ -568,21 +568,11 @@ window.AlbionItem = (function(ArrayUtils) {
   add_item("Adepts Tame Giant Stag",    {}, {tier: 4});
 })();
 
-/* included from jsd/items.js  */
+/* included from jsd/crafted_materials.js  */
 (function() {
   let add_item = document.AlbionData.add_item;
 
-/* Crops */
-  /* T2 Crops */
-  add_item("Arcane Agaric" , {}, {tier: 2, keywords: ['crop']});
-  add_item("Carrots", {}, { tier: 2, keywords: ['crop']});
-  add_item("Beans", {}, {tier: 2, keywords: ['crop'] });
-
-/* Drops / Uniques */
-  add_item( "Explorers Anchor" , {}, { tier: 3 });
-
-/* Crafted Materials */
-  /* T2 Materials */
+   /* T2 Materials */
   add_item( "Birch Planks" ,   { "Birch Logs":   1 }, { tier: 2 });
   add_item( "Copper Bar",      { "Copper Ore":   1 }, { tier: 2 });
   add_item( "Simple Cloth",    { "Cotton" :      1 }, { tier: 2 });
@@ -638,6 +628,20 @@ window.AlbionItem = (function(ArrayUtils) {
   add_item( "Fortified Leather",{ "Resilient Hide": 5, "Reinforced Leather": 1 }, {tier: 8});
   add_item( "Adamantium Steel Bar", { "Adamantium Ore": 5, "Meteorite Steel Bar": 1}, {tier: 8});
   add_item( "Whitewood Planks", { "Whitewood Logs": 5, "Ashenbark Planks":1 }, {tier: 8});
+})();
+
+/* included from jsd/items.js  */
+(function() {
+  let add_item = document.AlbionData.add_item;
+
+/* Crops */
+  /* T2 Crops */
+  add_item("Arcane Agaric" , {}, {tier: 2, keywords: ['crop']});
+  add_item("Carrots", {}, { tier: 2, keywords: ['crop']});
+  add_item("Beans", {}, {tier: 2, keywords: ['crop'] });
+
+/* Drops / Uniques */
+  add_item( "Explorers Anchor" , {}, { tier: 3 });
 
   /* Enchanted Items */
   /** For Warriors **/
