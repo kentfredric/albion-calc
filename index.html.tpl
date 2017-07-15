@@ -188,7 +188,7 @@
     <p>Like all software, there will be bugs, and the data might be missing/out of date. Everything you notice as being "out-of-place" is valuable information
        because it will help others with the same problems.</p>
     <p>So, please either tell me personally if something is missing that you were looking for, what you tried to do to find it, etc, or <a href="https://github.com/kentfredric/albion-calc/issues">file a bug on github</a></p>
-    <p>If you're a smart cookie, you'll notice the data itself is <a href="https://github.com/kentfredric/albion-calc/blob/master/jsd/items.js"> reasonably well laid out</a> and you might know what it takes to fix it with a <a href="https://github.com/kentfredric/albion-calc/pulls">Pull Request</a></p>
+    <p>If you're a smart cookie, you'll notice the data itself is <a href="https://github.com/kentfredric/albion-calc/blob/master/jsd"> reasonably well laid out</a> and you might know what it takes to fix it with a <a href="https://github.com/kentfredric/albion-calc/pulls">Pull Request</a></p>
   </div>
   <div><sub>Version: $Id: 34a17fe7b55ec18495c37c2fa7c17bb994d51960 $</sub><br />
        <sub>PS: If github are reading this, sorry, my contact request was wrong, I forgot git ID's
