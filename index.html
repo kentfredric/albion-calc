@@ -988,17 +988,21 @@ window.AlbionItem = (function(ArrayUtils) {
 
 })();
 
+/* included from jsd/buildings/alchemists-lab.js  */
+(function() {
+  let add_item = document.AlbionData.add_item;
+
+  /* Novices Alchemists Lab -> Potions */
+  add_item("Minor Healing Potion",  { "Arcane Agaric" : 8 }, {tier: 2});
+  add_item("Minor Energy Potion",   { "Arcane Agaric" : 8 }, {tier: 2});
+})();
+
 /* included from jsd/items.js  */
 (function() {
   let add_item = document.AlbionData.add_item;
 
 /* Drops / Uniques */
   add_item( "Explorers Anchor" , {}, { tier: 3 });
-
-/* Alchemists Lab */
-  /* Novices Alchemists Lab -> Potions */
-  add_item("Minor Healing Potion", { "Arcane Agaric" : 8 }, {tier: 2});
-  add_item("Minor Energy Potion", { "Arcane Agaric" : 8 }, {tier: 2});
 
 /* Cook */
   /* Novices Cook -> Food */

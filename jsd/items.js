@@ -4,11 +4,6 @@
 /* Drops / Uniques */
   add_item( "Explorers Anchor" , {}, { tier: 3 });
 
-/* Alchemists Lab */
-  /* Novices Alchemists Lab -> Potions */
-  add_item("Minor Healing Potion", { "Arcane Agaric" : 8 }, {tier: 2});
-  add_item("Minor Energy Potion", { "Arcane Agaric" : 8 }, {tier: 2});
-
 /* Cook */
   /* Novices Cook -> Food */
   add_item("Carrot Soup", { "Carrots" : 16 }, { tier: 1 , keywords: ['food']});
