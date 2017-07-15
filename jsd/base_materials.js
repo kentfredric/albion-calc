@@ -1,8 +1,6 @@
 (function() {
   let add_item = document.AlbionData.add_item;
 
-  add_item("Silver");
-
   /* T1 Materials */
   add_item( "Rough Logs"  ,   {}, { tier: 1 });
   add_item( "Rough Stone" ,   {}, { tier: 1 });

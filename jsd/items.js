@@ -1,9 +1,6 @@
 (function() {
   let add_item = document.AlbionData.add_item;
 
-/* Drops / Uniques */
-  add_item( "Explorers Anchor" , {}, { tier: 3 });
-
 /* Cook */
   /* Novices Cook -> Food */
   add_item("Carrot Soup", { "Carrots" : 16 }, { tier: 1 , keywords: ['food']});

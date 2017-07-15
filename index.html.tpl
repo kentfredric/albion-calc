@@ -110,6 +110,7 @@
 <!include_script "js/AlbionItem.js">
 <!include_script "js/AlbionData.js">
 
+<!include_script "jsd/misc.js">
 <!include_script "jsd/base_materials.js">
 <!include_script "jsd/animals.js">
 <!include_script "jsd/crops.js">

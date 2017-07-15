@@ -486,11 +486,18 @@ window.AlbionItem = (function(ArrayUtils) {
 })();
 
 
-/* included from jsd/base_materials.js  */
+/* included from jsd/misc.js  */
 (function() {
   let add_item = document.AlbionData.add_item;
 
-  add_item("Silver");
+  add_item( "Silver"                              );
+  add_item( "Explorers Anchor" , {}, { tier: 3 }  );
+
+})();
+
+/* included from jsd/base_materials.js  */
+(function() {
+  let add_item = document.AlbionData.add_item;
 
   /* T1 Materials */
   add_item( "Rough Logs"  ,   {}, { tier: 1 });
@@ -1000,9 +1007,6 @@ window.AlbionItem = (function(ArrayUtils) {
 /* included from jsd/items.js  */
 (function() {
   let add_item = document.AlbionData.add_item;
-
-/* Drops / Uniques */
-  add_item( "Explorers Anchor" , {}, { tier: 3 });
 
 /* Cook */
   /* Novices Cook -> Food */
