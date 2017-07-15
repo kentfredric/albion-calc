@@ -485,10 +485,11 @@ window.AlbionItem = (function(ArrayUtils) {
   };
 })();
 
-/* included from jsd/items.js  */
+
+/* included from jsd/base_materials.js  */
 (function() {
   let add_item = document.AlbionData.add_item;
-/* Core Materials */
+
   add_item("Silver");
 
   /* T1 Materials */
@@ -552,6 +553,12 @@ window.AlbionItem = (function(ArrayUtils) {
   add_item( "Whitewood Logs", { }, { tier: 8, transmute_from: { "Ashenbark Logs": 42 }});
   add_item( "Ghost Hemp",     { }, { tier: 8, transmute_from: { "Sunflax":        42 }, keywords: ['fibre'] });
   add_item( "Adamantium Ore", { }, { tier: 8, transmute_from: { "Meteorite Ore":  42 }});
+
+})();
+
+/* included from jsd/items.js  */
+(function() {
+  let add_item = document.AlbionData.add_item;
 
 /* Animals */
   add_item("Journeymans Horse", {}, {tier: 3});
