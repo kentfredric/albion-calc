@@ -687,15 +687,11 @@ window.AlbionItem = (function(ArrayUtils) {
 
 })();
 
-/* included from jsd/items.js  */
+/* included from jsd/buildings/toolmaker.js  */
 (function() {
   let add_item = document.AlbionData.add_item;
 
-/* Drops / Uniques */
-  add_item( "Explorers Anchor" , {}, { tier: 3 });
-
-/* Toolmaker */
-  /* Novices Toolmaker -> Tools */
+/* Novices Toolmaker -> Tools */
   add_item( "Beginners Pickaxe",         { "Rough Stone":   3, "Rough Logs": 3 }, {tier: 1});
   add_item( "Beginners Axe",             { "Rough Stone":   3, "Rough Logs": 3 }, {tier: 1});
   add_item( "Beginners Skinning Kinfe",  { "Rough Stone":   3, "Rough Logs": 3 }, {tier: 1});
@@ -780,6 +776,14 @@ window.AlbionItem = (function(ArrayUtils) {
   /* Toolkits */
   add_item( "Adepts Repair Kit", { "Pine Planks": 8, "Steel Bar": 8 });
 
+})();
+
+/* included from jsd/items.js  */
+(function() {
+  let add_item = document.AlbionData.add_item;
+
+/* Drops / Uniques */
+  add_item( "Explorers Anchor" , {}, { tier: 3 });
 
 /* Warriors Forge */
   /* Novices Warriors Forge -> Weapons */

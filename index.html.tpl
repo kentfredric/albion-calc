@@ -115,6 +115,7 @@
 <!include_script "jsd/crops.js">
 <!include_script "jsd/crafted_materials.js">
 <!include_script "jsd/weapon_fragments.js">
+<!include_script "jsd/buildings/toolmaker.js">
 <!include_script "jsd/items.js">
  </script>
  </head>
