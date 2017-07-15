@@ -1004,14 +1004,19 @@ window.AlbionItem = (function(ArrayUtils) {
   add_item("Minor Energy Potion",   { "Arcane Agaric" : 8 }, {tier: 2});
 })();
 
-/* included from jsd/items.js  */
+/* included from jsd/buildings/cook.js  */
 (function() {
   let add_item = document.AlbionData.add_item;
 
-/* Cook */
   /* Novices Cook -> Food */
   add_item("Carrot Soup", { "Carrots" : 16 }, { tier: 1 , keywords: ['food']});
   add_item("Bean Salad",  { "Beans"   :  8, "Carrots" : 8 }, { tier: 2 , keywords: ['food']});
+
+})();
+
+/* included from jsd/items.js  */
+(function() {
+  let add_item = document.AlbionData.add_item;
 
 /* Mage Tower */
   /* Novices Mage Tower -> Weapons */
