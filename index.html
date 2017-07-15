@@ -333,6 +333,18 @@ window.AlbionItem = (function(ArrayUtils) {
       return item.has_tier && item.tier == tier;
     });
   }
+  AlbionData.filter_craftable = function( itemlist ) {
+    return AlbionData.filter_itemlist( itemlist, function(item) {
+      return item.can_craft;
+    });
+  }
+  AlbionData.filter_createable = function( itemlist ) {
+    return AlbionData.filter_itemlist( itemlist, function(item) {
+      return item.can_create;
+    });
+  }
+
+
   AlbionData.filter_keyword = function( itemlist, keyword ) {
     let sterm = keyword.toLowerCase();
     return AlbionData.filter_itemlist( itemlist, function(item, name) {
@@ -401,7 +413,10 @@ window.AlbionItem = (function(ArrayUtils) {
     let data_internal = AlbionData.items[name];
     let data = {
       resources: data_internal.resources,
-      attributes: data_internal.attributes
+      attributes: data_internal.attributes,
+      can_create: false,
+      can_transmute: false,
+      can_craft: false
     };
 
     data.has_tier   = ( typeof data.attributes['tier'] != "undefined" );
@@ -414,9 +429,12 @@ window.AlbionItem = (function(ArrayUtils) {
       return false;
     };
     data.resource_names = [];
+
     for ( let needed_resource in data.resources ) {
       if ( data.resources.hasOwnProperty(needed_resource) ) {
-         data.resource_names.push(needed_resource);
+        data.resource_names.push(needed_resource);
+        data.can_craft  =true;
+        data.can_create =true;
       }
     }
     data.resource_names.sort();
@@ -427,9 +445,9 @@ window.AlbionItem = (function(ArrayUtils) {
       return data.resources[name] * amt;
     };
 
-    data.can_transmute = false;
     if ( typeof data.attributes['transmute_from'] != "undefined" ) {
       data.can_transmute = true;
+      data.can_create    = true;
       data.transmute_from_names = [];
       for ( let needed_resource in data.attributes['transmute_from'] ) {
         if ( data.attributes['transmute_from'].hasOwnProperty(needed_resource) ) {
@@ -1294,7 +1312,8 @@ window.AlbionItem = (function(ArrayUtils) {
     }
   };
 
-  renderddopts(AlbionData.item_names);
+  let simple_names = AlbionData.filter_createable(AlbionData.item_names_copy());
+  renderddopts(simple_names);
 
   let eat_whitespace = function(term) {
     term = term.replace(/^\s+/, "");
@@ -1317,10 +1336,10 @@ window.AlbionItem = (function(ArrayUtils) {
       let search = eat_whitespace(itemfilter.value);
       AlbionData.log("Search", search);
       if ( search.length < 1 ) {
-        return renderddopts(AlbionData.item_names);
+        return renderddopts(simple_names);
       }
       let res = search.match(/(?:^|\s)T(?:ier|eir|)(?:\s*)([0-8]+)(?:$|\s)/i);
-      let out = AlbionData.item_names_copy();
+      let out = AlbionData.filter_createable(AlbionData.item_names_copy());
 
       if ( res != null ){
         AlbionData.log("Teir Search", res[1]);

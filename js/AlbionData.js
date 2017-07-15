@@ -54,6 +54,18 @@
       return item.has_tier && item.tier == tier;
     });
   }
+  AlbionData.filter_craftable = function( itemlist ) {
+    return AlbionData.filter_itemlist( itemlist, function(item) {
+      return item.can_craft;
+    });
+  }
+  AlbionData.filter_createable = function( itemlist ) {
+    return AlbionData.filter_itemlist( itemlist, function(item) {
+      return item.can_create;
+    });
+  }
+
+
   AlbionData.filter_keyword = function( itemlist, keyword ) {
     let sterm = keyword.toLowerCase();
     return AlbionData.filter_itemlist( itemlist, function(item, name) {
@@ -122,7 +134,10 @@
     let data_internal = AlbionData.items[name];
     let data = {
       resources: data_internal.resources,
-      attributes: data_internal.attributes
+      attributes: data_internal.attributes,
+      can_create: false,
+      can_transmute: false,
+      can_craft: false
     };
 
     data.has_tier   = ( typeof data.attributes['tier'] != "undefined" );
@@ -135,9 +150,12 @@
       return false;
     };
     data.resource_names = [];
+
     for ( let needed_resource in data.resources ) {
       if ( data.resources.hasOwnProperty(needed_resource) ) {
-         data.resource_names.push(needed_resource);
+        data.resource_names.push(needed_resource);
+        data.can_craft  =true;
+        data.can_create =true;
       }
     }
     data.resource_names.sort();
@@ -148,9 +166,9 @@
       return data.resources[name] * amt;
     };
 
-    data.can_transmute = false;
     if ( typeof data.attributes['transmute_from'] != "undefined" ) {
       data.can_transmute = true;
+      data.can_create    = true;
       data.transmute_from_names = [];
       for ( let needed_resource in data.attributes['transmute_from'] ) {
         if ( data.attributes['transmute_from'].hasOwnProperty(needed_resource) ) {

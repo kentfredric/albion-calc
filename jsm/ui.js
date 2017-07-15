@@ -24,7 +24,8 @@
     }
   };
 
-  renderddopts(AlbionData.item_names);
+  let simple_names = AlbionData.filter_createable(AlbionData.item_names_copy());
+  renderddopts(simple_names);
 
   let eat_whitespace = function(term) {
     term = term.replace(/^\s+/, "");
@@ -47,10 +48,10 @@
       let search = eat_whitespace(itemfilter.value);
       AlbionData.log("Search", search);
       if ( search.length < 1 ) {
-        return renderddopts(AlbionData.item_names);
+        return renderddopts(simple_names);
       }
       let res = search.match(/(?:^|\s)T(?:ier|eir|)(?:\s*)([0-8]+)(?:$|\s)/i);
-      let out = AlbionData.item_names_copy();
+      let out = AlbionData.filter_createable(AlbionData.item_names_copy());
 
       if ( res != null ){
         AlbionData.log("Teir Search", res[1]);
