@@ -117,6 +117,7 @@
 <!include_script "jsd/weapon_fragments.js">
 <!include_script "jsd/buildings/toolmaker.js">
 <!include_script "jsd/buildings/warriors-forge.js">
+<!include_script "jsd/buildings/hunters-lodge.js">
 <!include_script "jsd/items.js">
  </script>
  </head>

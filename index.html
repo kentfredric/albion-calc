@@ -890,14 +890,9 @@ window.AlbionItem = (function(ArrayUtils) {
 
 })();
 
-/* included from jsd/items.js  */
+/* included from jsd/buildings/hunters-lodge.js  */
 (function() {
   let add_item = document.AlbionData.add_item;
-
-/* Drops / Uniques */
-  add_item( "Explorers Anchor" , {}, { tier: 3 });
-
-/* Hunters Lodge */
   /* Novices Weapons */
   add_item("Novices Bow", { "Birch Planks" : 32 }, { tier: 2 });
   /* Journeymans Weapons */
@@ -990,6 +985,15 @@ window.AlbionItem = (function(ArrayUtils) {
   add_item("Adepts Hellion Jacket", {"Worked Leather": 16, "Adepts Demonhide Leather": 1 }, { tier: 4 });
   add_item("Adepts Hellion Hood", { "Worked Leather": 8, "Adepts Demonhide Padding": 1 }, { tier: 4});
   add_item("Adepts Hellion Shoes", { "Worked Leather": 8, "Adepts Demonhide Bindings": 1 }, { tier: 4});
+
+})();
+
+/* included from jsd/items.js  */
+(function() {
+  let add_item = document.AlbionData.add_item;
+
+/* Drops / Uniques */
+  add_item( "Explorers Anchor" , {}, { tier: 3 });
 
 /* Alchemists Lab */
   /* Novices Alchemists Lab -> Potions */
