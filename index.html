@@ -308,6 +308,9 @@ window.AlbionItem = (function(ArrayUtils) {
     },
     keywords: function( array ) {
       return true;
+    },
+    meld_from: function( array ) {
+      return true;
     }
   };
 
@@ -672,73 +675,302 @@ window.AlbionItem = (function(ArrayUtils) {
   add_item( "Fortified Leather",{ "Resilient Hide": 5, "Reinforced Leather": 1 }, {tier: 8});
 })();
 
-/* included from jsd/weapon_fragments.js  */
+
+/* included from jsd/artifacts/warriors.js  */
 (function() {
   let add_item = document.AlbionData.add_item;
 
-  /** For Warriors **/
-  add_item("Adepts Ancient Bindings",         {}, {tier: 4});
-  add_item("Adepts Ancient Chain Rings",      {}, {tier: 4});
-  add_item("Adepts Ancient Hammer Head",      {}, {tier: 4});
-  add_item("Adepts Ancient Padding",          {}, {tier: 4});
-  add_item("Adepts Ancient Shield Core",      {}, {tier: 4});
-  add_item("Adepts Bloodforged Blade",        {}, {tier: 4});
-  add_item("Adepts Demonic Blade",            {}, {tier: 4});
-  add_item("Adepts Demonic Filling",          {}, {tier: 4});
-  add_item("Adepts Demonic Plates",           {}, {tier: 4});
-  add_item("Adepts Demonic Scraps",           {}, {tier: 4});
-  add_item("Adepts Hellish Bolts",            {}, {tier: 4});
-  add_item("Adepts Hellish Hammer Heads",     {}, {tier: 4});
-  add_item("Adepts Hellish Sicklehead",       {}, {tier: 4});
-  add_item("Adepts Infernal Mace Head",       {}, {tier: 4});
-  add_item("Adepts Infernal Shield Core",     {}, {tier: 4});
-  add_item("Adepts Lost Crossbow Mechanism",  {}, {tier: 4});
-  add_item("Adepts Morgana Halberd Head",     {}, {tier: 4});
-  add_item("Adepts Runed Rock",               {}, {tier: 4});
+  let adepts_melding = [ { "Adepts Rune": 50 }, { "Adepts Relic": 50 } ];
+  let adepts_demon_melding = { "Adepts Soul": 50 };
 
-  /** For Ranged **/
-  add_item("Adepts Black Leather",            {}, {tier: 4});
-  add_item("Adepts Demonhide Bindings",       {}, {tier: 4});
-  add_item("Adepts Demonhide Leather",        {}, {tier: 4});
-  add_item("Adepts Demonhide Padding",        {}, {tier: 4});
-  add_item("Adepts Demonic Arrowheads",       {}, {tier: 4});
-  add_item("Adepts Druidic Inscriptions",     {}, {tier: 4});
-  add_item("Adepts Ghastly Arrows",           {}, {tier: 4});
-  add_item("Adepts Hardened Debole",          {}, {tier: 4});
-  add_item("Adepts Hellish Handle",           {}, {tier: 4});
-  add_item("Adepts Hellish Sicklehead Pair",  {}, {tier: 4});
-  add_item("Adepts Imbued Leather Folds",     {}, {tier: 4});
-  add_item("Adepts Imbued Soles",             {}, {tier: 4});
-  add_item("Adepts Imbued Visor",             {}, {tier: 4});
-  add_item("Adepts Infernal Harpoon Tip",     {}, {tier: 4});
-  add_item("Adepts Keeper Spearhead",         {}, {tier: 4});
-  add_item("Adepts Reinforced Morgana Pole",  {}, {tier: 4});
-  add_item("Adepts Runed Horn",               {}, {tier: 4});
-  add_item("Adepts Symbol of Blight",         {}, {tier: 4});
+  add_item("Adepts Ancient Hammer Head",      {}, {tier: 4, meld_from: adepts_melding });
+  add_item("Adepts Ancient Shield Core",      {}, {tier: 4, meld_from: adepts_melding });
+  add_item("Adepts Bloodforged Blade",        {}, {tier: 4, meld_from: adepts_melding });
+  add_item("Adepts Lost Crossbow Mechanism",  {}, {tier: 4, meld_from: adepts_melding });
+  add_item("Adepts Morgana Halberd Head",     {}, {tier: 4, meld_from: adepts_melding });
+  add_item("Adepts Runed Rock",               {}, {tier: 4, meld_from: adepts_melding });
 
-  /** For Mages **/
-  add_item("Adepts Alluring Crystal",     {}, {tier: 4});
-  add_item("Adepts Burning Orb",          {}, {tier: 4});
-  add_item("Adepts Cursed Jawbone",       {}, {tier: 4});
-  add_item("Adepts Demonic Jawbone",      {}, {tier: 4});
-  add_item("Adepts Hoarfrost Orb",        {}, {tier: 4});
-  add_item("Adepts Icicle Orb",           {}, {tier: 4});
-  add_item("Adepts Infernal Scroll",      {}, {tier: 4});
-  add_item("Adepts Lost Arcane Crystal",  {}, {tier: 4});
-  add_item("Adepts Lost Cursed Crystal",  {}, {tier: 4});
-  add_item("Adepts Occult Orb",           {}, {tier: 4});
-  add_item("Adepts Possessed Scroll",     {}, {tier: 4});
-  add_item("Adepts Wildfire Orb",         {}, {tier: 4});
+  add_item("Adepts Ancient Bindings",         {}, {tier: 4, meld_from: adepts_melding });
+  add_item("Adepts Ancient Chain Rings",      {}, {tier: 4, meld_from: adepts_melding });
+  add_item("Adepts Ancient Padding",          {}, {tier: 4, meld_from: adepts_melding });
 
-  add_item("Adepts Druidic Feathers",       {}, {tier: 4});
-  add_item("Adepts Druidic Preserved Beak", {}, {tier: 4});
-  add_item("Adepts Druidic Bindings",       {}, {tier: 4});
+  add_item("Adepts Demonic Blade",            {}, {tier: 4, meld_from: adepts_demon_melding });
+  add_item("Adepts Hellish Bolts",            {}, {tier: 4, meld_from: adepts_demon_melding });
+  add_item("Adepts Hellish Hammer Heads",     {}, {tier: 4, meld_from: adepts_demon_melding });
+  add_item("Adepts Hellish Sicklehead",       {}, {tier: 4, meld_from: adepts_demon_melding });
+  add_item("Adepts Infernal Mace Head",       {}, {tier: 4, meld_from: adepts_demon_melding });
+  add_item("Adepts Infernal Shield Core",     {}, {tier: 4, meld_from: adepts_demon_melding });
 
-  add_item("Adepts Infernal Cloth Folds",     {}, {tier: 4});
-  add_item("Adepts Infernal Cloth Visor",     {}, {tier: 4});
-  add_item("Adepts Infernal Cloth Bindings",  {}, {tier: 4});
+  add_item("Adepts Demonic Filling",          {}, {tier: 4, meld_from: adepts_demon_melding });
+  add_item("Adepts Demonic Plates",           {}, {tier: 4, meld_from: adepts_demon_melding });
+  add_item("Adepts Demonic Scraps",           {}, {tier: 4, meld_from: adepts_demon_melding });
+
+  let experts_melding = [ { "Experts Rune": 50 }, { "Experts Relic": 50 } ];
+  let experts_demon_melding = { "Experts Soul": 50 };
+
+  add_item("Experts Ancient Hammer Head",      {}, {tier: 5, meld_from: experts_melding });
+  add_item("Experts Ancient Shield Core",      {}, {tier: 5, meld_from: experts_melding });
+  add_item("Experts Bloodforged Blade",        {}, {tier: 5, meld_from: experts_melding });
+  add_item("Experts Lost Crossbow Mechanism",  {}, {tier: 5, meld_from: experts_melding });
+  add_item("Experts Morgana Halberd Head",     {}, {tier: 5, meld_from: experts_melding });
+  add_item("Experts Runed Rock",               {}, {tier: 5, meld_from: experts_melding });
+
+  add_item("Experts Ancient Bindings",         {}, {tier: 5, meld_from: experts_melding });
+  add_item("Experts Ancient Chain Rings",      {}, {tier: 5, meld_from: experts_melding });
+  add_item("Experts Ancient Padding",          {}, {tier: 5, meld_from: experts_melding });
+
+  add_item("Experts Demonic Blade",            {}, {tier: 5, meld_from: experts_demon_melding });
+  add_item("Experts Hellish Bolts",            {}, {tier: 5, meld_from: experts_demon_melding });
+  add_item("Experts Hellish Hammer Heads",     {}, {tier: 5, meld_from: experts_demon_melding });
+  add_item("Experts Hellish Sicklehead",       {}, {tier: 5, meld_from: experts_demon_melding });
+  add_item("Experts Infernal Mace Head",       {}, {tier: 5, meld_from: experts_demon_melding });
+  add_item("Experts Infernal Shield Core",     {}, {tier: 5, meld_from: experts_demon_melding });
+
+  add_item("Experts Demonic Filling",          {}, {tier: 5, meld_from: experts_demon_melding });
+  add_item("Experts Demonic Plates",           {}, {tier: 5, meld_from: experts_demon_melding });
+  add_item("Experts Demonic Scraps",           {}, {tier: 5, meld_from: experts_demon_melding });
+
+  let masters_melding = [ { "Masters Rune": 50 }, { "Masters Relic": 50 } ];
+  let masters_demon_melding = { "Masters Soul": 50 };
+
+  add_item("Masters Ancient Hammer Head",      {}, {tier: 6, meld_from: masters_melding });
+  add_item("Masters Ancient Shield Core",      {}, {tier: 6, meld_from: masters_melding });
+  add_item("Masters Bloodforged Blade",        {}, {tier: 6, meld_from: masters_melding });
+  add_item("Masters Lost Crossbow Mechanism",  {}, {tier: 6, meld_from: masters_melding });
+  add_item("Masters Morgana Halberd Head",     {}, {tier: 6, meld_from: masters_melding });
+  add_item("Masters Runed Rock",               {}, {tier: 6, meld_from: masters_melding });
+
+  add_item("Masters Ancient Bindings",         {}, {tier: 6, meld_from: masters_melding });
+  add_item("Masters Ancient Chain Rings",      {}, {tier: 6, meld_from: masters_melding });
+  add_item("Masters Ancient Padding",          {}, {tier: 6, meld_from: masters_melding });
+
+  add_item("Masters Demonic Blade",            {}, {tier: 6, meld_from: masters_demon_melding });
+  add_item("Masters Hellish Bolts",            {}, {tier: 6, meld_from: masters_demon_melding });
+  add_item("Masters Hellish Hammer Heads",     {}, {tier: 6, meld_from: masters_demon_melding });
+  add_item("Masters Hellish Sicklehead",       {}, {tier: 6, meld_from: masters_demon_melding });
+  add_item("Masters Infernal Mace Head",       {}, {tier: 6, meld_from: masters_demon_melding });
+  add_item("Masters Infernal Shield Core",     {}, {tier: 6, meld_from: masters_demon_melding });
+
+  add_item("Masters Demonic Filling",          {}, {tier: 6, meld_from: masters_demon_melding });
+  add_item("Masters Demonic Plates",           {}, {tier: 6, meld_from: masters_demon_melding });
+  add_item("Masters Demonic Scraps",           {}, {tier: 6, meld_from: masters_demon_melding });
+
+  let grandmasters_melding = [ { "Grandmasters Rune": 50 }, { "Grandmasters Relic": 50 } ];
+  let grandmasters_demon_melding = { "Grandmasters Soul": 50 };
+
+  add_item("Grandmasters Ancient Hammer Head",      {}, {tier: 7, meld_from: grandmasters_melding });
+  add_item("Grandmasters Ancient Shield Core",      {}, {tier: 7, meld_from: grandmasters_melding });
+  add_item("Grandmasters Bloodforged Blade",        {}, {tier: 7, meld_from: grandmasters_melding });
+  add_item("Grandmasters Lost Crossbow Mechanism",  {}, {tier: 7, meld_from: grandmasters_melding });
+  add_item("Grandmasters Morgana Halberd Head",     {}, {tier: 7, meld_from: grandmasters_melding });
+  add_item("Grandmasters Runed Rock",               {}, {tier: 7, meld_from: grandmasters_melding });
+
+  add_item("Grandmasters Ancient Bindings",         {}, {tier: 7, meld_from: grandmasters_melding });
+  add_item("Grandmasters Ancient Chain Rings",      {}, {tier: 7, meld_from: grandmasters_melding });
+  add_item("Grandmasters Ancient Padding",          {}, {tier: 7, meld_from: grandmasters_melding });
+
+  add_item("Grandmasters Demonic Blade",            {}, {tier: 7, meld_from: grandmasters_demon_melding });
+  add_item("Grandmasters Hellish Bolts",            {}, {tier: 7, meld_from: grandmasters_demon_melding });
+  add_item("Grandmasters Hellish Hammer Heads",     {}, {tier: 7, meld_from: grandmasters_demon_melding });
+  add_item("Grandmasters Hellish Sicklehead",       {}, {tier: 7, meld_from: grandmasters_demon_melding });
+  add_item("Grandmasters Infernal Mace Head",       {}, {tier: 7, meld_from: grandmasters_demon_melding });
+  add_item("Grandmasters Infernal Shield Core",     {}, {tier: 7, meld_from: grandmasters_demon_melding });
+
+  add_item("Grandmasters Demonic Filling",          {}, {tier: 7, meld_from: grandmasters_demon_melding });
+  add_item("Grandmasters Demonic Plates",           {}, {tier: 7, meld_from: grandmasters_demon_melding });
+  add_item("Grandmasters Demonic Scraps",           {}, {tier: 7, meld_from: grandmasters_demon_melding });
+
+  let elders_melding = [ { "Elders Rune": 50 }, { "Elders Relic": 50 } ];
+  let elders_demon_melding = { "Elders Soul": 50 };
+
+  add_item("Elders Ancient Hammer Head",      {}, {tier: 8, meld_from: elders_melding });
+  add_item("Elders Ancient Shield Core",      {}, {tier: 8, meld_from: elders_melding });
+  add_item("Elders Bloodforged Blade",        {}, {tier: 8, meld_from: elders_melding });
+  add_item("Elders Lost Crossbow Mechanism",  {}, {tier: 8, meld_from: elders_melding });
+  add_item("Elders Morgana Halberd Head",     {}, {tier: 8, meld_from: elders_melding });
+  add_item("Elders Runed Rock",               {}, {tier: 8, meld_from: elders_melding });
+
+  add_item("Elders Ancient Bindings",         {}, {tier: 8, meld_from: elders_melding });
+  add_item("Elders Ancient Chain Rings",      {}, {tier: 8, meld_from: elders_melding });
+  add_item("Elders Ancient Padding",          {}, {tier: 8, meld_from: elders_melding });
+
+  add_item("Elders Demonic Blade",            {}, {tier: 8, meld_from: elders_demon_melding });
+  add_item("Elders Hellish Bolts",            {}, {tier: 8, meld_from: elders_demon_melding });
+  add_item("Elders Hellish Hammer Heads",     {}, {tier: 8, meld_from: elders_demon_melding });
+  add_item("Elders Hellish Sicklehead",       {}, {tier: 8, meld_from: elders_demon_melding });
+  add_item("Elders Infernal Mace Head",       {}, {tier: 8, meld_from: elders_demon_melding });
+  add_item("Elders Infernal Shield Core",     {}, {tier: 8, meld_from: elders_demon_melding });
+
+  add_item("Elders Demonic Filling",          {}, {tier: 8, meld_from: elders_demon_melding });
+  add_item("Elders Demonic Plates",           {}, {tier: 8, meld_from: elders_demon_melding });
+  add_item("Elders Demonic Scraps",           {}, {tier: 8, meld_from: elders_demon_melding });
 
 })();
+
+/* included from jsd/artifacts/hunters.js  */
+(function() {
+  let add_item = document.AlbionData.add_item;
+
+  /** For Ranged **/
+  let adepts_melding = [ { "Adepts Rune": 50 }, { "Adepts Relic": 50 } ];
+  let adepts_demon_melding = { "Adepts Soul": 50 };
+
+  add_item("Adepts Druidic Inscriptions",     {}, {tier: 4, meld_from: adepts_melding });
+  add_item("Adepts Ghastly Arrows",           {}, {tier: 4, meld_from: adepts_melding });
+  add_item("Adepts Hardened Debole",          {}, {tier: 4, meld_from: adepts_melding });
+  add_item("Adepts Keeper Spearhead",         {}, {tier: 4, meld_from: adepts_melding });
+  add_item("Adepts Reinforced Morgana Pole",  {}, {tier: 4, meld_from: adepts_melding });
+  add_item("Adepts Runed Horn",               {}, {tier: 4, meld_from: adepts_melding });
+
+  add_item("Adepts Imbued Leather Folds",     {}, {tier: 4, meld_from: adepts_melding });
+  add_item("Adepts Imbued Soles",             {}, {tier: 4, meld_from: adepts_melding });
+  add_item("Adepts Imbued Visor",             {}, {tier: 4, meld_from: adepts_melding });
+
+  add_item("Adepts Black Leather",            {}, {tier: 4, meld_from: adepts_demon_melding });
+  add_item("Adepts Demonic Arrowheads",       {}, {tier: 4, meld_from: adepts_demon_melding });
+  add_item("Adepts Hellish Handle",           {}, {tier: 4, meld_from: adepts_demon_melding });
+  add_item("Adepts Hellish Sicklehead Pair",  {}, {tier: 4, meld_from: adepts_demon_melding });
+  add_item("Adepts Infernal Harpoon Tip",     {}, {tier: 4, meld_from: adepts_demon_melding });
+  add_item("Adepts Symbol of Blight",         {}, {tier: 4, meld_from: adepts_demon_melding });
+
+  add_item("Adepts Demonhide Bindings",       {}, {tier: 4, meld_from: adepts_demon_melding });
+  add_item("Adepts Demonhide Leather",        {}, {tier: 4, meld_from: adepts_demon_melding });
+  add_item("Adepts Demonhide Padding",        {}, {tier: 4, meld_from: adepts_demon_melding });
+
+  let experts_melding = [ { "Experts Rune": 50 }, { "Experts Relic": 50 } ];
+  let experts_demon_melding = { "Experts Soul": 50 };
+
+  add_item("Experts Druidic Inscriptions",     {}, {tier: 5, meld_from: experts_melding });
+  add_item("Experts Ghastly Arrows",           {}, {tier: 5, meld_from: experts_melding });
+  add_item("Experts Hardened Debole",          {}, {tier: 5, meld_from: experts_melding });
+  add_item("Experts Keeper Spearhead",         {}, {tier: 5, meld_from: experts_melding });
+  add_item("Experts Reinforced Morgana Pole",  {}, {tier: 5, meld_from: experts_melding });
+  add_item("Experts Runed Horn",               {}, {tier: 5, meld_from: experts_melding });
+
+  add_item("Experts Imbued Leather Folds",     {}, {tier: 5, meld_from: experts_melding });
+  add_item("Experts Imbued Soles",             {}, {tier: 5, meld_from: experts_melding });
+  add_item("Experts Imbued Visor",             {}, {tier: 5, meld_from: experts_melding });
+
+  add_item("Experts Black Leather",            {}, {tier: 5, meld_from: experts_demon_melding });
+  add_item("Experts Demonic Arrowheads",       {}, {tier: 5, meld_from: experts_demon_melding });
+  add_item("Experts Hellish Handle",           {}, {tier: 5, meld_from: experts_demon_melding });
+  add_item("Experts Hellish Sicklehead Pair",  {}, {tier: 5, meld_from: experts_demon_melding });
+  add_item("Experts Infernal Harpoon Tip",     {}, {tier: 5, meld_from: experts_demon_melding });
+  add_item("Experts Symbol of Blight",         {}, {tier: 5, meld_from: experts_demon_melding });
+
+  add_item("Experts Demonhide Bindings",       {}, {tier: 5, meld_from: experts_demon_melding });
+  add_item("Experts Demonhide Leather",        {}, {tier: 5, meld_from: experts_demon_melding });
+  add_item("Experts Demonhide Padding",        {}, {tier: 5, meld_from: experts_demon_melding });
+
+  let masters_melding = [ { "Masters Rune": 50 }, { "Masters Relic": 50 } ];
+  let masters_demon_melding = { "Masters Soul": 50 };
+
+  add_item("Masters Druidic Inscriptions",     {}, {tier: 6, meld_from: masters_melding });
+  add_item("Masters Ghastly Arrows",           {}, {tier: 6, meld_from: masters_melding });
+  add_item("Masters Hardened Debole",          {}, {tier: 6, meld_from: masters_melding });
+  add_item("Masters Keeper Spearhead",         {}, {tier: 6, meld_from: masters_melding });
+  add_item("Masters Reinforced Morgana Pole",  {}, {tier: 6, meld_from: masters_melding });
+  add_item("Masters Runed Horn",               {}, {tier: 6, meld_from: masters_melding });
+
+  add_item("Masters Imbued Leather Folds",     {}, {tier: 6, meld_from: masters_melding });
+  add_item("Masters Imbued Soles",             {}, {tier: 6, meld_from: masters_melding });
+  add_item("Masters Imbued Visor",             {}, {tier: 6, meld_from: masters_melding });
+
+  add_item("Masters Black Leather",            {}, {tier: 6, meld_from: masters_demon_melding });
+  add_item("Masters Demonic Arrowheads",       {}, {tier: 6, meld_from: masters_demon_melding });
+  add_item("Masters Hellish Handle",           {}, {tier: 6, meld_from: masters_demon_melding });
+  add_item("Masters Hellish Sicklehead Pair",  {}, {tier: 6, meld_from: masters_demon_melding });
+  add_item("Masters Infernal Harpoon Tip",     {}, {tier: 6, meld_from: masters_demon_melding });
+  add_item("Masters Symbol of Blight",         {}, {tier: 6, meld_from: masters_demon_melding });
+
+  add_item("Masters Demonhide Bindings",       {}, {tier: 6, meld_from: masters_demon_melding });
+  add_item("Masters Demonhide Leather",        {}, {tier: 6, meld_from: masters_demon_melding });
+  add_item("Masters Demonhide Padding",        {}, {tier: 6, meld_from: masters_demon_melding });
+
+  let grandmasters_melding = [ { "Grandmasters Rune": 50 }, { "Grandmasters Relic": 50 } ];
+  let grandmasters_demon_melding = { "Grandmasters Soul": 50 };
+
+  add_item("Grandmasters Druidic Inscriptions",     {}, {tier: 7, meld_from: grandmasters_melding });
+  add_item("Grandmasters Ghastly Arrows",           {}, {tier: 7, meld_from: grandmasters_melding });
+  add_item("Grandmasters Hardened Debole",          {}, {tier: 7, meld_from: grandmasters_melding });
+  add_item("Grandmasters Keeper Spearhead",         {}, {tier: 7, meld_from: grandmasters_melding });
+  add_item("Grandmasters Reinforced Morgana Pole",  {}, {tier: 7, meld_from: grandmasters_melding });
+  add_item("Grandmasters Runed Horn",               {}, {tier: 7, meld_from: grandmasters_melding });
+
+  add_item("Grandmasters Imbued Leather Folds",     {}, {tier: 7, meld_from: grandmasters_melding });
+  add_item("Grandmasters Imbued Soles",             {}, {tier: 7, meld_from: grandmasters_melding });
+  add_item("Grandmasters Imbued Visor",             {}, {tier: 7, meld_from: grandmasters_melding });
+
+  add_item("Grandmasters Black Leather",            {}, {tier: 7, meld_from: grandmasters_demon_melding });
+  add_item("Grandmasters Demonic Arrowheads",       {}, {tier: 7, meld_from: grandmasters_demon_melding });
+  add_item("Grandmasters Hellish Handle",           {}, {tier: 7, meld_from: grandmasters_demon_melding });
+  add_item("Grandmasters Hellish Sicklehead Pair",  {}, {tier: 7, meld_from: grandmasters_demon_melding });
+  add_item("Grandmasters Infernal Harpoon Tip",     {}, {tier: 7, meld_from: grandmasters_demon_melding });
+  add_item("Grandmasters Symbol of Blight",         {}, {tier: 7, meld_from: grandmasters_demon_melding });
+
+  add_item("Grandmasters Demonhide Bindings",       {}, {tier: 7, meld_from: grandmasters_demon_melding });
+  add_item("Grandmasters Demonhide Leather",        {}, {tier: 7, meld_from: grandmasters_demon_melding });
+  add_item("Grandmasters Demonhide Padding",        {}, {tier: 7, meld_from: grandmasters_demon_melding });
+
+  let elders_melding = [ { "Elders Rune": 50 }, { "Elders Relic": 50 } ];
+  let elders_demon_melding = { "Elders Soul": 50 };
+
+  add_item("Elders Druidic Inscriptions",     {}, {tier: 8, meld_from: elders_melding });
+  add_item("Elders Ghastly Arrows",           {}, {tier: 8, meld_from: elders_melding });
+  add_item("Elders Hardened Debole",          {}, {tier: 8, meld_from: elders_melding });
+  add_item("Elders Keeper Spearhead",         {}, {tier: 8, meld_from: elders_melding });
+  add_item("Elders Reinforced Morgana Pole",  {}, {tier: 8, meld_from: elders_melding });
+  add_item("Elders Runed Horn",               {}, {tier: 8, meld_from: elders_melding });
+
+  add_item("Elders Imbued Leather Folds",     {}, {tier: 8, meld_from: elders_melding });
+  add_item("Elders Imbued Soles",             {}, {tier: 8, meld_from: elders_melding });
+  add_item("Elders Imbued Visor",             {}, {tier: 8, meld_from: elders_melding });
+
+  add_item("Elders Black Leather",            {}, {tier: 8, meld_from: elders_demon_melding });
+  add_item("Elders Demonic Arrowheads",       {}, {tier: 8, meld_from: elders_demon_melding });
+  add_item("Elders Hellish Handle",           {}, {tier: 8, meld_from: elders_demon_melding });
+  add_item("Elders Hellish Sicklehead Pair",  {}, {tier: 8, meld_from: elders_demon_melding });
+  add_item("Elders Infernal Harpoon Tip",     {}, {tier: 8, meld_from: elders_demon_melding });
+  add_item("Elders Symbol of Blight",         {}, {tier: 8, meld_from: elders_demon_melding });
+
+  add_item("Elders Demonhide Bindings",       {}, {tier: 8, meld_from: elders_demon_melding });
+  add_item("Elders Demonhide Leather",        {}, {tier: 8, meld_from: elders_demon_melding });
+  add_item("Elders Demonhide Padding",        {}, {tier: 8, meld_from: elders_demon_melding });
+
+
+})();
+
+/* included from jsd/artifacts/mages.js  */
+(function() {
+  let add_item = document.AlbionData.add_item;
+
+  /** For Mages **/
+  let adepts_mages_melding = [ { "Adepts Rune": 50 }, { "Adepts Relic": 50 } ];
+  let adepts_mages_demon_melding = { "Adepts Soul": 50 };
+  add_item("Adepts Alluring Crystal",     {}, {tier: 4, meld_from: adepts_mages_melding });
+  add_item("Adepts Hoarfrost Orb",        {}, {tier: 4, meld_from: adepts_mages_melding });
+  add_item("Adepts Lost Arcane Crystal",  {}, {tier: 4, meld_from: adepts_mages_melding });
+  add_item("Adepts Lost Cursed Crystal",  {}, {tier: 4, meld_from: adepts_mages_melding });
+  add_item("Adepts Possessed Scroll",     {}, {tier: 4, meld_from: adepts_mages_melding });
+  add_item("Adepts Wildfire Orb",         {}, {tier: 4, meld_from: adepts_mages_melding });
+
+  add_item("Adepts Druidic Feathers",       {}, {tier: 4, meld_from: adepts_mages_melding });
+  add_item("Adepts Druidic Preserved Beak", {}, {tier: 4, meld_from: adepts_mages_melding });
+  add_item("Adepts Druidic Bindings",       {}, {tier: 4, meld_from: adepts_mages_melding });
+
+  add_item("Adepts Burning Orb",          {}, {tier: 4, meld_from: adepts_mages_demon_melding });
+  add_item("Adepts Cursed Jawbone",       {}, {tier: 4, meld_from: adepts_mages_demon_melding });
+  add_item("Adepts Demonic Jawbone",      {}, {tier: 4, meld_from: adepts_mages_demon_melding });
+  add_item("Adepts Icicle Orb",           {}, {tier: 4, meld_from: adepts_mages_demon_melding });
+  add_item("Adepts Infernal Scroll",      {}, {tier: 4, meld_from: adepts_mages_demon_melding });
+  add_item("Adepts Occult Orb",           {}, {tier: 4, meld_from: adepts_mages_demon_melding });
+
+  add_item("Adepts Infernal Cloth Folds",     {}, {tier: 4, meld_from: adepts_mages_demon_melding });
+  add_item("Adepts Infernal Cloth Visor",     {}, {tier: 4, meld_from: adepts_mages_demon_melding });
+  add_item("Adepts Infernal Cloth Bindings",  {}, {tier: 4, meld_from: adepts_mages_demon_melding });
+
+})();
+
 
 /* included from jsd/buildings/toolmaker.js  */
 (function() {
@@ -938,8 +1170,9 @@ window.AlbionItem = (function(ArrayUtils) {
   add_item("Adepts Graveguard Armor", { "Steel Bar": 16, "Adepts Ancient Chain Rings": 1 }, {tier: 4});
   add_item("Adepts Graveguard Boots", { "Steel Bar": 8, "Adepts Ancient Bindings": 1 }, {tier: 4});
 
-  add_item("Adepts Demon Armour", { "Steel Bar": 16, "Adepts Demonic Plates": 1}, {tier: 4});
-  add_item("Adepts Demon Helmet", { "Steel Bar": 8, "Adepts Demonic Scraps": 1}, {tier: 4});
+  add_item("Adepts Demon Armour", { "Steel Bar": 16,  "Adepts Demonic Plates":  1}, {tier: 4});
+  add_item("Adepts Demon Helmet", { "Steel Bar": 8,   "Adepts Demonic Scraps":  1}, {tier: 4});
+  add_item("Adepts Demon Boots",  { "Steel Bar": 8,   "Adepts Demonic Filling": 1}, {tier: 4});
 
 })();
 

@@ -104,7 +104,8 @@
   add_item("Adepts Graveguard Armor", { "Steel Bar": 16, "Adepts Ancient Chain Rings": 1 }, {tier: 4});
   add_item("Adepts Graveguard Boots", { "Steel Bar": 8, "Adepts Ancient Bindings": 1 }, {tier: 4});
 
-  add_item("Adepts Demon Armour", { "Steel Bar": 16, "Adepts Demonic Plates": 1}, {tier: 4});
-  add_item("Adepts Demon Helmet", { "Steel Bar": 8, "Adepts Demonic Scraps": 1}, {tier: 4});
+  add_item("Adepts Demon Armour", { "Steel Bar": 16,  "Adepts Demonic Plates":  1}, {tier: 4});
+  add_item("Adepts Demon Helmet", { "Steel Bar": 8,   "Adepts Demonic Scraps":  1}, {tier: 4});
+  add_item("Adepts Demon Boots",  { "Steel Bar": 8,   "Adepts Demonic Filling": 1}, {tier: 4});
 
 })();

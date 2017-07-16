@@ -29,6 +29,9 @@
     },
     keywords: function( array ) {
       return true;
+    },
+    meld_from: function( array ) {
+      return true;
     }
   };
 
