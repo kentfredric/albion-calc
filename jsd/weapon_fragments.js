@@ -41,4 +41,17 @@
   add_item("Adepts Runed Horn",               {}, {tier: 4});
   add_item("Adepts Symbol of Blight",         {}, {tier: 4});
 
+  /** For Mages **/
+  add_item("Adepts Alluring Crystal",     {}, {tier: 4});
+  add_item("Adepts Burning Orb",          {}, {tier: 4});
+  add_item("Adepts Cursed Jawbone",       {}, {tier: 4});
+  add_item("Adepts Demonic Jawbone",      {}, {tier: 4});
+  add_item("Adepts Hoarfrost Orb",        {}, {tier: 4});
+  add_item("Adepts Icicle Orb",           {}, {tier: 4});
+  add_item("Adepts Infernal Scroll",      {}, {tier: 4});
+  add_item("Adepts Lost Arcane Crystal",  {}, {tier: 4});
+  add_item("Adepts Lost Cursed Crystal",  {}, {tier: 4});
+  add_item("Adepts Occult Orb",           {}, {tier: 4});
+  add_item("Adepts Possessed Scroll",     {}, {tier: 4});
+  add_item("Adepts Wildfire Orb",         {}, {tier: 4});
 })();
