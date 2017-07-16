@@ -8,4 +8,8 @@
   add_item( "Bloodoak Planks",  { "Bloodoak Logs":  4, "Cedar Planks":      1 }, {tier: 6});
   add_item( "Ashenbark Planks", { "Ashenbark Logs": 5, "Bloodoak Planks" :  1 }, {tier: 7});
   add_item( "Whitewood Planks", { "Whitewood Logs": 5, "Ashenbark Planks":  1 }, {tier: 8});
+
+  add_item( "Uncommon Pine Planks",     { "Uncommon Pine Logs":     2, "Chestnut Planks": 1 }, { tier: 4 });
+  add_item( "Rare Pine Planks",         { "Rare Pine Logs":         2, "Chestnut Planks": 1 }, { tier: 4 });
+  add_item( "Exceptional Pine Planks",  { "Exceptional Pine Logs":  2, "Chestnut Planks": 1 }, { tier: 4 });
 })();

@@ -35,6 +35,10 @@
   add_item( "Rare Iron Ore",            { }, { tier: 4, transmute_from: { "Uncommon Iron Ore" :     1, "Silver": 12000 } });
   add_item( "Exceptional Iron Ore",     { }, { tier: 4, transmute_from: { "Rare Iron Ore" :         1, "Silver": 24000 } });
 
+  add_item( "Uncommon Pine Logs",     { }, { tier: 4, transmute_from: { "Pine Logs" :          1, "Silver": 6000   } });
+  add_item( "Rare Pine Logs",         { }, { tier: 4, transmute_from: { "Uncommon Pine Logs" : 1, "Silver": 12000  } });
+  add_item( "Exceptional Pine Logs",  { }, { tier: 4, transmute_from: { "Rare Pine Logs" :     1, "Silver": 24000  } });
+
   /* T5 Materials */
   add_item( "Cedar Logs",   { }, { tier: 5, transmute_from: { "Pine Logs"  : 9 }});
   add_item( "Granite",      { }, { tier: 5, transmute_from: { "Travertine" : 9 }, keywords: ['stone'] });
