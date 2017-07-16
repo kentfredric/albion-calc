@@ -120,6 +120,7 @@
 <!include_script "jsd/craft-buildings/butcher.js">
 <!include_script "jsd/craft-buildings/mill.js">
 <!include_script "jsd/craft-buildings/weaver.js">
+<!include_script "jsd/craft-buildings/tanner.js">
 <!include_script "jsd/crafted_materials.js">
 
 <!include_script "jsd/artifacts/warriors.js">
