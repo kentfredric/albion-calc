@@ -84,4 +84,26 @@
   add_item("Journeymans Scholar Robe", { "Neat Cloth": 16 }, {tier: 3});
   add_item("Journeymans Scholar Sandals", { "Neat Cloth": 8 }, {tier: 3});
 
+  add_item("Adepts Scholar Cowl", { "Fine Cloth": 8 }, {tier: 4});
+  add_item("Adepts Scholar Robe", { "Fine Cloth": 16 }, {tier: 4});
+  add_item("Adepts Scholar Sandals", { "Fine Cloth": 8 }, {tier: 4});
+
+  add_item("Adepts Cleric Cowl", { "Fine Cloth": 8 }, {tier: 4});
+  add_item("Adepts Cleric Robe", { "Fine Cloth": 16 }, {tier: 4});
+  add_item("Adepts Cleric Sandals", { "Fine Cloth": 8 }, {tier: 4});
+
+  add_item("Adepts Mage Cowl", { "Fine Cloth": 8 }, {tier: 4});
+  add_item("Adepts Mage Robe", { "Fine Cloth": 16 }, {tier: 4});
+  add_item("Adepts Mage Sandals", { "Fine Cloth": 8 }, {tier: 4});
+
+  /* TODO: Royal gear */
+
+  add_item("Adepts Druid Robe", { "Fine Cloth": 16, "Adepts Druidic Feathers": 1 }, {tier: 4 });
+  add_item("Adepts Druid Cowl", { "Fine Cloth": 8, "Adepts Druidic Preserved Beak": 1 }, {tier: 4 });
+  add_item("Adepts Druid Sandals", { "Fine Cloth": 8, "Adepts Druidic Bindings": 1 }, {tier: 4 });
+
+  add_item("Adepts Fiend Robe", { "Fine Cloth": 16, "Adepts Infernal Cloth Folds": 1 }, {tier: 4 });
+  add_item("Adepts Fiend Cowl", { "Fine Cloth": 8, "Adepts Infernal Cloth Visor": 1 }, {tier: 4 });
+  add_item("Adepts Fiend Sandals", { "Fine Cloth": 8, "Adepts Infernal Cloth Bindings": 1 }, {tier: 4 });
+
 })();

@@ -54,4 +54,13 @@
   add_item("Adepts Occult Orb",           {}, {tier: 4});
   add_item("Adepts Possessed Scroll",     {}, {tier: 4});
   add_item("Adepts Wildfire Orb",         {}, {tier: 4});
+
+  add_item("Adepts Druidic Feathers",       {}, {tier: 4});
+  add_item("Adepts Druidic Preserved Beak", {}, {tier: 4});
+  add_item("Adepts Druidic Bindings",       {}, {tier: 4});
+
+  add_item("Adepts Infernal Cloth Folds",     {}, {tier: 4});
+  add_item("Adepts Infernal Cloth Visor",     {}, {tier: 4});
+  add_item("Adepts Infernal Cloth Bindings",  {}, {tier: 4});
+
 })();
