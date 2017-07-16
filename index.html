@@ -574,10 +574,14 @@ window.AlbionItem = (function(ArrayUtils) {
 (function() {
   let add_item = document.AlbionData.add_item;
 
+  add_item("Chicken",           {}, {tier: 3});
+
   add_item("Journeymans Horse", {}, {tier: 3});
   add_item("Journeymans Ox",    {}, {tier: 3});
   add_item("Adepts Horse",      {}, {tier: 3});
   add_item("Adepts Ox",         {}, {tier: 3});
+
+  add_item("Goat",              {}, {tier: 4});
 
   add_item("Adepts Tame Giant Stag",    {}, {tier: 4});
 })();
@@ -591,7 +595,16 @@ window.AlbionItem = (function(ArrayUtils) {
   add_item("Carrots",         {}, {tier: 2, keywords: ['crop']});
   add_item("Beans",           {}, {tier: 2, keywords: ['crop']});
 
+  /* T3 Crops */
+  add_item("Sheaf of Wheat",           {}, {tier: 3, keywords: ['crop']});
+
+  add_item("Turnips",                  {}, {tier: 4, keywords: ['crop']});
+
+  /* Animal Crops */
+  add_item("Hen Eggs",        {}, {tier: 3, keywords: ['crop']});
+  add_item("Goats Milk",      {}, {tier: 4, keywords: ['crop']});
 })();
+
 
 /* included from jsd/craft-buildings/lumbermill.js  */
 (function() {
@@ -626,6 +639,24 @@ window.AlbionItem = (function(ArrayUtils) {
   add_item( "Rare Steel Bar",         { "Rare Iron Ore":        2, "Bronze Bar" : 1 }, {tier: 4});
   add_item( "Exceptional Steel Bar",  { "Exceptional Iron Ore": 2, "Bronze Bar" : 1 }, {tier: 4});
 
+})();
+
+/* included from jsd/craft-buildings/butcher.js  */
+(function() {
+  let add_item = document.AlbionData.add_item;
+
+  /* Produces 15 */
+  add_item("Raw Chicken", { "Chicken": 1/15 }, {tier: 3});
+
+  add_item("Raw Goat", { "Goat": 1/15 }, {tier: 4});
+})();
+
+/* included from jsd/craft-buildings/mill.js  */
+(function() {
+  let add_item = document.AlbionData.add_item;
+
+  add_item("Flour", { "Sheaf of Wheat": 1 }, { tier: 4 });
+  add_item("Goats Butter", { "Goats Milk": 1 }, { tier: 4 });
 })();
 
 /* included from jsd/crafted_materials.js  */
@@ -1291,6 +1322,13 @@ window.AlbionItem = (function(ArrayUtils) {
   add_item("Carrot Soup", { "Carrots" : 16 }, { tier: 1 , keywords: ['food']});
   add_item("Bean Salad",  { "Beans"   :  8, "Carrots" : 8 }, { tier: 2 , keywords: ['food']});
 
+  add_item("Wheat Soup", { "Sheaf of Wheat": 48 }, { tier: 3, keywords: ['food'] } );
+  add_item("Chicken Omelette", {"Raw Chicken": 8, "Sheaf of Wheat": 4, "Hen Eggs": 2 }, { tier: 3, keywords: ['food'] });
+  add_item("Chicken Pie", {"Raw Chicken": 8, "Flour": 4, "Sheaf of Wheat": 2 }, { tier: 3, keywords: ['food']});
+  add_item("Turnip Salad", {"Turnips": 24, "Sheaf of Wheat": 24}, {tier: 4, keywords: ['food']});
+  add_item("Bread", {"Flour": 4 }, {tier: 4, keywords: ['food']});
+  add_item("Goat Stew", {"Raw Goat": 8, "Bread": 4, "Turnips": 4}, {tier: 4, keywords: ['food']});
+  add_item("Goat Sandwich", {"Raw Goat": 8, "Bread": 4, "Goats Butter": 2}, {tier: 4, keywords: ['food']});
 })();
 
 /* included from jsd/buildings/mage-tower.js  */
