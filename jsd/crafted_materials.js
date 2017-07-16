@@ -22,6 +22,10 @@
   add_item( "Rare Worked Leather", { "Rare Medium Hide" : 2, "Thick Leather" : 1 }, { tier: 4 });
   add_item( "Exceptional Worked Leather", { "Exceptional Medium Hide" : 2, "Thick Leather" : 1 }, { tier: 4 });
 
+  add_item( "Uncommon Fine Cloth", { "Uncommon Medium Hide" : 2, "Neat Cloth" : 1 }, { tier: 4 });
+  add_item( "Rare Fine Cloth", { "Rare Medium Hide" : 2, "Neat Cloth" : 1 }, { tier: 4 });
+  add_item( "Exceptional Fine Cloth", { "Exceptional Medium Hide" : 2, "Neat Cloth" : 1 }, { tier: 4 });
+
 
   /* T5 Materials */
   add_item( "Granite Block", { "Granite" : 3, "Travertine Block": 1 }, {tier: 5});
